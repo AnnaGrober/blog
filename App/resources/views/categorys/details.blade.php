@@ -20,6 +20,7 @@
                 <p class="lead my-3">{{ $category->categoryPages }}</p>
                 <p class="lead my-3">{{ $category->category }}</p>
                 <p class="lead my-3">{{ $category->language }}</p>
+                <p class="lead my-3">{{ $category->user}}</p>
             </div>
             <div class="col-md-6 col-lg-6">
                 <p class="lead mb-0"><img  src='../{{ $category->img }}' height='300px'  alt='Card image cap'></p>

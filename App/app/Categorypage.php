@@ -28,7 +28,10 @@ class Categorypage extends Model
     {
         return $this->hasMany(Language::class,  'id', 'language');
     }
-
+    public function user()
+    {
+        return $this->hasMany(User::class,  'id', 'user');
+    }
 
 
 }

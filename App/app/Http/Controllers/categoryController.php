@@ -13,8 +13,9 @@ class categoryController extends Controller
         $data=DB::table('categorypages')
             ->leftJoin('categories','categorypages.type_category','=','categories.id')
             ->leftJoin('languages','categorypages.language','=','languages.id')
+            ->leftJoin('users','categorypages.user','=','users.id')
             ->select('categorypages.img as img','categorypages.ad as ad','categorypages.complexity as complexity',
-                'languages.language  as  language','categories.category as category','categorypages.id  as  id')
+                'languages.language  as  language','categories.category as category','categorypages.id  as  id','users.name as  user')
             ->orderBy('categorypages.id')
             ->get();
 
@@ -24,14 +25,15 @@ class categoryController extends Controller
         $data=DB::table('categorypages')
             ->leftJoin('categories','categorypages.type_category','=','categories.id')
             ->leftJoin('languages','categorypages.language','=','languages.id')
+            ->leftJoin('users','categorypages.user','=','users.id')
             ->select('categorypages.img as img','categorypages.ad as ad','categorypages.complexity as complexity',
                 'categorypages.categoryPages as categoryPages',
-                'languages.language  as  language','categories.category as category')
+                'languages.language  as  language','categories.category as category','users.name  as  user')
             ->where('categorypages.id', $id)->get();
         return view('categorys.details', ['data'=>$data]);
     }
     public function create()
     {
-        return view('categorys.create');
+        return view('create');
     }
 }
