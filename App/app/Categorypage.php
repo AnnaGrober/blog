@@ -6,8 +6,29 @@ use Illuminate\Database\Eloquent\Model;
 
 class Categorypage extends Model
 {
-    public function categories()
+    protected $fillable = [
+        'id',
+        'type_category',
+        'language',
+        'priceMin',
+        'priceMax',
+        'complexity',
+        'dateStart',
+        'dateFinish',
+        'ad',
+        'img',
+        'user'
+    ];
+
+    public function category()
     {
         return $this->hasMany(Category::class,  'id', 'category');
     }
+    public function language()
+    {
+        return $this->hasMany(Language::class,  'id', 'language');
+    }
+
+
+
 }

@@ -8,18 +8,27 @@ use DB;
 use App\Categorypage;
 class categoryController extends Controller
 {
-     public function getCategory() {
-        $categories = Categorypage::all();
-        /*$categoriesName = DB::table('categorypages')
-             ->join('categories', 'category', '=', 'categories.id')
-             ->get();*/
-        return view('category', compact('categories'/*,'categoriesName'*/));
 
+    public function getCategory() {
+        $data=DB::table('categorypages')
+            ->leftJoin('categories','categorypages.type_category','=','categories.id')
+            ->leftJoin('languages','categorypages.language','=','languages.id')
+            ->select('categorypages.img as img','categorypages.ad as ad','categorypages.complexity as complexity',
+                'languages.language  as  language','categories.category as category','categorypages.id  as  id')
+            ->orderBy('categorypages.id')
+            ->get();
+
+        return view('category',['data'=>$data]);
     }
     public function getDetails($id) {
-        $category = Categorypage::find($id);
-        return view('categorys.details', compact('category'));
-
+        $data=DB::table('categorypages')
+            ->leftJoin('categories','categorypages.type_category','=','categories.id')
+            ->leftJoin('languages','categorypages.language','=','languages.id')
+            ->select('categorypages.img as img','categorypages.ad as ad','categorypages.complexity as complexity',
+                'categorypages.categoryPages as categoryPages',
+                'languages.language  as  language','categories.category as category')
+            ->where('categorypages.id', $id)->get();
+        return view('categorys.details', ['data'=>$data]);
     }
     public function create()
     {

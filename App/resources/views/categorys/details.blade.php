@@ -12,19 +12,21 @@
 <div class="container-fluid header">
     @include ('layouts.headerNavigetion')
 
-
+    @foreach ($data as $category)
     <div class="jumbotron text-white  bg-dark">
         <div class="row">
             <div class="col-md-6 col-lg-6">
                 <h1 class="display-4 font-italic">{{ $category->ad }}</h1>
                 <p class="lead my-3">{{ $category->categoryPages }}</p>
+                <p class="lead my-3">{{ $category->category }}</p>
+                <p class="lead my-3">{{ $category->language }}</p>
             </div>
             <div class="col-md-6 col-lg-6">
                 <p class="lead mb-0"><img  src='../{{ $category->img }}' height='300px'  alt='Card image cap'></p>
             </div>
         </div>
     </div>
-
+    @endForeach
     <div class="row">
         <div class="col-md-8 blog-main">
             <h3 class="pb-3 mb-4 font-italic border-bottom">

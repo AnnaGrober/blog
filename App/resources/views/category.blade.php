@@ -100,141 +100,142 @@
         <div class="container">
           <div class="row">
 
-			 @foreach ($categories as $category)
+			 @foreach ($data as $category)
 					<div class="col-md-4">
 					  <div class="card mb-4 box-shadow">
 						  <img class='card-img-top' src='{{ $category->img }}' height='300px'  alt='Card image cap'>
 						<div class="card-body">
 						  <p class="card-text">{{ $category->ad }}</p>
 							<p class="card-text">Сложность:{{ $category->complexity }}</p>
-							<p class="card-text">Категрия:{{$category->category }}</p>
+							<p class="card-text">Категрия:{{$category->category}}</p>
 							<p class="card-text">Язык:{{ $category->language }}</p>
 						  <div class="d-flex justify-content-between align-items-center">
 							<div class="btn-group">
 								<a href="/category/{{ $category->id }}"  class="btn  btn-outline-secondary " >Подробности</a>
-                                <a href="{{ $category->id }}" class="btn  btn-outline-primary ml-3" data-toggle="modal" data-target="#ResponseModal" >Откликнуться</a>
+								<a href="{{ $category->id }}" class="btn  btn-outline-primary ml-3" data-toggle="modal" data-target="#ResponseModal" >Откликнуться</a>
 							</div>
 						  </div>
 						</div>
 					  </div>
 					</div>
-         	 @endForeach
-          </div>
-        </div>
-      </div>
-	</main>
+
+ 			 @endForeach
+</div>
+</div>
+</div>
+</main>
 </div>
 @include ('layouts.footerNavigation')
 
 <div class="modal fade" id="ResponseModal" tabindex="-1" role="dialog" aria-labelledy="ResponseModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+<div class="modal-header">
 
 
 
-                <button class="close" type="button" data-dismiss="modal" aria-lable="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="container">
+    <button class="close" type="button" data-dismiss="modal" aria-lable="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="container">
 
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
     </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
 </div>
 
 <script src="noUiSlider.11.0.3/nouislider.min.js"></script>
- <script>
-        $('#datepicker').datepicker({
-            uiLibrary: 'bootstrap4'
-        });
-          $('#datepicker2').datepicker({
-            uiLibrary: 'bootstrap4'
-        });
-       var select = document.getElementById('input-select');
-       var selectcomplexity = document.getElementById('input-complexity');
+<script>
+$('#datepicker').datepicker({
+uiLibrary: 'bootstrap4'
+});
+$('#datepicker2').datepicker({
+uiLibrary: 'bootstrap4'
+});
+var select = document.getElementById('input-select');
+var selectcomplexity = document.getElementById('input-complexity');
 
-		// Append the option elements price
-		for ( var i = 0; i <= 10000; i++ ){
+// Append the option elements price
+for ( var i = 0; i <= 10000; i++ ){
 
-			var option = document.createElement("option");
-				option.text = i;
-				option.value = i;
+var option = document.createElement("option");
+    option.text = i;
+    option.value = i;
 
-			select.appendChild(option);
-		}
+select.appendChild(option);
+}
 
-		// Append the option elements complexity
-		for ( var j = 0; j <= 5; j++ ){
+// Append the option elements complexity
+for ( var j = 0; j <= 5; j++ ){
 
-			var option2 = document.createElement("option");
-				option2.text = j;
-				option2.value = j;
+var option2 = document.createElement("option");
+    option2.text = j;
+    option2.value = j;
 
-			selectcomplexity.appendChild(option2);
-		}
+selectcomplexity.appendChild(option2);
+}
 
-       var html5Slider = document.getElementById('html5');
-       var complexitySlider = document.getElementById('complexity');
+var html5Slider = document.getElementById('html5');
+var complexitySlider = document.getElementById('complexity');
 
-	noUiSlider.create(html5Slider, {
-		start: [ 200, 8000 ],
-		connect: true,
-		range: {
-			'min': 0,
-			'max': 10000
-		}
-	});
-
-	noUiSlider.create(complexitySlider, {
-		start: [ 2 ],
-		range: {
-			'min': 0,
-			'max': 5
-		}
-	});
-	var inputNumber = document.getElementById('input-number');
-
-	html5Slider.noUiSlider.on('update', function( values, handle ) {
-
-		var value = values[handle];
-
-		if ( handle ) {
-			inputNumber.value = value;
-		} else {
-			select.value = Math.round(value);
-		}
-	});
-
-
-	complexitySlider.noUiSlider.on('update', function( values, handle ) {
-		var value = values[handle];
-		if ( handle ) {
-			inputNumber.value = value;
-		} else {
-			selectcomplexity.value = Math.round(value);
-		}
-	});
-
-	select.addEventListener('change', function(){
-		html5Slider.noUiSlider.set([this.value, null]);
-	});
-
-	inputNumber.addEventListener('change', function(){
-		html5Slider.noUiSlider.set([null, this.value]);
-	});
-
-	selectcomplexity.addEventListener('change', function(){
-		complexitySlider.noUiSlider.set([this.value, null]);
+noUiSlider.create(html5Slider, {
+start: [ 200, 8000 ],
+connect: true,
+range: {
+'min': 0,
+'max': 10000
+}
 });
 
- </script>
+noUiSlider.create(complexitySlider, {
+start: [ 2 ],
+range: {
+'min': 0,
+'max': 5
+}
+});
+var inputNumber = document.getElementById('input-number');
+
+html5Slider.noUiSlider.on('update', function( values, handle ) {
+
+var value = values[handle];
+
+if ( handle ) {
+inputNumber.value = value;
+} else {
+select.value = Math.round(value);
+}
+});
+
+
+complexitySlider.noUiSlider.on('update', function( values, handle ) {
+var value = values[handle];
+if ( handle ) {
+inputNumber.value = value;
+} else {
+selectcomplexity.value = Math.round(value);
+}
+});
+
+select.addEventListener('change', function(){
+html5Slider.noUiSlider.set([this.value, null]);
+});
+
+inputNumber.addEventListener('change', function(){
+html5Slider.noUiSlider.set([null, this.value]);
+});
+
+selectcomplexity.addEventListener('change', function(){
+complexitySlider.noUiSlider.set([this.value, null]);
+});
+
+</script>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="bootstrap/dist/js/jquery.js"></script>
