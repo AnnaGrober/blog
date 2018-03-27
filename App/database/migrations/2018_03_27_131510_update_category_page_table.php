@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class RenameCategoryTable extends Migration
+class UpdateCategoryPageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,10 @@ class RenameCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::rename('category', 'categorys');
+        Schema::table('categorypages', function (Blueprint $table) {
+            $table->string('link');
+            $table->integerp('language_translation');
+        });
     }
 
     /**
@@ -23,6 +26,8 @@ class RenameCategoryTable extends Migration
      */
     public function down()
     {
+        Schema::table('categorypages', function (Blueprint $table) {
 
+        });
     }
 }

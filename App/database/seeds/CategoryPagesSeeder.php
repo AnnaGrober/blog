@@ -15,7 +15,7 @@ class CategoryPagesSeeder extends Seeder
         	array(
 				[
 					'id'=>"1",
-					'category' =>"1",
+					'type_category' =>"1",
 					'language'=>"2",
 					'priceMin'=>"0",
 					'priceMax'=>"200",
@@ -23,12 +23,13 @@ class CategoryPagesSeeder extends Seeder
 					'ad'=>"Переведите пожалуйста",
 					'categoryPages'=>"перевод перевод перевод",
                     'img'=>"krol.jpg",
-                    'user'=>"1"
-
+                    'user'=>"1",
+                    'link'=>"http://ilibrary.ru/text/436/p.2/index.html",
+                    'language_translation'=>"2"
 				],
                 [
                 'id'=>"2",
-                'category' =>"3",
+                'type_category' =>"3",
                 'language'=>"2",
                 'priceMin'=>"0",
                 'priceMax'=>"200",
@@ -36,7 +37,9 @@ class CategoryPagesSeeder extends Seeder
                 'ad'=>"Переведите пожалуйста",
                 'categoryPages'=>"перевод 666 перевод перевод",
                 'img'=>"dog.jpg",
-                'user'=>"2"
+                'user'=>"2",
+                    'link'=>"http://www.stihi-rus.ru/1/Ahmatova/86.htm",
+                    'language_translation'=>"1"
 
 				]
 				
