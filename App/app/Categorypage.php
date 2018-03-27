@@ -24,10 +24,15 @@ class Categorypage extends Model
     {
         return $this->hasMany(Category::class,  'id', 'category');
     }
+    public function language_translation()
+    {
+        return $this->hasMany(Language::class,  'id', 'language_translation');
+    }
     public function language()
     {
         return $this->hasMany(Language::class,  'id', 'language');
     }
+
     public function user()
     {
         return $this->hasMany(User::class,  'id', 'user');

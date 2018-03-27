@@ -16,7 +16,7 @@
 <div class="container-fluid" >
 	@include ('layouts.headerNavigetion')
  
-  <div class="container conCategory header">
+  <div class="container  header">
 		  <form class="filter">
 		  <div class="form-froup filterform">
 			  			<div class="form-row">
@@ -108,7 +108,8 @@
 						  <p class="card-text">{{ $category->ad }}</p>
 							<p class="card-text">Сложность:{{ $category->complexity }}</p>
 							<p class="card-text">Категрия:{{$category->category}}</p>
-							<p class="card-text">Язык:{{ $category->language }}</p>
+							<p class="card-text">Язык Оригинала:{{ $category->language }}</p>
+							<p class="card-text">Язык Перевода:{{ $category->translation}}</p>
 						  <div class="d-flex justify-content-between align-items-center">
 							<div class="btn-group">
 								<a href="/category/{{ $category->id }}"  class="btn  btn-outline-secondary " >Подробности</a>
@@ -227,9 +228,7 @@ select.addEventListener('change', function(){
 html5Slider.noUiSlider.set([this.value, null]);
 });
 
-inputNumber.addEventListener('change', function(){
-html5Slider.noUiSlider.set([null, this.value]);
-});
+
 
 selectcomplexity.addEventListener('change', function(){
 complexitySlider.noUiSlider.set([this.value, null]);

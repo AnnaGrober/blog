@@ -19,7 +19,8 @@
                 <h1 class="display-4 font-italic">{{ $category->ad }}</h1>
                 <p class="lead my-3">{{ $category->categoryPages }}</p>
                 <p class="lead my-3">{{ $category->category }}</p>
-                <p class="lead my-3">{{ $category->language }}</p>
+                <p class="lead my-3">Язык Оригинала:{{ $category->language }}</p>
+                <p class="lead my-3">Язык Перевода:{{ $category->translation}}</p>
                 <p class="lead my-3">{{ $category->user}}</p>
             </div>
             <div class="col-md-6 col-lg-6">
