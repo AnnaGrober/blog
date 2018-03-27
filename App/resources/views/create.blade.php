@@ -3,178 +3,228 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Детали</title>
-    <script src="../bootstrap/dist/js/jquery.min.js"></script>
-    <link href="../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Добавление объявления</title>
+    <script src="bootstrap/dist/js/jquery.min.js"></script>
+    <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="noUiSlider.11.0.3/nouislider.min.css" rel="stylesheet">
-    <link href="../bootstrap/form-validation.css" rel="stylesheet">
 
-    <link href="../styles/styles2.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/atatanasov/gijgo@1.7.3/dist/combined/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://cdn.jsdelivr.net/gh/atatanasov/gijgo@1.7.3/dist/combined/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <link href="styles/styles2.css" rel="stylesheet">
 </head>
-<body class="bg-light">
-    <div class="container-fluid header">
+<body>
+<div class="container-fluid" >
     @include ('layouts.headerNavigetion')
 
-            <form >
-            <div class="row text-left justify-content-center">
-                <div class="col-md-8 ">
-                    <h4 class="mb-3">Введите данные для размещения объявления</h4>
-                    <form class="needs-validation" novalidate>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="category">Категория</label>
-                                <select class="custom-select d-block w-100" id="category" required>
-                                    <option value="">Выберите категорию</option>
-                                    <option>Другая</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="inputCategory">Введите категорию</label>
-                                <input type="text" class="form-control" id="inputCategory" placeholder="" value="" required>
-                            </div>
-                        </div>
-                        <div class="row">
-                           <div class="col-md-6 mb-3">
-                                <label for="language">Язык</label>
-                                <select class="custom-select d-block w-100" id="language" required>
-                                    <option value="">Выберите язык</option>
-                                    <option>Другой</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="inputLanguage">Введите язык</label>
-                                <input type="text" class="form-control" id="inputLanguage" placeholder="" value="" required>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-1 col-lg-1 col-md-1 col-sm-4 col-xs-4">
-                                <lable for="VoidInputPrice">Цена  </lable>
-                            </div>
+    <div class="container  header">
+        <form class="filter">
+            <div class="form-froup filterform">
+                <div class="form-row">
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                        <lable for="VoidSelectLanquage"> Язык </lable>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3">
+                        <select  class="form-control" id="VoidSelectLanquage" max-width="276">
+                            <option > Выберите язык </option>
+                            <option> Язык 1 </option>
+                            <option> Язык 2</option>
+                        </select>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3">
+                        <input type="text" class="form-control" id="lanquage" placeholder="Введите язык" required>
+                    </div>
+                </div><br>
+                <div class="form-row ">
 
-                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-5 col-xs-5">
-                                <div class="example">
-                                    <div id="html5" class="noUi-target noUi-ltr noUi-horizontal"></div>
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-1 col-xs-1">
+                        <lable for="VoidSelectType"> Тип </lable>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
+                        <select  class="form-control" id="VoidSelectType" >
+                            <option > Выберите тип перевода </option>
+                            <option> Книги </option>
+                            <option> Статьи</option>
+                            <option> Видео</option>
+                            <option> Озвучка</option>
+                        </select>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3">
+                        <input type="text" class="form-control" id="lanquage" placeholder="Введите категорию" required>
+                    </div>
+                </div><br>
+                <div class="form-row ">
 
-                                </div>
-                            </div>
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                        <lable for="VoidInputPrice">Сложность </lable>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                        <div class="example">
+                            <div id="complexity" class="noUi-target noUi-ltr noUi-horizontal"></div>
+                        </div>
+                    </div>
+                    <div class="col-xl-1 col-lg-1 col-md-1">
+                        <select id="input-complexity"></select>
 
-                            <div class="col-xl-3 col-lg-3 col-md-3 ">
-                                min<select id="input-select"></select>
-                                max<input type="number" min="0" max="10000" step="100" id="input-number">
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="address">Address</label>
-                            <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
-                            <div class="invalid-feedback">
-                                Please enter your shipping address.
-                            </div>
-                        </div>
+                    </div>
 
-                        <div class="mb-3">
-                            <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
-                            <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
-                        </div>
+                </div><br>
+                <div class="form-row ">
 
-                        <div class="row">
-                            <div class="col-md-5 mb-3">
-                                <label for="country">Country</label>
-                                <select class="custom-select d-block w-100" id="country" required>
-                                    <option value="">Choose...</option>
-                                    <option>United States</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    Please select a valid country.
-                                </div>
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label for="state">State</label>
-                                <select class="custom-select d-block w-100" id="state" required>
-                                    <option value="">Choose...</option>
-                                    <option>California</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    Please provide a valid state.
-                                </div>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <label for="zip">Zip</label>
-                                <input type="text" class="form-control" id="zip" placeholder="" required>
-                                <div class="invalid-feedback">
-                                    Zip code required.
-                                </div>
-                            </div>
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                        <lable for="VoidInputPrice">Цена </lable>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                        <div class="example">
+                            <div id="html5" class="noUi-target noUi-ltr noUi-horizontal"></div>
                         </div>
-                        <hr class="mb-4">
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="same-address">
-                            <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
-                        </div>
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="save-info">
-                            <label class="custom-control-label" for="save-info">Save this information for next time</label>
-                        </div>
-                        <hr class="mb-4">
+                    </div>
+                    <div class="col-xl-1 col-lg-1 col-md-1">
+                        <select id="input-select"></select>
+                    </div>
 
-                        <h4 class="mb-3">Payment</h4>
+                </div><br>
 
-                        <div class="d-block my-3">
-                            <div class="custom-control custom-radio">
-                                <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
-                                <label class="custom-control-label" for="credit">Credit card</label>
-                            </div>
-                            <div class="custom-control custom-radio">
-                                <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
-                                <label class="custom-control-label" for="debit">Debit card</label>
-                            </div>
-                            <div class="custom-control custom-radio">
-                                <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
-                                <label class="custom-control-label" for="paypal">Paypal</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="cc-name">Name on card</label>
-                                <input type="text" class="form-control" id="cc-name" placeholder="" required>
-                                <small class="text-muted">Full name as displayed on card</small>
-                                <div class="invalid-feedback">
-                                    Name on card is required
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="cc-number">Credit card number</label>
-                                <input type="text" class="form-control" id="cc-number" placeholder="" required>
-                                <div class="invalid-feedback">
-                                    Credit card number is required
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3 mb-3">
-                                <label for="cc-expiration">Expiration</label>
-                                <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
-                                <div class="invalid-feedback">
-                                    Expiration date required
-                                </div>
-                            </div>
-                            <div class="col-md-3 mb-3">
-                                <label for="cc-expiration">CVV</label>
-                                <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
-                                <div class="invalid-feedback">
-                                    Security code required
-                                </div>
-                            </div>
-                        </div>
-                        <hr class="mb-4">
-                        <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
-                    </form>
+                <div class="form-row ">
+
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                        <lable for="VoidSelectOneDate"> Время на выполнение </lable>
+                    </div>
+
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <input id="datepicker"  placeholder="Начало"/>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <input id="datepicker2"  placeholder="Конец"/>
+                    </div>
+
+                </div><br>
+                <div class="form-row ">
+                        <label for="ad">Введите объявление (кратко)</label>
+                    <textarea class="form-control" id="ad" cols="255" rows="4"> </textarea>
+                </div><br>
+                <div class="form-row ">
+                    <label for="categoryPages">Введите объявление (полностью)</label>
+                    <textarea class="form-control" id="categoryPages" cols="2000" rows="10" required> </textarea>
+
                 </div>
             </div>
-            </form>
+        </form>
+
     </div>
-    @include ('layouts.footerNavigation')
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="../bootstrap/dist/js/jquery.js"></script>
-    <script src="../bootstrap/dist/js/bootstrap.min.js"></script>
+
+
+</div>
+@include ('layouts.footerNavigation')
+
+<div class="modal fade" id="ResponseModal" tabindex="-1" role="dialog" aria-labelledy="ResponseModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+
+
+                <button class="close" type="button" data-dismiss="modal" aria-lable="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="noUiSlider.11.0.3/nouislider.min.js"></script>
+<script>
+    $('#datepicker').datepicker({
+        uiLibrary: 'bootstrap4'
+    });
+    $('#datepicker2').datepicker({
+        uiLibrary: 'bootstrap4'
+    });
+    var select = document.getElementById('input-select');
+    var selectcomplexity = document.getElementById('input-complexity');
+
+    // Append the option elements price
+    for ( var i = 0; i <= 10000; i++ ){
+
+        var option = document.createElement("option");
+        option.text = i;
+        option.value = i;
+
+        select.appendChild(option);
+    }
+
+    // Append the option elements complexity
+    for ( var j = 0; j <= 5; j++ ){
+
+        var option2 = document.createElement("option");
+        option2.text = j;
+        option2.value = j;
+
+        selectcomplexity.appendChild(option2);
+    }
+
+    var html5Slider = document.getElementById('html5');
+    var complexitySlider = document.getElementById('complexity');
+
+    noUiSlider.create(html5Slider, {
+        start: [ 200],
+        range: {
+            'min': 0,
+            'max': 10000
+        }
+    });
+
+    noUiSlider.create(complexitySlider, {
+        start: [ 2 ],
+        range: {
+            'min': 0,
+            'max': 5
+        }
+    });
+    var inputNumber = document.getElementById('input-number');
+
+    html5Slider.noUiSlider.on('update', function( values, handle ) {
+
+        var value = values[handle];
+
+        if ( handle ) {
+            inputNumber.value = value;
+        } else {
+            select.value = Math.round(value);
+        }
+    });
+
+
+    complexitySlider.noUiSlider.on('update', function( values, handle ) {
+        var value = values[handle];
+        if ( handle ) {
+            inputNumber.value = value;
+        } else {
+            selectcomplexity.value = Math.round(value);
+        }
+    });
+
+    select.addEventListener('change', function(){
+        html5Slider.noUiSlider.set([this.value, null]);
+    });
+
+
+    selectcomplexity.addEventListener('change', function(){
+        complexitySlider.noUiSlider.set([this.value, null]);
+    });
+
+</script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="bootstrap/dist/js/jquery.js"></script>
+<script src="bootstrap/dist/js/bootstrap.min.js"></script>
+
 </body>
 </html>
