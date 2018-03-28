@@ -19,10 +19,25 @@
     <div class="container  header">
         <form class="filter">
             <div class="form-froup filterform">
-                <h1>Звполните объявление</h1>
+                <h1>Заполните объявление</h1>
                 <div class="form-row">
                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                        <lable for="VoidSelectLanquage"> Язык </lable>
+                        <lable for="VoidSelectLanquage"> Язык оригинала</lable>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3">
+                        <select  class="form-control" id="VoidSelectLanquage" max-width="276">
+                            <option > Выберите язык </option>
+                            <option> Язык 1 </option>
+                            <option> Язык 2</option>
+                        </select>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3">
+                        <input type="text" class="form-control" id="lanquage" placeholder="Введите язык" required>
+                    </div>
+                </div><br>
+                <div class="form-row">
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                        <lable for="VoidSelectLanquage"> Язык перевода</lable>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3">
                         <select  class="form-control" id="VoidSelectLanquage" max-width="276">
@@ -107,6 +122,12 @@
                     <label for="categoryPages">Введите объявление (полностью)</label>
                     <textarea class="form-control" id="categoryPages" cols="2000" rows="10" required> </textarea>
 
+                </div><br>
+                <div class="form-row ">
+                    <label >Вы можете добавить своё изображение</label>
+                    <label class="btn btn-secondary">
+                        Добавить изображение <input type="file" hidden>
+                    </label>
                 </div><br>
                 <button class="btn btn-secondary btn-lg btn-block" type="submit">Отправить</button>
             </div>
