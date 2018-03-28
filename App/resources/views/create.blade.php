@@ -25,29 +25,29 @@
                         <lable for="VoidSelectLanquage"> Язык оригинала</lable>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3">
-                        <select  class="form-control" id="VoidSelectLanquage" max-width="276">
+                        <select  class="form-control" id="VoidSelectLanquage" name="language"  max-width="276">
                             <option > Выберите язык </option>
                             <option> Язык 1 </option>
                             <option> Язык 2</option>
                         </select>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3">
-                        <input type="text" class="form-control" id="lanquage" placeholder="Введите язык" required>
+                        <input type="text" class="form-control" id="lanquage" name="language" placeholder="Введите язык" required>
                     </div>
                 </div><br>
                 <div class="form-row">
                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                        <lable for="VoidSelectLanquage"> Язык перевода</lable>
+                        <lable for="VoidSelectLanquageTranslation"> Язык перевода</lable>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3">
-                        <select  class="form-control" id="VoidSelectLanquage" max-width="276">
+                        <select  class="form-control" id="VoidSelectLanquageTranslation" name="language_translation"  max-width="276">
                             <option > Выберите язык </option>
                             <option> Язык 1 </option>
                             <option> Язык 2</option>
                         </select>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3">
-                        <input type="text" class="form-control" id="lanquage" placeholder="Введите язык" required>
+                        <input type="text" class="form-control" id="lanquage_translation" name="language_translation"  placeholder="Введите язык" required>
                     </div>
                 </div><br>
                 <div class="form-row ">
@@ -56,7 +56,7 @@
                         <lable for="VoidSelectType"> Тип </lable>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
-                        <select  class="form-control" id="VoidSelectType" >
+                        <select  class="form-control" id="VoidSelectType" name="type_category"  >
                             <option > Выберите тип перевода </option>
                             <option> Книги </option>
                             <option> Статьи</option>
@@ -65,7 +65,7 @@
                         </select>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3">
-                        <input type="text" class="form-control" id="lanquage" placeholder="Введите категорию" required>
+                        <input type="text" class="form-control" id="lanquage" name="type_category"   placeholder="Введите категорию" required>
                     </div>
                 </div><br>
                 <div class="form-row ">
@@ -79,7 +79,7 @@
                         </div>
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1">
-                        <select id="input-complexity"></select>
+                        <select id="input-complexity" name="complexity" ></select>
 
                     </div>
 
@@ -95,11 +95,36 @@
                         </div>
                     </div>
                     <div class="col-xl-1 col-lg-1 col-md-1">
-                        <select id="input-select"></select>
+                        <select id="input-select" name="price" ></select>
                     </div>
 
                 </div><br>
 
+
+                <div class="form-row ">
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                        <label for="ad">Введите объявление (кратко)</label>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                         <textarea class="form-control " id="ad" cols="255"  name="add" rows="4" > </textarea>
+                    </div>
+                </div><br>
+                <div class="form-row ">
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                          <label for="ad">Ссылка на источник</label>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <input class="form-control" id="link" name="link">
+                    </div>
+                </div><br>
+                <div class="form-row ">
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                        <label for="categoryPages">Введите объявление (полностью)</label>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                          <textarea class="form-control" id="categoryPages" name="categoryPages" cols="2000" rows="10" required> </textarea>
+                    </div>
+                </div><br>
                 <div class="form-row ">
 
                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
@@ -107,27 +132,22 @@
                     </div>
 
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                        <input id="datepicker"  placeholder="Начало"/>
+                        <input id="datepicker" name="dateStart"   placeholder="Начало"/>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                        <input id="datepicker2"  placeholder="Конец"/>
+                        <input id="datepicker2" name="dateFinish"  placeholder="Конец"/>
                     </div>
 
                 </div><br>
                 <div class="form-row ">
-                        <label for="ad">Введите объявление (кратко)</label>
-                    <textarea class="form-control" id="ad" cols="255" rows="4"> </textarea>
-                </div><br>
-                <div class="form-row ">
-                    <label for="categoryPages">Введите объявление (полностью)</label>
-                    <textarea class="form-control" id="categoryPages" cols="2000" rows="10" required> </textarea>
-
-                </div><br>
-                <div class="form-row ">
-                    <label >Вы можете добавить своё изображение</label>
-                    <label class="btn btn-secondary">
-                        Добавить изображение <input type="file" hidden>
-                    </label>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                         <label >Вы можете добавить своё изображение</label>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                            <label class="btn btn-secondary">
+                                Добавить изображение <input type="file"  name="img" hidden>
+                            </label>
+                    </div>
                 </div><br>
                 <button class="btn btn-secondary btn-lg btn-block" type="submit">Отправить</button>
             </div>
