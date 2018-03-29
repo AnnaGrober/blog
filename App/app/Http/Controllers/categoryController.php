@@ -6,6 +6,7 @@ use App\Category;
 use Illuminate\Http\Request;
 use DB;
 use App\Categorypage;
+use App\Language;
 class categoryController extends Controller
 {
 
@@ -31,13 +32,26 @@ class categoryController extends Controller
             ->leftJoin('languages as two','categoryPages.language_translation','=','two.id')
             ->leftJoin('users','categorypages.user','=','users.id')
             ->select('categorypages.img as img','categorypages.ad as ad','categorypages.complexity as complexity',
-                'categorypages.categoryPages as categoryPages',
+                'categorypages.category_pages as categoryPages',
                 'one.language  as  language','two.language  as  translation','categories.category as category','users.name  as  user')
             ->where('categorypages.id', $id)->get();
         return view('categorys.details', ['data'=>$data]);
     }
     public function create()
     {
-        return view('create');
+        $categories = DB::table('categories')->get();
+        $languages = DB::table('languages')->get();
+        return view('create',['categories'=>$categories], ['languages'=>$languages]);
+    }
+    public function store()
+    {
+        $categoryPage = new Categorypage;
+        $category = new Category;
+        $language = new Language;
+
+        $language->language = request('language2');
+        $language-> language= request('language_translation2');
+        $category->type_category=request('type_category2');
+
     }
 }

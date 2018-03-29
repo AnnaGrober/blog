@@ -17,7 +17,8 @@
     @include ('layouts.headerNavigetion')
 
     <div class="container  header">
-        <form class="filter">
+        <form action="/create/add" method="post">
+            {{csrf_field()}}
             <div class="form-froup filterform">
                 <h1>Заполните объявление</h1>
                 <div class="form-row">
@@ -26,13 +27,13 @@
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3">
                         <select  class="form-control" id="VoidSelectLanquage" name="language"  max-width="276">
-                            <option > Выберите язык </option>
-                            <option> Язык 1 </option>
-                            <option> Язык 2</option>
+                            @foreach ($languages as $language)
+                                <option> {{ $language->language }}</option>
+                            @endForeach
                         </select>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3">
-                        <input type="text" class="form-control" id="lanquage" name="language" placeholder="Введите язык" required>
+                        <input type="text" class="form-control" id="lanquage" name="language2" placeholder="Введите язык" >
                     </div>
                 </div><br>
                 <div class="form-row">
@@ -41,13 +42,13 @@
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3">
                         <select  class="form-control" id="VoidSelectLanquageTranslation" name="language_translation"  max-width="276">
-                            <option > Выберите язык </option>
-                            <option> Язык 1 </option>
-                            <option> Язык 2</option>
+                            @foreach ($languages as $language)
+                                <option> {{ $language->language }}</option>
+                            @endForeach
                         </select>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3">
-                        <input type="text" class="form-control" id="lanquage_translation" name="language_translation"  placeholder="Введите язык" required>
+                        <input type="text" class="form-control" id="lanquage_translation" name="language_translation2"  placeholder="Введите язык" >
                     </div>
                 </div><br>
                 <div class="form-row ">
@@ -57,15 +58,13 @@
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
                         <select  class="form-control" id="VoidSelectType" name="type_category"  >
-                            <option > Выберите тип перевода </option>
-                            <option> Книги </option>
-                            <option> Статьи</option>
-                            <option> Видео</option>
-                            <option> Озвучка</option>
+                            @foreach ($categories as $category)
+                                <option> {{ $category->category }}</option>
+                            @endForeach
                         </select>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3">
-                        <input type="text" class="form-control" id="lanquage" name="type_category"   placeholder="Введите категорию" required>
+                        <input type="text" class="form-control" id="lanquage" name="type_category2"   placeholder="Введите категорию">
                     </div>
                 </div><br>
                 <div class="form-row ">
@@ -122,7 +121,7 @@
                         <label for="categoryPages">Введите объявление (полностью)</label>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                          <textarea class="form-control" id="categoryPages" name="categoryPages" cols="2000" rows="10" required> </textarea>
+                          <textarea class="form-control" id="categoryPages" name="category_pages" cols="2000" rows="10" required> </textarea>
                     </div>
                 </div><br>
                 <div class="form-row ">
