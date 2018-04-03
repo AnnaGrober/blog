@@ -14,21 +14,15 @@ class CreateLanguageTable extends Migration
     public function up()
     {
         Schema::create('languages', function (Blueprint $table) {
-             $table->increments('id');
-            $table->text('language');
-            $table->timestamps();
-        });
+        $table->increments('id');
+        $table->string('language');
+        $table->timestamps();
+    });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+
     public function down()
     {
-        Schema::table('languages', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('languages');
     }
 }

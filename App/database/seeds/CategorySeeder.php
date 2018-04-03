@@ -11,22 +11,18 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('category')->insert(
+        DB::table('Categories')->insert(
         	array(
 				[
-					'id'=>"1",
 					'category' =>"Книга"
 				],
 				[
-					'id'=>"2",
 					'category' =>"Видео"
 				],
 				[
-					'id'=>"3",
 					'category' =>"Статья"
 				],
 				[
-					'id'=>"4",
 					'category' =>"Озвучка видео"
 				]
 			)

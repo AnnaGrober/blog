@@ -13,17 +13,9 @@ class CreateCateroryTable extends Migration
      */
     public function up()
     {
-        Schema::create('category', function (Blueprint $table) {
+        Schema::create('Categories', function (Blueprint $table) {
             $table->increments('id');
-         /*   $table->text('type');
-            $table->text('language');
-            $table->integer('priceMin');
-            $table->integer('priceMax');
-            $table->integer('complexity');
-            $table->date('dateStart');
-            $table->date('dateFinish');
-            $table->text('ad');*/
-            $table->text('category');
+            $table->string('category');
             $table->timestamps();
         });
     }

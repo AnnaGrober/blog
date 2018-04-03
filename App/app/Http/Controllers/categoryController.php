@@ -11,8 +11,7 @@ class categoryController extends Controller
 {
 
     public function getCategory() {
-        $data=DB::table('categoryPages')
-            ->leftJoin('categories','categoryPages.type_category','=','categories.id')
+        $data=Categorypage:: leftJoin('categories','categoryPages.type_category','=','categories.id')
             ->leftJoin('languages as one','categoryPages.language','=','one.id')
             ->leftJoin('languages as two','categoryPages.language_translation','=','two.id')
             ->leftJoin('users','categoryPages.user','=','users.id')
@@ -26,8 +25,7 @@ class categoryController extends Controller
 
 
     public function getDetails($id) {
-        $data=DB::table('categorypages')
-            ->leftJoin('categories','categorypages.type_category','=','categories.id')
+        $data=Categorypage::leftJoin('categories','categorypages.type_category','=','categories.id')
             ->leftJoin('languages as one','categoryPages.language','=','one.id')
             ->leftJoin('languages as two','categoryPages.language_translation','=','two.id')
             ->leftJoin('users','categorypages.user','=','users.id')
@@ -39,8 +37,8 @@ class categoryController extends Controller
     }
     public function create()
     {
-        $categories = DB::table('categories')->get();
-        $languages = DB::table('languages')->get();
+        $categories = Category::get();
+        $languages = Language::get();
         return view('create',['categories'=>$categories], ['languages'=>$languages]);
     }
     public function store()
@@ -49,9 +47,47 @@ class categoryController extends Controller
         $category = new Category;
         $language = new Language;
 
-        $language->language = request('language2');
-        $language-> language= request('language_translation2');
-        $category->type_category=request('type_category2');
+       if (request('language2') != NULL) {
+           Language::insert(['language'  =>  request('language2')]);
+           $Language = Language:: where('language', request('language2'))->value('id');
 
+       }
+       else
+       {
+           $Language= Language:: where('language', request('language'))->value('id');
+       }
+        if (request('language_translation2') != NULL) {
+           Language::insert(['language'  =>  request('language_translation2')]);
+            $language_translation = Language:: where('language', request('language_translation2'))->value('id');
+
+       }
+       else {
+           $language_translation = Language:: where('language', request('language_translation'))->value('id');
+       }
+
+        if (request('type_category2') != NULL) {
+            Category::insert(['category'  =>  request('type_category2')]);
+            $type_category = Category:: where('category', request('type_category2'))->value('id');
+
+        }
+        else {
+            $type_category =Category:: where('category', request('type_category'))->value('id');
+        }
+
+        Categorypage::insert([
+            'language' =>$Language,
+            'language_translation' =>$language_translation,
+            'type_category' =>$type_category,
+            'price' => request('price'),
+            'complexity'=> request('complexity'),
+            'ad'=> request('add'),
+            'complexity'=> request('complexity'),
+            'category_pages' =>request('category_pages'),
+            'date_start' =>request('dateStart'),
+            'date_finish' =>request('dateFinish'),
+            /*'lmg' =>request('img'),*/
+            'link' =>request('link'),
+
+            ]);
     }
 }

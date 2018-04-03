@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Language extends Model
 {
+    public $timestamps = false;
     protected $fillable = [
         'id',
         'language'
@@ -14,4 +15,6 @@ class Language extends Model
     {
         return $this->belongsTo(Categorypage::class);
     }
+
 }
+

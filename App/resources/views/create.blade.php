@@ -27,6 +27,7 @@
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3">
                         <select  class="form-control" id="VoidSelectLanquage" name="language"  max-width="276">
+                            <option disabled selected> Выбрать язык</option>
                             @foreach ($languages as $language)
                                 <option> {{ $language->language }}</option>
                             @endForeach
@@ -42,6 +43,7 @@
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3">
                         <select  class="form-control" id="VoidSelectLanquageTranslation" name="language_translation"  max-width="276">
+                            <option disabled selected> Выбрать язык </option>
                             @foreach ($languages as $language)
                                 <option> {{ $language->language }}</option>
                             @endForeach
@@ -58,8 +60,9 @@
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
                         <select  class="form-control" id="VoidSelectType" name="type_category"  >
+                            <option disabled selected> Выбрать тип</option>
                             @foreach ($categories as $category)
-                                <option> {{ $category->category }}</option>
+                                <option > {{ $category->category }}</option>
                             @endForeach
                         </select>
                     </div>
@@ -86,7 +89,7 @@
                 <div class="form-row ">
 
                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                        <lable for="VoidInputPrice">Цена </lable>
+                        <lable for="VoidInputPrice">Цена (руб)</lable>
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
                         <div class="example">
@@ -110,7 +113,7 @@
                 </div><br>
                 <div class="form-row ">
                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                          <label for="ad">Ссылка на источник</label>
+                          <label for="link">Ссылка на источник</label>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
                         <input class="form-control" id="link" name="link">
@@ -131,10 +134,10 @@
                     </div>
 
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                        <input id="datepicker" name="dateStart"   placeholder="Начало"/>
+                        <input id="datepicker" name="dateStart"  data-date-format="yyyy-mm-dd"  placeholder="Начало"/>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                        <input id="datepicker2" name="dateFinish"  placeholder="Конец"/>
+                        <input id="datepicker2" name="dateFinish" data-date-format="yyyy-mm-dd"  placeholder="Конец"/>
                     </div>
 
                 </div><br>
@@ -184,9 +187,11 @@
 <script src="noUiSlider.11.0.3/nouislider.min.js"></script>
 <script>
     $('#datepicker').datepicker({
+        format: 'yyyy-mm-dd',
         uiLibrary: 'bootstrap4'
     });
     $('#datepicker2').datepicker({
+        format: 'yyyy-mm-dd',
         uiLibrary: 'bootstrap4'
     });
     var select = document.getElementById('input-select');

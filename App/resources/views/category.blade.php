@@ -83,10 +83,10 @@
 							</div>
 			  
 									 <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
-										 <input id="datepicker"  placeholder="Начало"/>
+										 <input id="datepicker"  data-date-format="YYYY-MM-DD" placeholder="Начало"/>
 									 </div>
 									 <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
-										<input id="datepicker2"  placeholder="Конец"/>
+										<input id="datepicker2" data-date-format="YYYY-MM-DD"  placeholder="Конец"/>
 									 </div>
 									 <div class="col-xl-3 col-lg-3 col-md-3 "></div>
 					   </div>
