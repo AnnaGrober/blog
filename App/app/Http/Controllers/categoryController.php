@@ -18,21 +18,30 @@ class categoryController extends Controller
         $categories = Category::get();
         $languages = Language::get();
         if($request->ajax() ){
-            $lang = $request->lang;
+            $lang= $request->lang;
+            $cat =  $request->cat;
            $priceMin =  $request->priceMin;
             $priceMax =  $request->priceMax;
+
             $Data = Categorypage:: leftJoin('categories', 'categoryPages.type_category', '=', 'categories.id')
                 ->leftJoin('languages as one', 'categoryPages.language', '=', 'one.id')
-                ->where('one.id',$lang)
                 ->leftJoin('languages as two', 'categoryPages.language_translation', '=', 'two.id')
                 ->leftJoin('users', 'categoryPages.user', '=', 'users.id')
                ->where('categoryPages.price', '>=',$priceMin)
                 ->where('categoryPages.price', '<=',$priceMax)
+               ->when($lang, function ($language) use ($lang){
+                    return $language ->where('one.id', $lang);
+                })
+               ->when($cat, function ($category) use ($cat){
+                    return $category ->where('categories.id', $cat);
+                })
                 ->select('categoryPages.id  as  id', 'categoryPages.img as img', 'categoryPages.ad as ad', 'categoryPages.complexity as complexity',
                     'one.language  as  language', 'two.language  as  translation', 'categories.category as category',
-                    'users.name as  user')
+                    'users.name as  user')->get();
+           /* if  ($lang->exists){
+                $Data ->where('one.id', $lang)->get();
+            }*/
 
-                ->get();
         //   dd($Data);
              response()->json($Data);
             return view('categorys.products', ['languages' => $languages, 'categories' => $categories, 'Data' => $Data]);

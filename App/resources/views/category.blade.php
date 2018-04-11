@@ -29,7 +29,7 @@
 											</div>
 											  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-6">
 											<select  class="form-control" id="languages" name="lang" max-width="276">
-											    <option> Выберите язык </option>
+											    <option value=0> Выберите язык </option>
 												@foreach ($languages as $language)
 													<option class="option" value="{{$language->id}}">
 														{{ $language->language }}
@@ -61,9 +61,11 @@
 											</div>
 											  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
 											<select  class="form-control" id="categories" >
-											    <option > Выберите тип перевода </option>
+											    <option value=0> Выберите тип перевода </option>
 												@foreach ($categories as $category)
-													<option class="data-category='{{$category->id}}'" name="categories[]" value="{{$category->id}}"> {{ $category->category }}</option>
+													<option class="option"  value="{{$category->id}}">
+														{{ $category->category }}
+													</option>
 												@endForeach
 											 </select>
 												</div>

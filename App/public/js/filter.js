@@ -85,16 +85,20 @@ selectcomplexity.addEventListener('change', function(){
 $('#languages').change(function() {
             changeCat();
 });
+$('#categories').change(function() {
+    changeCat();
+});
 
 function changeCat(){
-    var lang =$('#languages').val();
+    if ( $('#languages').length ){ var lang =$('#languages').val();}
     var priceMin =$('#input-select').val();
     var priceMax =$('#input-number').val();
+    if ( $('#categories').length ){ var cat =$('#categories').val();}
     $.ajax({
         type: 'get',
         url: '',
         dataType:'html',
-        data: "lang="+lang +"& priceMin="+priceMin+"& priceMax="+priceMax,
+        data: "lang="+lang +"& priceMin="+priceMin+"& priceMax="+priceMax+"& cat="+cat,
 
         success: function (response) {
             console.log(response);
