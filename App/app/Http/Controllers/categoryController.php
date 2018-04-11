@@ -10,18 +10,49 @@ use App\Language;
 class categoryController extends Controller
 {
 
-    public function getCategory() {
-        $data=Categorypage:: leftJoin('categories','categoryPages.type_category','=','categories.id')
-            ->leftJoin('languages as one','categoryPages.language','=','one.id')
-            ->leftJoin('languages as two','categoryPages.language_translation','=','two.id')
-            ->leftJoin('users','categoryPages.user','=','users.id')
-            ->select('categoryPages.id  as  id','categoryPages.img as img','categoryPages.ad as ad','categoryPages.complexity as complexity',
-                'one.language  as  language','two.language  as  translation','categories.category as category',
-                'users.name as  user')
-            ->get();
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function category(Request $request) {
+        $categories = Category::get();
+        $languages = Language::get();
+        if($request->ajax() ){
+            $lang = $request->lang;
+           $priceMin =  $request->priceMin;
+            $priceMax =  $request->priceMax;
+            $Data = Categorypage:: leftJoin('categories', 'categoryPages.type_category', '=', 'categories.id')
+                ->leftJoin('languages as one', 'categoryPages.language', '=', 'one.id')
+                ->where('one.id',$lang)
+                ->leftJoin('languages as two', 'categoryPages.language_translation', '=', 'two.id')
+                ->leftJoin('users', 'categoryPages.user', '=', 'users.id')
+               ->where('categoryPages.price', '>=',$priceMin)
+                ->where('categoryPages.price', '<=',$priceMax)
+                ->select('categoryPages.id  as  id', 'categoryPages.img as img', 'categoryPages.ad as ad', 'categoryPages.complexity as complexity',
+                    'one.language  as  language', 'two.language  as  translation', 'categories.category as category',
+                    'users.name as  user')
 
-        return view('category',['data'=>$data]);
+                ->get();
+        //   dd($Data);
+             response()->json($Data);
+            return view('categorys.products', ['languages' => $languages, 'categories' => $categories, 'Data' => $Data]);
+
+        }
+        else {
+            $Data = Categorypage:: leftJoin('categories', 'categoryPages.type_category', '=', 'categories.id')
+                ->leftJoin('languages as one', 'categoryPages.language', '=', 'one.id')
+                ->leftJoin('languages as two', 'categoryPages.language_translation', '=', 'two.id')
+                ->leftJoin('users', 'categoryPages.user', '=', 'users.id')
+                ->select('categoryPages.id  as  id', 'categoryPages.img as img', 'categoryPages.ad as ad', 'categoryPages.complexity as complexity',
+                    'one.language  as  language', 'two.language  as  translation', 'categories.category as category',
+                    'users.name as  user')
+                ->get();
+
+            return view('category', ['languages' => $languages, 'categories' => $categories, 'Data' => $Data]);
+
+        }
     }
+
 
 
     public function getDetails($id) {
