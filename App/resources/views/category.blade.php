@@ -9,8 +9,9 @@
     <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="noUiSlider.11.0.3/nouislider.min.css" rel="stylesheet">
 
-    <script src="https://cdn.jsdelivr.net/gh/atatanasov/gijgo@1.7.3/dist/combined/js/gijgo.min.js" type="text/javascript"></script>
-    <link href="https://cdn.jsdelivr.net/gh/atatanasov/gijgo@1.7.3/dist/combined/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+	<link href="jQRangeSlider-master/demo/lib/jquery-ui/css/smoothness/jquery-ui-1.8.10.custom.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link href="styles/styles2.css" rel="stylesheet">
 
 
@@ -91,10 +92,10 @@
 							</div>
 			  
 									 <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
-										 <input id="datepicker"  data-date-format="YYYY-MM-DD" placeholder="Начало"/>
+										 <input id="datepicker"  value=0  data-date-format="yy-mm-dd" placeholder="Начало"/>
 									 </div>
 									 <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
-										<input id="datepicker2" data-date-format="YYYY-MM-DD"  placeholder="Конец"/>
+										<input id="datepicker2" value=0 data-date-format="yy-mm-dd"  placeholder="Конец"/>
 									 </div>
 									 <div class="col-xl-3 col-lg-3 col-md-3 "></div>
 					   </div>

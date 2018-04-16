@@ -1,9 +1,18 @@
 
 $('#datepicker').datepicker({
-    uiLibrary: 'bootstrap4'
+    dateFormat:'yy-mm-dd',
+    uiLibrary: 'bootstrap4',
+    onSelect: function(date1) {
+        changeCat(date1);
+    }
 });
+
 $('#datepicker2').datepicker({
-    uiLibrary: 'bootstrap4'
+    dateFormat:'yy-mm-dd',
+    uiLibrary: 'bootstrap4',
+    onSelect: function(date2) {
+        changeCat(date2);
+    }
 });
 var select = document.getElementById('input-select');
 var selectcomplexity = document.getElementById('input-complexity');
@@ -69,6 +78,7 @@ complexitySlider.noUiSlider.on('update', function( values, handle ) {
     } else {
         selectcomplexity.value = Math.round(value);
     }
+    changeCat();
 });
 
 select.addEventListener('change', function(){
@@ -83,22 +93,26 @@ selectcomplexity.addEventListener('change', function(){
 
 
 $('#languages').change(function() {
-            changeCat();
+    changeCat();
 });
 $('#categories').change(function() {
     changeCat();
 });
+
 
 function changeCat(){
     if ( $('#languages').length ){ var lang =$('#languages').val();}
     var priceMin =$('#input-select').val();
     var priceMax =$('#input-number').val();
     if ( $('#categories').length ){ var cat =$('#categories').val();}
+    var complex =$('#input-complexity').val();
+    if ( $('#datepicker').length ) {var data1 = $("#datepicker").val();}
+    if ( $('#datepicker2').length ){var data2 =$('#datepicker2').val();}
     $.ajax({
         type: 'get',
         url: '',
         dataType:'html',
-        data: "lang="+lang +"& priceMin="+priceMin+"& priceMax="+priceMax+"& cat="+cat,
+        data: "lang="+lang +"& priceMin="+priceMin+"& priceMax="+priceMax+"& cat="+cat+"& complex="+complex+"& data1="+data1+"& data2="+data2,
 
         success: function (response) {
             console.log(response);

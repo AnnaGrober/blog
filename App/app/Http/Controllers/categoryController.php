@@ -22,6 +22,9 @@ class categoryController extends Controller
             $cat =  $request->cat;
            $priceMin =  $request->priceMin;
             $priceMax =  $request->priceMax;
+            $complex =  $request->complex;
+            $data1 =  $request->data1;
+            $data2 =  $request->data2;
 
             $Data = Categorypage:: leftJoin('categories', 'categoryPages.type_category', '=', 'categories.id')
                 ->leftJoin('languages as one', 'categoryPages.language', '=', 'one.id')
@@ -29,23 +32,25 @@ class categoryController extends Controller
                 ->leftJoin('users', 'categoryPages.user', '=', 'users.id')
                ->where('categoryPages.price', '>=',$priceMin)
                 ->where('categoryPages.price', '<=',$priceMax)
+                ->where('categoryPages.complexity', '=',$complex)
                ->when($lang, function ($language) use ($lang){
                     return $language ->where('one.id', $lang);
                 })
                ->when($cat, function ($category) use ($cat){
                     return $category ->where('categories.id', $cat);
                 })
+               ->when($data1, function ($datepicker1) use ($data1) {
+                   return $datepicker1->where('categoryPages.date_start', '>=', $data1);
+               })
+                ->when($data2, function ($datepicker2) use ($data2){
+                    return $datepicker2 ->where('categoryPages.date_finish', '<=',$data2);
+                })
                 ->select('categoryPages.id  as  id', 'categoryPages.img as img', 'categoryPages.ad as ad', 'categoryPages.complexity as complexity',
-                    'one.language  as  language', 'two.language  as  translation', 'categories.category as category',
-                    'users.name as  user')->get();
-           /* if  ($lang->exists){
-                $Data ->where('one.id', $lang)->get();
-            }*/
+                    'one.language  as  language', 'two.language  as  translation', 'categories.category as category', 'categoryPages.date_start as date_start',
+                    'categoryPages.date_finish as date_finish',  'users.name as  user')->get();
 
-        //   dd($Data);
              response()->json($Data);
             return view('categorys.products', ['languages' => $languages, 'categories' => $categories, 'Data' => $Data]);
-
         }
         else {
             $Data = Categorypage:: leftJoin('categories', 'categoryPages.type_category', '=', 'categories.id')
@@ -56,9 +61,7 @@ class categoryController extends Controller
                     'one.language  as  language', 'two.language  as  translation', 'categories.category as category',
                     'users.name as  user')
                 ->get();
-
             return view('category', ['languages' => $languages, 'categories' => $categories, 'Data' => $Data]);
-
         }
     }
 
