@@ -14,7 +14,10 @@
     <div class="row pl-5 pt-5">
         <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
             <div class="sz">Общее количество объявлений<br>
-                <h1 class="font_h1"><b>{{$col}}</b></h1>
+                <h1 class="font_h1">
+                    <b>{{$col}}</b>
+                </h1>
+                <input type="button" id="All" value="Просмотр" class="btn btn-secondary">
             </div>
 
         </div>
@@ -22,20 +25,26 @@
         <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12">
             <div class=" sz">В режиме выполнения
                 <br>
-                <h1 class="font_h1"> <b>{{$runtime}}</b></h1></div>
+                <h1 class="font_h1"> <b>{{$runtime}}</b></h1>
+                <input type="button" value="Просмотр" class="btn btn-secondary">
+            </div>
         </div>
 
         <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12" >
             <div class=" sz">Завершенные (по времени) <br>
-                <h1 class="font_h1"> <b>{{$completed}}</b></h1></div>
+                <h1 class="font_h1"> <b>{{$completed}}</b></h1>
+                <input type="button" value="Просмотр" class="btn btn-secondary">
+            </div>
         </div>
 
         <div class="col-md-3 col-lg-3  col-sm-6 col-xs-12">
             <div class=" sz">Незавершенные (по времени)<br>
-                <h1 class="font_h1"> <b>{{$Notcompleted}}</b></h1></div>
+                <h1 class="font_h1"> <b>{{$Notcompleted}}</b></h1>
+                <input type="button" value="Просмотр" class="btn btn-secondary">
+            </div>
         </div>
     </div>
-    <div class="row pt-5 pl-5">
+    <div class="row pt-5 pl-5" id="change">
         <div class="col-md-6  col-sm-12 col-xs-12">
             <div class="sz1 border">
 
@@ -81,6 +90,6 @@
 </div>
 <script src="{{asset('bootstrap/dist/js/jquery.js')}}"></script>
 <script src="{{asset('bootstrap/dist/js/bootstrap.min.js')}}"></script>
-
+    <script src="{{asset('js/red.js')}}" type="text/javascript"></script>
 </body>
 </html>

@@ -84,6 +84,12 @@ class categoryController extends Controller
         $languages = Language::get();
         return view('create',['categories'=>$categories], ['languages'=>$languages]);
     }
+    public function update($id)
+    {
+        $categories = Category::get();
+        $languages = Language::get();
+        return view('update',['categories'=>$categories], ['languages'=>$languages]);
+    }
     public function store()
     {
         $categoryPage = new Categorypage;

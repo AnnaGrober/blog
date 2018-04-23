@@ -12,5 +12,8 @@ Route::post('/create/add',"categoryController@store" );
 
 Route::get('/redactor',"RedactorController@getRed" );
 
-Route::get('/forum',"ForumController@getForum" );
+Route::get('/SelectForUpdate',"RedactorController@getAll" );
 
+Route::get('/update/{id}',"categoryController@update" );
+
+Route::get('/forum',"ForumController@getForum" );
