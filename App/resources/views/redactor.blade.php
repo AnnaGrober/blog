@@ -18,6 +18,7 @@
                     <b>{{$col}}</b>
                 </h1>
                 <input type="button" id="All" value="Просмотр" class="btn btn-secondary">
+                <input type="button" id="None" value="Скрыть" style="display: none;" class="btn btn-secondary">
             </div>
 
         </div>

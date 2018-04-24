@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Изменение объявления</title>
-    <script src="bootstrap/dist/js/jquery.min.js"></script>
-    <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="noUiSlider.11.0.3/nouislider.min.css" rel="stylesheet">
+    <script src="../bootstrap/dist/js/jquery.min.js"></script>
+    <link href="../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../noUiSlider.11.0.3/nouislider.min.css" rel="stylesheet">
 
-    <link href="jQRangeSlider-master/demo/lib/jquery-ui/css/smoothness/jquery-ui-1.8.10.custom.css" rel="stylesheet">
+    <link href="../jQRangeSlider-master/demo/lib/jquery-ui/css/smoothness/jquery-ui-1.8.10.custom.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link href="../styles/styles2.css" rel="stylesheet">
@@ -18,17 +18,18 @@
     @include ('layouts.headerNavigetion')
 
     <div class="container  header">
-        <form action="/create/add" method="post">
+        @foreach ($Data as $data)
+        <form action="/update/add/{{$data->id}}" method="post">
             {{csrf_field()}}
             <div class="form-froup filterform">
-                <h1>Заполните объявление</h1>
+                <h1>Измените объявление</h1>
                 <div class="form-row">
                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
                         <lable for="VoidSelectLanquage"> Язык оригинала</lable>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3">
-                        <select  class="form-control" id="VoidSelectLanquage" name="language"  max-width="276">
-                            <option disabled selected> Выбрать язык</option>
+                        <select class="form-control" id="VoidSelectLanquage" name="language"  max-width="276">
+                            <option selected> {{$data->language}}</option>
                             @foreach ($languages as $language)
                                 <option> {{ $language->language }}</option>
                             @endForeach
@@ -44,7 +45,7 @@
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3">
                         <select  class="form-control" id="VoidSelectLanquageTranslation" name="language_translation"  max-width="276">
-                            <option disabled selected> Выбрать язык </option>
+                            <option selected>{{$data->translation}} </option>
                             @foreach ($languages as $language)
                                 <option> {{ $language->language }}</option>
                             @endForeach
@@ -61,7 +62,7 @@
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
                         <select  class="form-control" id="VoidSelectType" name="type_category"  >
-                            <option disabled selected> Выбрать тип</option>
+                            <option selected>{{$data->category}} </option>
                             @foreach ($categories as $category)
                                 <option > {{ $category->category }}</option>
                             @endForeach
@@ -109,7 +110,7 @@
                         <label for="ad">Введите объявление (кратко)</label>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                        <textarea class="form-control " id="ad" cols="255"  name="add" rows="4" > </textarea>
+                        <textarea class="form-control"  id="ad" cols="255"  name="add" rows="4">{{$data->ad}}</textarea>
                     </div>
                 </div><br>
                 <div class="form-row ">
@@ -117,7 +118,7 @@
                         <label for="link">Ссылка на источник</label>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                        <input class="form-control" id="link" name="link">
+                        <input class="form-control" value="{{$data->link}}" id="link" name="link">
                     </div>
                 </div><br>
                 <div class="form-row ">
@@ -125,7 +126,7 @@
                         <label for="categoryPages">Введите объявление (полностью)</label>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                        <textarea class="form-control" id="categoryPages" name="category_pages" cols="2000" rows="10" required> </textarea>
+                        <textarea class="form-control" id="categoryPages" name="category_pages" cols="2000" rows="10" required>{{$data->pages}}</textarea>
                     </div>
                 </div><br>
                 <div class="form-row ">
@@ -135,10 +136,10 @@
                     </div>
 
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                        <input id="datepicker" name="dateStart"  data-date-format="yy-mm-dd"  placeholder="Начало"/>
+                        <input id="datepicker" name="dateStart"  data-date-format="yy-mm-dd"  value="{{$data->start}}"/>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                        <input id="datepicker2" name="dateFinish" data-date-format="yy-mm-dd"  placeholder="Конец"/>
+                        <input id="datepicker2" name="dateFinish" data-date-format="yy-mm-dd"   value="{{$data->finish}}"/>
                     </div>
 
                 </div><br>
@@ -154,6 +155,7 @@
                 </div><br>
                 <button class="btn btn-secondary btn-lg btn-block" type="submit">Отправить</button>
             </div>
+
         </form>
 
     </div>
@@ -185,7 +187,7 @@
     </div>
 </div>
 
-<script src="noUiSlider.11.0.3/nouislider.min.js"></script>
+<script src="../noUiSlider.11.0.3/nouislider.min.js"></script>
 <script>
     $('#datepicker').datepicker({
         dateFormat:'yy-mm-dd',
@@ -224,7 +226,7 @@
     var complexitySlider = document.getElementById('complexity');
 
     noUiSlider.create(html5Slider, {
-        start: [ 200],
+        start: [{{$data->price}} ],
         range: {
             'min': 0,
             'max': 10000
@@ -232,7 +234,7 @@
     });
 
     noUiSlider.create(complexitySlider, {
-        start: [ 2 ],
+        start: [ {{$data->complexity}} ],
         range: {
             'min': 0,
             'max': 5
@@ -271,10 +273,10 @@
     });
 
 </script>
-
+@endForeach
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="bootstrap/dist/js/jquery.js"></script>
-<script src="bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../bootstrap/dist/js/jquery.js"></script>
+<script src="../bootstrap/dist/js/bootstrap.min.js"></script>
 
 </body>
 </html>

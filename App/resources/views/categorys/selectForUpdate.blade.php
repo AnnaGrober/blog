@@ -14,6 +14,7 @@
                             <div class="btn-group">
                                 <a href="/category/{{ $data->id }}"  class="btn  btn-outline-secondary " >Подробности</a>
                                 <a href="/update/{{ $data->id }}" class="btn  btn-outline-primary ml-3" >Изменить</a>
+                                <a href="/del/{{ $data->id }}" id="del" class="btn  btn-outline-primary ml-3" >Удалить</a>
                             </div>
                         </div>
                     </div>

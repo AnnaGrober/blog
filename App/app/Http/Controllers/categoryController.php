@@ -73,7 +73,7 @@ class categoryController extends Controller
             ->leftJoin('languages as two','categoryPages.language_translation','=','two.id')
             ->leftJoin('users','categorypages.user','=','users.id')
             ->select('categorypages.img as img','categorypages.ad as ad','categorypages.complexity as complexity',
-                'categorypages.category_pages as categoryPages',
+                  'categorypages.category_pages as categoryPages',
                 'one.language  as  language','two.language  as  translation','categories.category as category','users.name  as  user')
             ->where('categorypages.id', $id)->get();
         return view('categorys.details', ['data'=>$data]);
@@ -88,55 +88,113 @@ class categoryController extends Controller
     {
         $categories = Category::get();
         $languages = Language::get();
-        return view('update',['categories'=>$categories], ['languages'=>$languages]);
+        $Data=Categorypage::leftJoin('categories','categorypages.type_category','=','categories.id')
+            ->leftJoin('languages as one','categoryPages.language','=','one.id')
+            ->leftJoin('languages as two','categoryPages.language_translation','=','two.id')
+            ->leftJoin('users','categorypages.user','=','users.id')
+            ->select('categorypages.img as img','categorypages.ad as ad','categorypages.complexity as complexity',
+                'categorypages.category_pages as categoryPages','categorypages.price as price', 'categorypages.ad as ad',
+                'categorypages.link as link',    'categorypages.category_pages as pages',   'one.language  as  language',
+                'two.language  as  translation','categories.category as category','users.name  as  user',
+                'categorypages.date_start as start',  'categorypages.date_finish as finish' , 'categorypages.id as id')
+            ->where('categorypages.id', $id)->get();
+       // dd($Data);
+        return view('update', ['Data'=>$Data, 'categories'=>$categories, 'languages'=>$languages]);
     }
-    public function store()
-    {
-        $categoryPage = new Categorypage;
-        $category = new Category;
-        $language = new Language;
 
-       if (request('language2') != NULL) {
-           Language::insert(['language'  =>  request('language2')]);
-           $Language = Language:: where('language', request('language2'))->value('id');
 
-       }
-       else
-       {
-           $Language= Language:: where('language', request('language'))->value('id');
-       }
-        if (request('language_translation2') != NULL) {
-           Language::insert(['language'  =>  request('language_translation2')]);
-            $language_translation = Language:: where('language', request('language_translation2'))->value('id');
+        public function store()
+        {
+            $categoryPage = new Categorypage;
+            $category = new Category;
+            $language = new Language;
 
-       }
-       else {
-           $language_translation = Language:: where('language', request('language_translation'))->value('id');
-       }
+            if (request('language2') != NULL) {
+                Language::insert(['language' => request('language2')]);
+                $Language = Language:: where('language', request('language2'))->value('id');
 
-        if (request('type_category2') != NULL) {
-            Category::insert(['category'  =>  request('type_category2')]);
-            $type_category = Category:: where('category', request('type_category2'))->value('id');
+            } else {
+                $Language = Language:: where('language', request('language'))->value('id');
+            }
+            if (request('language_translation2') != NULL) {
+                Language::insert(['language' => request('language_translation2')]);
+                $language_translation = Language:: where('language', request('language_translation2'))->value('id');
 
-        }
-        else {
-            $type_category =Category:: where('category', request('type_category'))->value('id');
-        }
+            } else {
+                $language_translation = Language:: where('language', request('language_translation'))->value('id');
+            }
 
-        Categorypage::insert([
-            'language' =>$Language,
-            'language_translation' =>$language_translation,
-            'type_category' =>$type_category,
-            'price' => request('price'),
-            'complexity'=> request('complexity'),
-            'ad'=> request('add'),
-            'complexity'=> request('complexity'),
-            'category_pages' =>request('category_pages'),
-            'date_start' =>request('dateStart'),
-            'date_finish' =>request('dateFinish'),
-            /*'lmg' =>request('img'),*/
-            'link' =>request('link'),
+            if (request('type_category2') != NULL) {
+                Category::insert(['category' => request('type_category2')]);
+                $type_category = Category:: where('category', request('type_category2'))->value('id');
+
+            } else {
+                $type_category = Category:: where('category', request('type_category'))->value('id');
+            }
+
+            Categorypage::insert([
+                'language' => $Language,
+                'language_translation' => $language_translation,
+                'type_category' => $type_category,
+                'price' => request('price'),
+                'complexity' => request('complexity'),
+                'ad' => request('add'),
+                'category_pages' => request('category_pages'),
+                'date_start' => request('dateStart'),
+                'date_finish' => request('dateFinish'),
+                /*'lmg' =>request('img'),*/
+                'link' => request('link'),
 
             ]);
+        }
+
+            public function up($id)
+            {
+                $categoryPage = new Categorypage;
+                $category = new Category;
+                $language = new Language;
+
+                if (request('language2') != NULL) {
+                    Language::insert(['language' => request('language2')]);
+                    $Language = Language:: where('language', request('language2'))->value('id');
+                } else {
+                    $Language = Language:: where('language', request('language'))->value('id');
+                }
+                if (request('language_translation2') != NULL) {
+                    Language::insert(['language' => request('language_translation2')]);
+                    $language_translation = Language:: where('language', request('language_translation2'))->value('id');
+                } else {
+                    $language_translation = Language:: where('language', request('language_translation'))->value('id');
+                }
+
+                if (request('type_category2') != NULL) {
+                    Category::insert(['category' => request('type_category2')]);
+                    $type_category = Category:: where('category', request('type_category2'))->value('id');
+
+                } else {
+                    $type_category = Category:: where('category', request('type_category'))->value('id');
+                }
+
+              Categorypage::where('id', $id)
+                    ->update([
+                    'language' => $Language,
+                    'language_translation' => $language_translation,
+                    'type_category' => $type_category,
+                    'price' => request('price'),
+                    'complexity' => request('complexity'),
+                    'ad' => request('add'),
+                    'category_pages' => request('category_pages'),
+                    'date_start' => request('dateStart'),
+                    'date_finish' => request('dateFinish'),
+                    /*'lmg' =>request('img'),*/
+                    'link' => request('link'),
+                ]);
+                return redirect('category');
+            }
+    public function del($id)
+    {
+            Categorypage::where('id', $id)->delete();
+            return redirect('redactor');
     }
-}
+
+    }
