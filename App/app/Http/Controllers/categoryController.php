@@ -66,7 +66,6 @@ class categoryController extends Controller
     }
 
 
-
     public function getDetails($id) {
         $data=Categorypage::leftJoin('categories','categorypages.type_category','=','categories.id')
             ->leftJoin('languages as one','categoryPages.language','=','one.id')
@@ -142,6 +141,7 @@ class categoryController extends Controller
                 'category_pages' => request('category_pages'),
                 'date_start' => request('dateStart'),
                 'date_finish' => request('dateFinish'),
+                'user' =>request('user'),
                 /*'lmg' =>request('img'),*/
                 'link' => request('link'),
 

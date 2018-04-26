@@ -7,17 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class Categorypage extends Model
 {
     protected $fillable = [
-        'id',
         'type_category',
         'language',
-        'priceMin',
-        'priceMax',
+        'language_translation',
+        'price',
         'complexity',
-        'dateStart',
-        'dateFinish',
+        'date_start',
+        'date_finish',
+        'category_pages',
         'ad',
         'img',
-        'user'
+        'link'
     ];
 
     public function category()

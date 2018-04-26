@@ -30,13 +30,16 @@
                         <select  class="form-control" id="VoidSelectLanquage" name="language"  max-width="276">
                             <option disabled selected> Выбрать язык</option>
                             @foreach ($languages as $language)
-                                <option> {{ $language->language }}</option>
+                                <option > {{ $language->language }}</option>
                             @endForeach
+                            <option name="lanquage"> Другой</option>
                         </select>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3">
-                        <input type="text" class="form-control" id="lanquage" name="language2" placeholder="Введите язык" >
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3" id="lang" >
+                        <input type="text" class="form-control" id="lanquage" name="language2" placeholder="Введите язык" style="display: none;" >
+
                     </div>
+
                 </div><br>
                 <div class="form-row">
                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
@@ -69,6 +72,7 @@
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3">
                         <input type="text" class="form-control" id="lanquage" name="type_category2"   placeholder="Введите категорию">
+
                     </div>
                 </div><br>
                 <div class="form-row ">
@@ -120,6 +124,7 @@
                         <input class="form-control" id="link" name="link">
                     </div>
                 </div><br>
+                <input class="form-control" id="user" value="{{ Auth::user()->id }}" name="user" type="hidden">
                 <div class="form-row ">
                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
                         <label for="categoryPages">Введите объявление (полностью)</label>
@@ -186,91 +191,7 @@
 </div>
 
 <script src="noUiSlider.11.0.3/nouislider.min.js"></script>
-<script>
-    $('#datepicker').datepicker({
-        dateFormat:'yy-mm-dd',
-        uiLibrary: 'bootstrap4'
-    });
-
-
-    $('#datepicker2').datepicker({
-        dateFormat:'yy-mm-dd',
-        uiLibrary: 'bootstrap4'
-    });
-    var select = document.getElementById('input-select');
-    var selectcomplexity = document.getElementById('input-complexity');
-
-    // Append the option elements price
-    for ( var i = 0; i <= 10000; i++ ){
-
-        var option = document.createElement("option");
-        option.text = i;
-        option.value = i;
-
-        select.appendChild(option);
-    }
-
-    // Append the option elements complexity
-    for ( var j = 0; j <= 5; j++ ){
-
-        var option2 = document.createElement("option");
-        option2.text = j;
-        option2.value = j;
-
-        selectcomplexity.appendChild(option2);
-    }
-
-    var html5Slider = document.getElementById('html5');
-    var complexitySlider = document.getElementById('complexity');
-
-    noUiSlider.create(html5Slider, {
-        start: [ 200],
-        range: {
-            'min': 0,
-            'max': 10000
-        }
-    });
-
-    noUiSlider.create(complexitySlider, {
-        start: [ 2 ],
-        range: {
-            'min': 0,
-            'max': 5
-        }
-    });
-    var inputNumber = document.getElementById('input-number');
-
-    html5Slider.noUiSlider.on('update', function( values, handle ) {
-
-        var value = values[handle];
-
-        if ( handle ) {
-            inputNumber.value = value;
-        } else {
-            select.value = Math.round(value);
-        }
-    });
-
-
-    complexitySlider.noUiSlider.on('update', function( values, handle ) {
-        var value = values[handle];
-        if ( handle ) {
-            inputNumber.value = value;
-        } else {
-            selectcomplexity.value = Math.round(value);
-        }
-    });
-
-    select.addEventListener('change', function(){
-        html5Slider.noUiSlider.set([this.value, null]);
-    });
-
-
-    selectcomplexity.addEventListener('change', function(){
-        complexitySlider.noUiSlider.set([this.value, null]);
-    });
-
-</script>
+<script src="{{asset('js/create.js')}}" type="text/javascript"></script>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="bootstrap/dist/js/jquery.js"></script>

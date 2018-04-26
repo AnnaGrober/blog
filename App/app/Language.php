@@ -8,7 +8,6 @@ class Language extends Model
 {
     public $timestamps = false;
     protected $fillable = [
-        'id',
         'language'
     ];
     public function categorypages()
