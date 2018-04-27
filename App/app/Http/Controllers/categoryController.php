@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Feedback;
 use Illuminate\Http\Request;
 use DB;
 use App\Categorypage;
@@ -186,6 +187,7 @@ class categoryController extends Controller
                     'category_pages' => request('category_pages'),
                     'date_start' => request('dateStart'),
                     'date_finish' => request('dateFinish'),
+                        'user' =>request('user'),
                     /*'lmg' =>request('img'),*/
                     'link' => request('link'),
                 ]);
@@ -195,6 +197,16 @@ class categoryController extends Controller
     {
             Categorypage::where('id', $id)->delete();
             return redirect('redactor');
+    }
+
+    public function feedback()
+    {
+        $categoryPage = new Categorypage;
+        $feedback =new  Feedback;
+        Feedback::insert([
+            'user' =>request('user'),
+            'application' =>  request('id_cat')
+            ]);
     }
 
     }

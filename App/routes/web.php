@@ -43,5 +43,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/create',"categoryController@create");
 
     Route::post('/create/add',"categoryController@store" );
+
+    Route::post('/category/post',"categoryController@feedback");
 });
 

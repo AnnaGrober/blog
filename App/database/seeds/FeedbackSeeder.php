@@ -11,7 +11,7 @@ class FeedbackSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('Feedbacks')->insert(
+        DB::table('feedbacks')->insert(
             array(
                 [
                     'application' =>"2",

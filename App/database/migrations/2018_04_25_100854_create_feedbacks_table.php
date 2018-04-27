@@ -14,10 +14,10 @@ class CreateFeedbacksTable extends Migration
     public function up()
     {
         Schema::create('feedbacks', function (Blueprint $table) {
-            $table->increments('id');
             $table->timestamps();
             $table->integer('application');
             $table->integer('user');
+            $table->boolean('status_user')->nullable();
         });
     }
 
