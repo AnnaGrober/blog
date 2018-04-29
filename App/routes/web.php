@@ -12,6 +12,14 @@ Route::get('/redactor',"RedactorController@getRed" );
 
 Route::get('/SelectForUpdate',"RedactorController@getAll" );
 
+Route::get('/SelectForUpdate/set',"RedactorController@get_set" );
+
+Route::get('/SelectForUpdate/run',"RedactorController@get_run" );
+
+Route::get('/SelectForUpdate/comp',"RedactorController@get_comp" );
+
+Route::get('/SelectForUpdate/comp_time',"RedactorController@get_comp_time" );
+
 Route::get('/update/{id}',"categoryController@update" );
 
 Route::get('/del/{id}',"categoryController@del" );

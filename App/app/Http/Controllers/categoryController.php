@@ -15,6 +15,23 @@ class categoryController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
+    public function data()
+    {
+        return  $Data = Categorypage:: leftJoin('categories', 'categoryPages.type_category', '=', 'categories.id')
+            ->leftJoin('languages as one', 'categoryPages.language', '=', 'one.id')
+            ->leftJoin('languages as two', 'categoryPages.language_translation', '=', 'two.id')
+            ->leftJoin('users', 'categoryPages.user', '=', 'users.id');
+    }
+    public function data_select()
+    {
+        return   $Data=  $this->data()
+            ->select('categorypages.img as img','categorypages.ad as ad','categorypages.complexity as complexity',
+                'categorypages.category_pages as categoryPages','categorypages.price as price', 'categorypages.ad as ad',
+                'categorypages.link as link',    'categorypages.category_pages as pages',   'one.language  as  language',
+                'two.language  as  translation','categories.category as category','users.name  as  user',
+                'categorypages.date_start as start',  'categorypages.date_finish as finish' , 'categorypages.id as id');
+    }
+
     public function category(Request $request) {
         $categories = Category::get();
         $languages = Language::get();
@@ -27,10 +44,7 @@ class categoryController extends Controller
             $data1 =  $request->data1;
             $data2 =  $request->data2;
 
-            $Data = Categorypage:: leftJoin('categories', 'categoryPages.type_category', '=', 'categories.id')
-                ->leftJoin('languages as one', 'categoryPages.language', '=', 'one.id')
-                ->leftJoin('languages as two', 'categoryPages.language_translation', '=', 'two.id')
-                ->leftJoin('users', 'categoryPages.user', '=', 'users.id')
+            $Data=  $this->data()
                ->where('categoryPages.price', '>=',$priceMin)
                 ->where('categoryPages.price', '<=',$priceMax)
                 ->where('categoryPages.complexity', '=',$complex)
@@ -54,13 +68,7 @@ class categoryController extends Controller
             return view('categorys.products', ['languages' => $languages, 'categories' => $categories, 'Data' => $Data]);
         }
         else {
-            $Data = Categorypage:: leftJoin('categories', 'categoryPages.type_category', '=', 'categories.id')
-                ->leftJoin('languages as one', 'categoryPages.language', '=', 'one.id')
-                ->leftJoin('languages as two', 'categoryPages.language_translation', '=', 'two.id')
-                ->leftJoin('users', 'categoryPages.user', '=', 'users.id')
-                ->select('categoryPages.id  as  id', 'categoryPages.img as img', 'categoryPages.ad as ad', 'categoryPages.complexity as complexity',
-                    'one.language  as  language', 'two.language  as  translation', 'categories.category as category',
-                    'users.name as  user')
+            $Data=  $this->data_select()
                 ->get();
             return view('category', ['languages' => $languages, 'categories' => $categories, 'Data' => $Data]);
         }
@@ -68,13 +76,7 @@ class categoryController extends Controller
 
 
     public function getDetails($id) {
-        $data=Categorypage::leftJoin('categories','categorypages.type_category','=','categories.id')
-            ->leftJoin('languages as one','categoryPages.language','=','one.id')
-            ->leftJoin('languages as two','categoryPages.language_translation','=','two.id')
-            ->leftJoin('users','categorypages.user','=','users.id')
-            ->select('categorypages.img as img','categorypages.ad as ad','categorypages.complexity as complexity',
-                  'categorypages.category_pages as categoryPages',
-                'one.language  as  language','two.language  as  translation','categories.category as category','users.name  as  user')
+        $data=  $this->data_select()
             ->where('categorypages.id', $id)->get();
         return view('categorys.details', ['data'=>$data]);
     }
@@ -88,15 +90,7 @@ class categoryController extends Controller
     {
         $categories = Category::get();
         $languages = Language::get();
-        $Data=Categorypage::leftJoin('categories','categorypages.type_category','=','categories.id')
-            ->leftJoin('languages as one','categoryPages.language','=','one.id')
-            ->leftJoin('languages as two','categoryPages.language_translation','=','two.id')
-            ->leftJoin('users','categorypages.user','=','users.id')
-            ->select('categorypages.img as img','categorypages.ad as ad','categorypages.complexity as complexity',
-                'categorypages.category_pages as categoryPages','categorypages.price as price', 'categorypages.ad as ad',
-                'categorypages.link as link',    'categorypages.category_pages as pages',   'one.language  as  language',
-                'two.language  as  translation','categories.category as category','users.name  as  user',
-                'categorypages.date_start as start',  'categorypages.date_finish as finish' , 'categorypages.id as id')
+        $Data=  $this->data_select()
             ->where('categorypages.id', $id)->get();
        // dd($Data);
         return view('update', ['Data'=>$Data, 'categories'=>$categories, 'languages'=>$languages]);

@@ -14,28 +14,63 @@ class RedactorController extends Controller
         $categories = Category::get();
         $languages = Language::get();
         $col = Categorypage::count();
-        $runtime = Categorypage::where('categoryPages.status', '=', 1)->count();
-        $completed= Categorypage::where('categoryPages.date_finish', '>',Carbon::now())->count();
-        $Notcompleted= Categorypage::where('categoryPages.date_finish', '<=',Carbon::now())->count();
-        return view('redactor', ['col' => $col, 'runtime' =>  $runtime, 'completed' =>  $completed,'Notcompleted' =>  $Notcompleted]);
+        $set = Categorypage::where('categoryPages.status', '=', 1)->count();
+        $runtime = Categorypage::where('categoryPages.status', '=', 2)->count();
+        $completed = Categorypage::where('categoryPages.status', '=', 3)->count();
+        $completed_time= Categorypage::where('categoryPages.date_finish', '>',Carbon::now())->count();
+        return view('redactor', ['col' => $col,'set' => $set,  'runtime' =>  $runtime, 'completed' =>  $completed,'completed_time' => $completed_time]);
     }
 
-    public function getAll(Request $request)
+
+    public function data()
+    {
+       return  $Data = Categorypage:: leftJoin('categories', 'categoryPages.type_category', '=', 'categories.id')
+            ->leftJoin('languages as one', 'categoryPages.language', '=', 'one.id')
+            ->leftJoin('languages as two', 'categoryPages.language_translation', '=', 'two.id')
+            ->leftJoin('users', 'categoryPages.user', '=', 'users.id')
+            ->select('categoryPages.id  as  id', 'categoryPages.img as img', 'categoryPages.ad as ad', 'categoryPages.complexity as complexity',
+                'one.language  as  language', 'two.language  as  translation', 'categories.category as category', 'categoryPages.date_start as date_start',
+                'categoryPages.date_finish as date_finish', 'users.name as  user');
+    }
+    public function getAll()
     {
         $categories = Category::get();
         $languages = Language::get();
-        if ($request->ajax()) {
-           $Data = Categorypage:: leftJoin('categories', 'categoryPages.type_category', '=', 'categories.id')
-                ->leftJoin('languages as one', 'categoryPages.language', '=', 'one.id')
-                ->leftJoin('languages as two', 'categoryPages.language_translation', '=', 'two.id')
-                ->leftJoin('users', 'categoryPages.user', '=', 'users.id')
-                ->select('categoryPages.id  as  id', 'categoryPages.img as img', 'categoryPages.ad as ad', 'categoryPages.complexity as complexity',
-                    'one.language  as  language', 'two.language  as  translation', 'categories.category as category', 'categoryPages.date_start as date_start',
-                    'categoryPages.date_finish as date_finish', 'users.name as  user')->get();
-            response()->json($Data);
-           return view('categorys.SelectForUpdate', ['languages' => $languages, 'categories' => $categories, 'Data' => $Data]);
-
-        }
+        $Data=  $this->data()->get();
+            return view('categorys.SelectForUpdate', ['languages' => $languages, 'categories' => $categories, 'Data' => $Data]);
     }
+        public function get_set()
+        {
+            $categories = Category::get();
+            $languages = Language::get();
+                $Data= $this->data()->where('categoryPages.status', '=', 1)
+                ->get();
+                return view('categorys.SelectForUpdate', [ 'languages' => $languages, 'categories' => $categories,'Data' => $Data]);
+        }
+    public function get_run()
+    {
+        $categories = Category::get();
+        $languages = Language::get();
+        $Data= $this->data()->where('categoryPages.status', '=', 2)
+            ->get();
+        return view('categorys.SelectForUpdate', [ 'languages' => $languages, 'categories' => $categories,'Data' => $Data]);
+    }
+    public function get_comp()
+    {
+        $categories = Category::get();
+        $languages = Language::get();
+        $Data= $this->data()->where('categoryPages.status', '=', 3)
+            ->get();
+        return view('categorys.SelectForUpdate', [ 'languages' => $languages, 'categories' => $categories,'Data' => $Data]);
+    }
+    public function get_comp_time()
+    {
+        $categories = Category::get();
+        $languages = Language::get();
+        $Data= $this->data()->where('categoryPages.date_finish', '>',Carbon::now())
+            ->get();
+        return view('categorys.SelectForUpdate', [ 'languages' => $languages, 'categories' => $categories,'Data' => $Data]);
+    }
+
 }
 
