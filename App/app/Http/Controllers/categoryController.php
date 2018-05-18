@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Categorypage;
 use App\Language;
+use App\TestUsers;
 class categoryController extends Controller
 {
 
@@ -72,6 +73,18 @@ class categoryController extends Controller
                 ->get();
             return view('category', ['languages' => $languages, 'categories' => $categories, 'Data' => $Data]);
         }
+    }
+
+
+    public function sel_user() {
+        $id = Auth::id();
+        $user = User::find($id);
+        $categories = Category::get();
+        $languages = Language::get();
+        $Data=  $this->data_select()
+            ->where('categorypages.user', $id)
+            ->get();
+        return view('user_cp', ['languages' => $languages, 'categories' => $categories, 'Data' => $Data],compact('user'));
     }
 
 

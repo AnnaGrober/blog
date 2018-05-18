@@ -22,7 +22,8 @@ class CreateUsersTable extends Migration
             $table->string('photo',50)->nullable();
             $table->integer('rating')->nullable();
             $table->string('remember_token',255)->nullable();
-            $table->boolean('admin')->nullable();
+            $table->integer('grant')->nullable();
+            $table->boolean('block')->nullable();
             $table->timestamps();
         });
     }

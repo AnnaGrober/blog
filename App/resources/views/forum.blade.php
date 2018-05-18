@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+      <meta name="csrf-token" content="{{ csrf_token() }}" />
 	<title>Форум</title>
 
     <!-- Bootstrap core CSS -->
@@ -19,51 +20,72 @@
    @include ('layouts.headerNavigetion')
 	  <main role="main" class="container header">
       <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple box-shadow">
-        <img class="mr-3" src="https://getbootstrap.com/assets/brand/bootstrap-outline.svg" alt="" width="48" height="48">
+
         <div class=" w-25">
           <h6 class="mb-0 text-white lh-100">Форум</h6>
           <small>Обсуждайте с нами</small>
         </div>
         <div class=" w-75 text-center justify-content-center">
-        <button class="btn btn-success">Добавить обсуждение</button>
-   
+        <button class="btn btn-success" id="creating_sub">Добавить обсуждение</button>
         </div>
-   
-       
       </div>
+          <div id="change_for_create" style="display: none;">
+              @include ('forum.create_forum')
+          </div>
+
+		  @foreach ($subject as $Subject)
+
 	  	<div class="my-3 p-3 bg-white rounded box-shadow">
-	        <h6 class="border-bottom border-gray pb-2 ">Recent updates</h6>
-	        <div class="media text-muted pt-3">
-	          <img src="vat.jpg" alt="картинка" width="48" height="48" class="mr-2 rounded mb-2">
-	          <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-	            <strong class="d-block text-gray-dark">Тема 1</strong>
-	           Обсуждаем тему 1
-	          </p>
+            <form  method="post" >
+	        <div class="row media text-muted pt-3">
+
+
+
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-xs-10 d-block text-gray-dark">
+                        <a href="forum/{{$Subject->id}}">
+                    <h4>{{ $Subject->subject_name }}</h4>
+                  <?php $k = 0; ?>
+                  @foreach ($forums as $Message)
+                      @if ((($Subject->id) === ($Message->subject)) && ($k===0))
+                  {{$Message->message}}
+                        </a>
+                    </div>
+
+                        @if(($Message->user) === ( Auth::user()->id))
+
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2 resp" ><input type="button" class="btn secondary"  onclick="Uptade_sabject({{$Subject->id}})" id="updating_sub{{$Subject->id}}" value="Изменить">
+
+                   </p> <input type="button" class="btn secondary"  onclick="Close_button_sabject({{$Subject->id}})" id="close_button_sub{{$Subject->id}}" style="display: none;" value="Закрыть"> </div>
+
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-xs-10" id="change_for_update{{$Subject->id}}"   style="display: none;">
+                        @include ('forum.update_forum')
+                    </div>
+
+
+                            @endif
+                          <?php $k = 1; ?>
+                      @endif
+                  @endForeach
+
+
 	        </div>
-	        <div class="media text-muted pt-3 pb-2 ">
-	        <img src="vat.jpg" alt="картинка" width="48" height="48" class="mr-2 rounded mb-2">
-	          <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-	            <strong class="d-block text-gray-dark">Тема 2</strong>
-	            Обсуждаем тему 2
-	          </p>
-	        </div>
-	        <div class="media text-muted pt-3">
-	        <img src="vat.jpg" alt="картинка" width="48" height="48" class="mr-2 rounded mb-2">
-	          <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-	            <strong class="d-block text-gray-dark">Тема 3</strong>
-	            Обсуждаем тему 3
-	          </p>
-	        </div>
-	      
+            </form>
+
 	      </div>
+
+		  @endForeach
+         {{ $subject->links() }}
 	  </main>
+
    </div>
+
    @include ('layouts.footerNavigation')
   <script src="bootstrap/dist/js/jquery.js"></script>
 
   <script src="bootstrap/dist/js/bootstrap.min.js"></script>
-       <script src="offcanvas.js"></script>
+
 
   </body>
+  <script src="{{asset('js/forum.js')}}" type="text/javascript"></script>
 </html>
 

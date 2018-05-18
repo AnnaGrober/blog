@@ -81,11 +81,26 @@ selectcomplexity.addEventListener('change', function(){
     complexitySlider.noUiSlider.set([this.value, null]);
 });
 
-$(document).ready(function(e) {
+$(document).ready(function() {
+
+    $("#VoidSelectType").change(function () {
+        var y = $('#div_by_type select option:selected').attr('name');
+        $('#categ').find(':input').css('display','none');
+        $('#' + y).css('display', 'block');
+    })
+});
+
+$(document).ready(function() {
     $("#VoidSelectLanquage").change(function () {
-        var x = $('select option:selected').attr('name');
+            var x = $('#div_by_lang select option:selected').attr('name');
         $('#lang').find(':input').css('display','none');
         $('#' + x).css('display', 'block');
     })
 });
-
+$(document).ready(function() {
+    $("#VoidSelectLanquageTranslation").change(function () {
+        var t = $('#div_by_lang_tr select option:selected').attr('name');
+        $('#lang_tr').find(':input').css('display','none');
+        $('#' + t).css('display', 'block');
+    })
+});

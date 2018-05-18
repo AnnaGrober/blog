@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-	
-	
 
     <title>Главная</title>
 
@@ -39,7 +37,7 @@
          <div class="jumbotron">
           <h1>Станьте переводчиком или найдите переводчика для себя, а также общайтесь на форуме</h1>
           <p><a class="btn btn-secondary mr-sm-4" href="#" role="button">Узнать больше &raquo;</a></p>
-            <p><a class="btn btn-primary btn-lg" href="#" role="button"  >Подать объявление</a></p>
+            <p><a class="btn btn-primary btn-lg" href="/create" role="button"  >Подать объявление</a></p>
         </div>
       </div>
 

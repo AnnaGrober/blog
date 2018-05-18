@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
   <title>Категории</title>
 
 	<script src="{{asset('bootstrap/dist/js/jquery.js')}}"></script>
@@ -23,8 +24,10 @@
   <div class="container  header">
 		  <form class="filter" id="filters-form">
 		  <div class="form-froup filterform">
-
+			  {{csrf_field()}}
 			  			<div class="form-row">
+							<!--<input class="form-control" id="user" value="Auth::user()->id }}" name="user" type="hidden"> -->
+
 										    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-4 col-xs-4">
 												<lable for="languages"> Язык </lable>
 											</div>
@@ -48,15 +51,15 @@
 												<div id="html5" class="noUi-target noUi-ltr noUi-horizontal"></div>
 
 											</div>
-											</div>	
-											 
+											</div>
+
 											<div class="col-xl-3 col-lg-3 col-md-3 ">
 												min<select id="input-select" name="priceMin" ></select>
 												max<input type="number" min="0" max="10000" step="100" id="input-number" name="priceMax" >
 											</div>
 						</div><br>
 						<div class="form-row ">
-									
+
 										    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1">
 												<lable for="VoidSelectType"> Тип </lable>
 											</div>
@@ -82,7 +85,7 @@
 											<div class="col-xl-3 col-lg-3 col-md-3 ">
 											<select id="input-complexity"></select>
 											</div>
-										
+
 						</div><br>
 						<div class="form-row ">
 							<div class="col-xl-2 col-lg-2 col-md-2 ">
@@ -90,7 +93,7 @@
 							<div class="col-xl-1 col-lg-1 col-md-1 col-sm-4 col-xs-4">
 									 <lable for="VoidSelectOneDate"> Дата </lable>
 							</div>
-			  
+
 									 <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
 										 <input id="datepicker"  value=0  data-date-format="yy-mm-dd" placeholder="Начало"/>
 									 </div>
@@ -101,7 +104,7 @@
 					   </div>
 		  </div>
 		  </form>
-			   
+
   </div>
 	<div class="col-md-4">
 		<br>
@@ -120,22 +123,7 @@
 				<div class="row">
 					@foreach ($Data as $data)
 						<div class="col-md-4" >
-							<div class="card mb-4 box-shadow">
-								<img class='card-img-top' src='{{ $data->img }}' height='300px'  alt='Card image cap'>
-								<div class="card-body">
-									<p class="card-text">{{ $data->ad }}</p>
-									<p class="card-text">Сложность:{{ $data->complexity }}</p>
-									<p class="card-text">Категрия:{{$data->category}}</p>
-									<p class="card-text">Язык Оригинала:{{ $data->language }}</p>
-									<p class="card-text">Язык Перевода:{{ $data->translation}}</p>
-									<div class="d-flex justify-content-between align-items-center">
-										<div class="btn-group">
-											<a href="/category/{{ $data->id }}"  class="btn  btn-outline-secondary " >Подробности</a>
-											<a href="{{ $data->id }}" class="btn  btn-outline-primary ml-3" data-toggle="modal" data-target="#ResponseModal" >Откликнуться</a>
-										</div>
-									</div>
-								</div>
-							</div>
+
 						</div>
 					@endforeach
 				</div>
@@ -149,28 +137,6 @@
 
 @include ('layouts.footerNavigation')
 
-<div class="modal fade" id="ResponseModal" tabindex="-1" role="dialog" aria-labelledy="ResponseModal" aria-hidden="true">
-<div class="modal-dialog" role="document">
-<div class="modal-content">
-<div class="modal-header">
-
-
-
-    <button class="close" type="button" data-dismiss="modal" aria-lable="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-<div class="modal-body">
-    <div class="container">
-
-    </div>
-</div>
-<div class="modal-footer">
-    <button class="btn btn-secondary" data-dismiss="modal">Close</button>
-</div>
-</div>
-</div>
-</div>
 
 
 

@@ -26,18 +26,17 @@
                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
                         <lable for="VoidSelectLanquage"> Язык оригинала</lable>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3">
-                        <select  class="form-control" id="VoidSelectLanquage" name="language"  max-width="276">
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3" id="div_by_lang">
+                        <select  class="form-control" id="VoidSelectLanquage" name="language" max-width="276">
                             <option disabled selected> Выбрать язык</option>
                             @foreach ($languages as $language)
-                                <option > {{ $language->language }}</option>
+                                <option> {{ $language->language }}</option>
                             @endForeach
-                            <option name="lanquage"> Другой</option>
+                            <option name="lanquage2"> Другой</option>
                         </select>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3" id="lang" >
-                        <input type="text" class="form-control" id="lanquage" name="language2" placeholder="Введите язык" style="display: none;" >
-
+                        <input type="text" class="form-control" id="lanquage2" name="language2" placeholder="Введите язык" style="display: none;" >
                     </div>
 
                 </div><br>
@@ -45,16 +44,17 @@
                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
                         <lable for="VoidSelectLanquageTranslation"> Язык перевода</lable>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3">
-                        <select  class="form-control" id="VoidSelectLanquageTranslation" name="language_translation"  max-width="276">
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3" id="div_by_lang_tr">
+                        <select  class="form-control" id="VoidSelectLanquageTranslation" name="language_translation" max-width="276">
                             <option disabled selected> Выбрать язык </option>
                             @foreach ($languages as $language)
                                 <option> {{ $language->language }}</option>
                             @endForeach
+                            <option name="language_translation2"> Другой</option>
                         </select>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3">
-                        <input type="text" class="form-control" id="lanquage_translation" name="language_translation2"  placeholder="Введите язык" >
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3" id="lang_tr">
+                        <input type="text" class="form-control" id="language_translation2" name="language_translation2"  placeholder="Введите язык" style="display: none;" >
                     </div>
                 </div><br>
                 <div class="form-row ">
@@ -62,19 +62,29 @@
                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-1 col-xs-1">
                         <lable for="VoidSelectType"> Тип </lable>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
-                        <select  class="form-control" id="VoidSelectType" name="type_category"  >
-                            <option disabled selected> Выбрать тип</option>
-                            @foreach ($categories as $category)
-                                <option > {{ $category->category }}</option>
-                            @endForeach
-                        </select>
-                    </div>
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3">
-                        <input type="text" class="form-control" id="lanquage" name="type_category2"   placeholder="Введите категорию">
 
-                    </div>
-                </div><br>
+
+
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3" id="div_by_type">
+                    <select  class="form-control" name="type_category" id="VoidSelectType"  >
+                        <option disabled selected> Выбрать тип</option>
+                        @foreach ($categories as $category)
+                            <option name="7"> {{ $category->category }}</option>
+                        @endForeach
+                        <option name="type_category2"> Другой</option>
+                    </select>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3" id="categ" >
+                    <input type="text" class="form-control" id="type_category2" placeholder="Введите тип" style="display: none;" >
+                </div>
+
+            </div>
+
+
+
+
+
+                <br>
                 <div class="form-row ">
 
                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
@@ -124,7 +134,11 @@
                         <input class="form-control" id="link" name="link">
                     </div>
                 </div><br>
+
+
                 <input class="form-control" id="user" value="{{ Auth::user()->id }}" name="user" type="hidden">
+
+
                 <div class="form-row ">
                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
                         <label for="categoryPages">Введите объявление (полностью)</label>
@@ -152,9 +166,9 @@
                          <label >Вы можете добавить своё изображение</label>
                     </div>
                     <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                            <label class="btn btn-secondary">
-                                Добавить изображение <input type="file"  name="img" hidden>
-                            </label>
+                        <button type="button" class="ghost-button"  data-toggle="modal" data-target="#exampleModal">
+                            Загрузить фото
+                        </button>
                     </div>
                 </div><br>
                 <button class="btn btn-secondary btn-lg btn-block" type="submit">Отправить</button>
@@ -166,7 +180,6 @@
 
 </div>
 @include ('layouts.footerNavigation')
-
 <div class="modal fade" id="ResponseModal" tabindex="-1" role="dialog" aria-labelledy="ResponseModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -189,6 +202,47 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Загрузка аватара</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" enctype="multipart/form-data" action="{{url('/modal')}}" >
+
+
+                <div class="modal-body">
+
+                    @csrf
+                    <img class=" img-responsive avatar-lg" id="pw" src="">
+                    <input class="upload" name="image" type="file" id="uploadAvatar">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#pw').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    $("#uploadAvatar").change(function() {
+        readURL(this);
+    });
+</script>
 
 <script src="noUiSlider.11.0.3/nouislider.min.js"></script>
 <script src="{{asset('js/create.js')}}" type="text/javascript"></script>
