@@ -61,24 +61,27 @@ class ForumController extends Controller
     }
 
 
-    public function  post_update_save(Request $request){
+    public function update_save(/*Request $request*/  ) {
 
-       $subj= $request->subject;
+       /*$subj= $request->subject;
         $mes =  $request->message;
         $subj_id =  $request->subj_id;
-        $mes_id =  $request->mes_id;
-       $subj= request('subject');
-       $mes=request('message');
+        $mes_id =  $request->mes_id;*/
+       $subj= request('subj');
+       $mes=request('mes');
         $subj_id =request ('subj_id');
-        $mes_id = request ('mes_id');
-        dd($mes, $subj);
-        Subject::where('id',$subj_id )
-            ->update([
-                'subject_name' => $subj]);
-        Forum::where('id', $mes_id)
-            ->update([
-                'message' => $mes]);
-
-        //return redirect('/forum');
+        $mes_id = Forum:: where ('subject', $subj_id)-> value('id');
+//dd($subj,$mes, $subj_id, $mes_id);
+        if ($subj) {
+            Subject::where('id', $subj_id)
+                ->update([
+                    'subject_name' => $subj]);
+        }
+        if($mes) {
+            Forum::where('id', $mes_id)
+                ->update([
+                    'message' => $mes]);
+        }
+        return redirect('/forum');
     }
 }

@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-      <meta name="csrf-token" content="{{ csrf_token() }}" />
 	<title>Форум</title>
 
     <!-- Bootstrap core CSS -->
@@ -36,7 +35,7 @@
 		  @foreach ($subject as $Subject)
 
 	  	<div class="my-3 p-3 bg-white rounded box-shadow">
-            <form  method="post" >
+            <form    action="updating_subject" method="post">
 	        <div class="row media text-muted pt-3">
 
 
@@ -53,9 +52,9 @@
 
                         @if(($Message->user) === ( Auth::user()->id))
 
-                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2 resp" ><input type="button" class="btn secondary"  onclick="Uptade_sabject({{$Subject->id}})" id="updating_sub{{$Subject->id}}" value="Изменить">
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2 resp" ><input type="button" class="btn secondary"  onclick="Update_subject({{$Subject->id}})" id="updating_sub{{$Subject->id}}" value="Изменить">
 
-                   </p> <input type="button" class="btn secondary"  onclick="Close_button_sabject({{$Subject->id}})" id="close_button_sub{{$Subject->id}}" style="display: none;" value="Закрыть"> </div>
+                   </p> <input type="button" class="btn secondary"  onclick="Close_button_subject({{$Subject->id}})" id="close_button_sub{{$Subject->id}}" style="display: none;" value="Закрыть"> </div>
 
                     <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-xs-10" id="change_for_update{{$Subject->id}}"   style="display: none;">
                         @include ('forum.update_forum')
