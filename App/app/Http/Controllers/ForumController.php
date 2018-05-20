@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\forum;
 use App\subject;
+use App\users;
 use Illuminate\Mail\Message;
 
 
@@ -31,7 +32,7 @@ class ForumController extends Controller
         $forums= forum:: leftJoin('subjects', 'forums.subject', '=', 'subjects.id')
             ->leftJoin('users', 'users.id', '=', 'forums.user')
             ->where ('subjects.id', $id)
-            ->select ('users.name  as  user', 'forums.message as message')
+            ->select ('users.name  as  user', 'users.id as user_id', 'forums.message as message', 'forums.id as id')
             ->paginate(10);
         return view('forum.forumOpen',  ['subject' => $subject, 'forums'=> $forums,'subject_id' => $subject_id] );
     }
@@ -61,27 +62,31 @@ class ForumController extends Controller
     }
 
 
-    public function update_save(/*Request $request*/  ) {
+    public function update_save() {
 
-       /*$subj= $request->subject;
-        $mes =  $request->message;
-        $subj_id =  $request->subj_id;
-        $mes_id =  $request->mes_id;*/
        $subj= request('subj');
        $mes=request('mes');
         $subj_id =request ('subj_id');
         $mes_id = Forum:: where ('subject', $subj_id)-> value('id');
 //dd($subj,$mes, $subj_id, $mes_id);
-        if ($subj) {
             Subject::where('id', $subj_id)
                 ->update([
                     'subject_name' => $subj]);
-        }
-        if($mes) {
             Forum::where('id', $mes_id)
                 ->update([
                     'message' => $mes]);
-        }
         return redirect('/forum');
     }
+
+
+public function update_save_mes($id) {
+    $mes_id = request('mes_id_hidden');
+    $mes=request('upd_message_for_forum');
+
+    //dd($mes, $mes_id);
+    Forum::where('id', $mes_id)
+        ->update([
+            'message' => $mes]);
+    return back();
+}
 }

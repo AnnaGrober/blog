@@ -16,9 +16,8 @@
   
    <body class="bg-light">
    @include ('../layouts.headerNavigetion')
-	  <main role="main" class="container">
+	  <div class="container-fluid">
       <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple box-shadow">
-        <img class="mr-3" src="https://getbootstrap.com/assets/brand/bootstrap-outline.svg" alt="" width="48" height="48">
         <div class=" w-25">
 
           <h6 class="mb-0 text-white lh-100">{{$subject}}</h6>
@@ -29,24 +28,38 @@
        
       </div>
 	  	<div class="my-3 p-3 bg-white rounded box-shadow">
-            @foreach ($forums as $Message)
-	        <div class="media text-muted pt-3">
 
-	          <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+
+                @foreach ($forums as $Message)
+                <form  method="POST" action="../updating_massage/{{$Message->id}}">
+	        <div class="row media text-muted pt-3">
+
+	          <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
 	            <strong class="d-block text-gray-dark"> Пользователь:{{$Message->user}}</strong>
                   {{$Message->message}}
-	          </p>
-	        </div>
+              </div>
+                  @if(($Message->user_id) === ( Auth::user()->id))
 
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2 resp" ><input type="button" class="btn secondary"  onclick="Update_message({{$Message->id}})" id="updating_mes{{$Message->id}}" value="Изменить">
+                    <input type="button" class="btn secondary"  onclick="Close_button_message({{$Message->id}})" id="close_button_mes{{$Message->id}}" style="display: none;" value="Закрыть"> </div>
+
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 box-shadow" id="change_for_update_mes{{$Message->id}}"   style="display: none; background: radial-gradient(white,#f4f6f9);">
+                        @include ('forum.update_forum_mes')
+                    </div>
+                    @endif
+
+	        </div>
+                </form>
             @endForeach
+
                 {{ $forums->links()}}
 	      </div>
 
           @include ('forum.create_forum_message')
-	</main>
+	</div>
    @include ('../layouts.footerNavigation')
   <script src="../bootstrap/dist/js/jquery.js"></script>
-
+   <script src="{{asset('../js/forum.js')}}" type="text/javascript"></script>
   <script src="../bootstrap/dist/js/bootstrap.min.js"></script>
        <script src="../offcanvas.js"></script>
   </body>

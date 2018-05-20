@@ -54,7 +54,7 @@
 
                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2 resp" ><input type="button" class="btn secondary"  onclick="Update_subject({{$Subject->id}})" id="updating_sub{{$Subject->id}}" value="Изменить">
 
-                   </p> <input type="button" class="btn secondary"  onclick="Close_button_subject({{$Subject->id}})" id="close_button_sub{{$Subject->id}}" style="display: none;" value="Закрыть"> </div>
+                   <input type="button" class="btn secondary"  onclick="Close_button_subject({{$Subject->id}})" id="close_button_sub{{$Subject->id}}" style="display: none;" value="Закрыть"> </div>
 
                     <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-xs-10" id="change_for_update{{$Subject->id}}"   style="display: none;">
                         @include ('forum.update_forum')

@@ -57,6 +57,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/forum_open_create',"ForumController@store_mes" );
 
     Route::post('/updating_subject', "ForumController@update_save" );
+    Route::post('/updating_massage/{id}', "ForumController@update_save_mes" );
 
 });
 

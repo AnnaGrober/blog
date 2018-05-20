@@ -7,7 +7,7 @@
                     <lable for="subject"> Тема:</lable>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3" >
-                    <input type="text" class="form-control"  id="subject_upd" name="subj" placeholder="{{$Subject->subject_name}}"  >
+                    <input type="text" class="form-control"  id="subject_upd" name="subj" value="{{$Subject->subject_name}}"  >
                 </div>
             </div><br>
         </div>
@@ -17,7 +17,7 @@
                     <lable for="message"> Сообщение:</lable>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3" >
-                    <input type="text" class="form-control" id="message_upd" name="mes" placeholder="{{$Message->message}}"  >
+                    <input type="text" class="form-control" id="message_upd" name="mes" value="{{$Message->message}}"  >
                     <input type="hidden" class="form-control" id="subj_id" name="subj_id" value="{{$Subject->id}}">
                 </div>
             </div><br>
