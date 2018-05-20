@@ -58,6 +58,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('/updating_subject', "ForumController@update_save" );
     Route::post('/updating_massage/{id}', "ForumController@update_save_mes" );
+    Route::get('/del_subject_for_forum/{id}', "ForumController@del_subj" );
+    Route::get('/del_message_for_forum/{id}', "ForumController@del_mes" );
 
 });
 

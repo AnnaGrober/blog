@@ -39,7 +39,7 @@
                   {{$Message->message}}
               </div>
                   @if(($Message->user_id) === ( Auth::user()->id))
-
+                    <a href="../del_message_for_forum/{{$Message->id}}"  class="btn" id="delete_mes" style=" color:black; border: none; " type="button">Удалить</a>
                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2 resp" ><input type="button" class="btn secondary"  onclick="Update_message({{$Message->id}})" id="updating_mes{{$Message->id}}" value="Изменить">
                     <input type="button" class="btn secondary"  onclick="Close_button_message({{$Message->id}})" id="close_button_mes{{$Message->id}}" style="display: none;" value="Закрыть"> </div>
 

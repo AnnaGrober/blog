@@ -52,7 +52,9 @@
 
                         @if(($Message->user) === ( Auth::user()->id))
 
-                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2 resp" ><input type="button" class="btn secondary"  onclick="Update_subject({{$Subject->id}})" id="updating_sub{{$Subject->id}}" value="Изменить">
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2 resp" >
+                        <a href="del_subject_for_forum/{{$Subject->id}}"  class="btn" id="delete_subj" style="height: 30px; margin-bottom:10px; padding-top: 4px; color:black; border: none; " type="button">Удалить</a>
+                        <input type="button" class="btn secondary"  onclick="Update_subject({{$Subject->id}})" id="updating_sub{{$Subject->id}}" value="Изменить">
 
                    <input type="button" class="btn secondary"  onclick="Close_button_subject({{$Subject->id}})" id="close_button_sub{{$Subject->id}}" style="display: none;" value="Закрыть"> </div>
 

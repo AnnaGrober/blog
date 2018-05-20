@@ -89,4 +89,18 @@ public function update_save_mes($id) {
             'message' => $mes]);
     return back();
 }
+
+public function del_subj($id){
+       subject::where ('id', $id)
+           -> delete();
+       forum::where('subject', $id)
+           ->delete();
+    return back();
+}
+
+public function del_mes($id){
+    forum::where('id', $id)
+        ->delete();
+    return back();
+}
 }
