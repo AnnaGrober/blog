@@ -12,7 +12,7 @@
 <div class="container-fluid header">
 @include ('layouts.headerNavigetion')
 <main role="main">
-    <div  >
+    <div>
         <div class="container">
             <h3>Вы опубликовали проекты:</h3>
             <div class="row">

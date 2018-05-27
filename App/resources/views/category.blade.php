@@ -26,10 +26,11 @@
 		  <div class="form-froup filterform">
 			  {{csrf_field()}}
 			  			<div class="form-row">
-							<!--<input class="form-control" id="user" value="Auth::user()->id }}" name="user" type="hidden"> -->
-
-										    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-4 col-xs-4">
-												<lable for="languages"> Язык </lable>
+							@isset (Auth::user()->id )
+			  <input class="form-control" id="user" value="{{Auth::user()->id }}" name="user" type="hidden">
+							@endisset
+										    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
+												<lable for="languages"> Язык оригинала</lable>
 											</div>
 											  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-6">
 											<select  class="form-control" id="languages" name="lang" max-width="276">
@@ -42,28 +43,27 @@
 											 </select>
 												</div>
 
-										  <div class="col-xl-1 col-lg-1 col-md-1 col-sm-4 col-xs-4">
-											<lable for="VoidInputPrice">Цена  </lable>
-											</div>
-
-											 <div class="col-xl-3 col-lg-3 col-md-3 col-sm-5 col-xs-5">
-											<div class="example">
-												<div id="html5" class="noUi-target noUi-ltr noUi-horizontal"></div>
-
-											</div>
-											</div>
-
-											<div class="col-xl-3 col-lg-3 col-md-3 ">
-												min<select id="input-select" name="priceMin" ></select>
-												max<input type="number" min="0" max="10000" step="100" id="input-number" name="priceMax" >
-											</div>
+								<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
+									<lable for="languages"> Язык перевода</lable>
+								</div>
+								<div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
+									<select  class="form-control" id="language_translate" name="lang_tran" max-width="276">
+										<option value=0> Выберите язык </option>
+										@foreach ($languages as $language)
+											<option class="option" value="{{$language->id}}">
+												{{ $language->language }}
+											</option>
+										@endForeach
+									</select>
+								</div>
 						</div><br>
+
 						<div class="form-row ">
 
-										    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1">
+										    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
 												<lable for="VoidSelectType"> Тип </lable>
 											</div>
-											  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
+											  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4 ">
 											<select  class="form-control" id="categories" >
 											    <option value=0> Выберите тип перевода </option>
 												@foreach ($categories as $category)
@@ -73,20 +73,43 @@
 												@endForeach
 											 </select>
 												</div>
-										  <div class="col-xl-1 col-lg-1 col-md-1 col-sm-4 col-xs-4">
+										  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
 											<lable for="VoidInputPrice">Сложность </lable>
 											</div>
-											  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-5 col-xs-5">
+											  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
 											<div class="example">
 												<div id="complexity" class="noUi-target noUi-ltr noUi-horizontal"></div>
 
 											</div>
 											</div>
-											<div class="col-xl-3 col-lg-3 col-md-3 ">
+											<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1">
 											<select id="input-complexity"></select>
 											</div>
+							<div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1">
+							</div>
 
-						</div><br>
+						</div><br><div class="form-row">
+				  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
+				  </div>
+				  <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1">
+					  <lable for="VoidInputPrice">Цена  </lable>
+				  </div>
+
+				  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
+					  <div class="example">
+						  <div id="html5" class="noUi-target noUi-ltr noUi-horizontal"></div>
+
+					  </div>
+				  </div>
+
+				  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
+					  min<select id="input-select" name="priceMin" ></select>
+					  max<input type="number" min="0" max="10000" step="100" id="input-number" name="priceMax" >
+				  </div>
+				  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
+				  </div>
+			  </div><br>
+
 						<div class="form-row ">
 							<div class="col-xl-2 col-lg-2 col-md-2 ">
 							</div>
@@ -103,15 +126,23 @@
 									 <div class="col-xl-3 col-lg-3 col-md-3 "></div>
 					   </div>
 		  </div>
+
+	<div class="row mt-4">
+
+	<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
+
+			<input type="button" class="btn btn-secondary mr-sm-4 btn-sm" name="price_asc" value="По цене ↓">
+			<input type="button" class="btn btn-secondary mr-sm-4 btn-sm" name="price_desc" value="По цене ↑">
+	</div>
+		<div class="form-check col-xl-9 col-lg-9 col-md-9 col-sm-9 col-xs-9">
+			<input type="checkbox" class="form-check-input" id="exampleCheck1">
+			<label class="form-check-label" for="exampleCheck1">В режиме набора пользователей</label>
+		</div>
+
+	</div>
 		  </form>
 
   </div>
-	<div class="col-md-4">
-		<br>
-			<input type="button" class="btn btn-secondary mr-sm-4 btn-sm" name="price_asc" value="По цене ↓">
-			<input type="button"class="btn btn-secondary mr-sm-4 btn-sm" name="price_desc" value="По цене ↑">
-		<!-- <p>  <br><button id="findBtn" onclick="sendLang()" class="btn btn-secondary mr-sm-4 btn-sm">Найти</button></p> -->
-	</div>
 	<div class="row">
 	<div class="col-md-4" id="showDiv">
 		<div id="showLang"></div>
@@ -122,8 +153,26 @@
 			<div class="container">
 				<div class="row">
 					@foreach ($Data as $data)
+						<meta name="csrf-token" content="{{ csrf_token() }}">
 						<div class="col-md-4" >
+							<div class="card mb-4 box-shadow">
+								<img class='card-img-top' src='upload/{{ $data->img }}' height='300px'  alt='Card image cap'>
+								<div class="card-body">
+									<p class="card-text">{{ $data->ad }}</p>
+									<p class="card-text">Сложность:{{ $data->complexity }}</p>
+									<p class="card-text">Категрия:{{$data->category}}</p>
+									<p class="card-text">Язык Оригинала:{{ $data->language }}</p>
+									<p class="card-text">Язык Перевода:{{ $data->translation}}</p>
+									<div class="d-flex justify-content-between align-items-center">
+										<div class="btn-group">
 
+											<a href="/category/{{ $data->id }}"  class="btn  btn-outline-secondary " >Подробности</a>
+											<input type="button"  id="feed" class="btn  btn-outline-primary ml-3" value="Откликнуться">
+											<input class="form-control" id="id_cat" value="{{$data->id}}"  type="hidden">
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					@endforeach
 				</div>

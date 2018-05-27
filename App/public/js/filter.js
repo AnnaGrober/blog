@@ -98,10 +98,14 @@ $('#languages').change(function() {
 $('#categories').change(function() {
     changeCat();
 });
+$('#language_translate').change(function() {
+    changeCat();
+});
 
 
 function changeCat(){
     if ( $('#languages').length ){ var lang =$('#languages').val();}
+    if ( $('#language_translate').length ){ var lang_tran =$('#language_translate').val();}
     var priceMin =$('#input-select').val();
     var priceMax =$('#input-number').val();
     if ( $('#categories').length ){ var cat =$('#categories').val();}
@@ -112,7 +116,8 @@ function changeCat(){
         type: 'get',
         url: '',
         dataType:'html',
-        data: "lang="+lang +"& priceMin="+priceMin+"& priceMax="+priceMax+"& cat="+cat+"& complex="+complex+"& data1="+data1+"& data2="+data2,
+        data: "lang="+lang +"& priceMin="+priceMin +"& lang_tran="+lang_tran+"& priceMax="+priceMax+"& cat="+cat+"& complex="
+        +complex+"& data1="+data1+"& data2="+data2,
 
         success: function (response) {
             console.log(response);

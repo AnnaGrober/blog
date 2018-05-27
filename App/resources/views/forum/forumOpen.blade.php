@@ -7,8 +7,6 @@
     <meta name="author" content="">
 	<title>Форум</title>
 
-    <!-- Bootstrap core CSS -->
-
     <link href="../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../styles/styles2.css" rel="stylesheet">
 	 <link href="../bootstrap/dist/css/offcanvas.css" rel="stylesheet">
@@ -18,28 +16,25 @@
    @include ('../layouts.headerNavigetion')
 	  <div class="container-fluid">
       <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple box-shadow">
-        <div class=" w-25">
+        <div>
 
-          <h6 class="mb-0 text-white lh-100">{{$subject}}</h6>
-          <small>Обсуждение темы {{$subject}}</small>
+          <h3 class="mb-0 text-white lh-100">{{$subject}}</h3>
+          <div>Обсуждение темы {{$subject}}</div>
         </div>
-       
-   
-       
+
       </div>
 	  	<div class="my-3 p-3 bg-white rounded box-shadow">
-
-
                 @foreach ($forums as $Message)
                 <form  method="POST" action="../updating_massage/{{$Message->id}}">
 	        <div class="row media text-muted pt-3">
 
-	          <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-	            <strong class="d-block text-gray-dark"> Пользователь:{{$Message->user}}</strong>
-                  {{$Message->message}}
+	          <div class="media-body pb-3 mb-0 big  lh-125 border-bottom border-gray">
+	            <strong class="d-block" style="color: #00b3ee;"> Пользователь:{{$Message->user}}</strong>
+                 <h4 style="color: mediumpurple;">{{$Message->message}}</h4>
               </div>
+                @isset (Auth::user()->id )
                   @if(($Message->user_id) === ( Auth::user()->id))
-                    <a href="../del_message_for_forum/{{$Message->id}}"  class="btn" id="delete_mes" style=" color:black; border: none; " type="button">Удалить</a>
+                    <a href="../del_message_for_forum/{{$Message->id}}"  class="btn" id="delete_mes" style=" color:black; border: none; " role="button">Удалить</a>
                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2 resp" ><input type="button" class="btn secondary"  onclick="Update_message({{$Message->id}})" id="updating_mes{{$Message->id}}" value="Изменить">
                     <input type="button" class="btn secondary"  onclick="Close_button_message({{$Message->id}})" id="close_button_mes{{$Message->id}}" style="display: none;" value="Закрыть"> </div>
 
@@ -47,6 +42,7 @@
                         @include ('forum.update_forum_mes')
                     </div>
                     @endif
+                @endisset
 
 	        </div>
                 </form>

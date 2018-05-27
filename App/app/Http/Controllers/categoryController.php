@@ -9,6 +9,7 @@ use DB;
 use App\Categorypage;
 use App\Language;
 use App\TestUsers;
+use Intervention\Image\Facades\Image as ImageInt;
 class categoryController extends Controller
 {
 
@@ -38,6 +39,7 @@ class categoryController extends Controller
         $languages = Language::get();
         if($request->ajax() ){
             $lang= $request->lang;
+            $lang_tran= $request->lang_tran;
             $cat =  $request->cat;
            $priceMin =  $request->priceMin;
             $priceMax =  $request->priceMax;
@@ -51,6 +53,9 @@ class categoryController extends Controller
                 ->where('categoryPages.complexity', '=',$complex)
                ->when($lang, function ($language) use ($lang){
                     return $language ->where('one.id', $lang);
+                })
+                ->when($lang_tran, function ($language) use ($lang_tran){
+                    return $language ->where('two.id', $lang_tran);
                 })
                ->when($cat, function ($category) use ($cat){
                     return $category ->where('categories.id', $cat);
@@ -110,7 +115,7 @@ class categoryController extends Controller
     }
 
 
-        public function store()
+        public function store(Request $request)
         {
             $categoryPage = new Categorypage;
             $category = new Category;
@@ -139,6 +144,16 @@ class categoryController extends Controller
                 $type_category = Category:: where('category', request('type_category'))->value('id');
             }
 
+
+            $path = public_path().'\upload';
+            $file = $request->file('file');
+
+            foreach ($file as $f) {
+                $filename = str_random(20) . '.' . $f->getClientOriginalExtension() ?: 'png' || 'jpg';
+                $img = ImageInt::make($f);
+                $img->resize(200, 200)->save($path . '/'.$filename);
+                //dd($filename, $img);
+            }
             Categorypage::insert([
                 'language' => $Language,
                 'language_translation' => $language_translation,
@@ -150,10 +165,11 @@ class categoryController extends Controller
                 'date_start' => request('dateStart'),
                 'date_finish' => request('dateFinish'),
                 'user' =>request('user'),
-                /*'lmg' =>request('img'),*/
+                'img' =>$filename,
                 'link' => request('link'),
 
             ]);
+            return redirect('category');
         }
 
             public function up($id)

@@ -15,6 +15,10 @@ class forum extends Model
     {
         return $this->hasMany(subject::class,  'id', 'subject');
     }
+    public function photo_for_forum()
+    {
+        return $this->hasMany(Photo_for_forum::class,  'id', 'message');
+    }
 
     public function user()
     {

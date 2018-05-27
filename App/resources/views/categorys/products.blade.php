@@ -7,7 +7,7 @@
             <meta name="csrf-token" content="{{ csrf_token() }}">
             <div class="col-md-4" >
                 <div class="card mb-4 box-shadow">
-                    <img class='card-img-top' src='{{ $data->img }}' height='300px'  alt='Card image cap'>
+                    <img class='card-img-top' src='upload/{{ $data->img }}' height='300px'  alt='Card image cap'>
                     <div class="card-body">
                         <p class="card-text">{{ $data->ad }}</p>
                         <p class="card-text">Сложность:{{ $data->complexity }}</p>
@@ -18,8 +18,10 @@
                             <div class="btn-group">
 
                                 <a href="/category/{{ $data->id }}"  class="btn  btn-outline-secondary " >Подробности</a>
-                                <input type="button"  id="feed" class="btn  btn-outline-primary ml-3" value="Откликнуться">
-                                <input class="form-control" id="id_cat" value="{{$data->id}}" name="user" type="hidden">
+                                <input class="form-control" id="id_cat" value="{{$data->id}}"  type="hidden">
+                                <input type="button"  id="feed" onclick="feedback({{ $data->id }})" class="btn  btn-outline-primary ml-3" value="Откликнуться">
+
+
                             </div>
                         </div>
                     </div>
@@ -30,10 +32,9 @@
 </div>
 
 <script>
-    $( "#feed" ).click(function() {
+   function feedback($id) {
 
         var user =$('#user').val();
-
         var id_cat =$('#id_cat').val();
         $.ajax({
             headers: {
@@ -48,5 +49,5 @@
                 $('#updateDiv').html(response);
             },
         });
-    });
+    };
 </script>

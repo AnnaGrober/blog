@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Photo_for_forum;
 use Illuminate\Http\Request;
 use App\forum;
 use App\subject;
@@ -103,4 +104,11 @@ public function del_mes($id){
         ->delete();
     return back();
 }
+
+    public function image()
+    {
+        $images = Photo_for_forum::all();
+        return view('forum.images_for_forum',['images' => $images]);
+    }
+
 }

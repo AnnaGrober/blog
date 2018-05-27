@@ -11,8 +11,6 @@ Route::get('/category', "categoryController@category");
 Route::get('/category/{id}',"categoryController@getDetails");
 Route::post('/create/add',"categoryController@store" );
 Route::get('/forum',"ForumController@getSubject" );
-Route::post('/forum_create',"ForumController@create" );
-Route::post('/forum_open_create',"ForumController@forum_open_create" );
 Route::get('/forum/{id}',"ForumController@forum_open" );
 Route::post('/reg','UserCpController@user_store');
 
@@ -60,6 +58,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/updating_massage/{id}', "ForumController@update_save_mes" );
     Route::get('/del_subject_for_forum/{id}', "ForumController@del_subj" );
     Route::get('/del_message_for_forum/{id}', "ForumController@del_mes" );
-
+    Route::get('forum/{id}/images','ForumController@image');
 });
 

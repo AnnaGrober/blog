@@ -23,7 +23,9 @@
 
             </div><br>
         </div>
+        @isset (Auth::user()->id )
         <input class="form-control" id="user" value="{{ Auth::user()->id }}" name="user" type="hidden">
+        @endif
         <button class="btn btn-secondary btn-lg btn-block" id="create_subj" type="submit">Добавить</button>
     </form>
 </div>

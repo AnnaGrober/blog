@@ -1,5 +1,4 @@
 <div class="container ">
-
         {{csrf_field()}}
         <div class="form-froup filterform">
             <div class="form-row">
@@ -22,8 +21,8 @@
                 </div>
             </div><br>
         </div>
+    @isset (Auth::user()->id )
         <input class="form-control" id="user" value="{{ Auth::user()->id }}" name="user" type="hidden">
+    @endisset
         <button class="btn btn-secondary btn-lg btn-block" id="updating_subj" type="submit">Изменить</button>
-
-
 </div>

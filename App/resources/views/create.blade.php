@@ -18,7 +18,7 @@
     @include ('layouts.headerNavigetion')
 
     <div class="container  header">
-        <form action="/create/add" method="post">
+        <form action="/create/add" method="post" enctype="multipart/form-data">
             {{csrf_field()}}
             <div class="form-froup filterform">
                 <h1>Заполните объявление</h1>
@@ -62,20 +62,17 @@
                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-1 col-xs-1">
                         <lable for="VoidSelectType"> Тип </lable>
                     </div>
-
-
-
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3" id="div_by_type">
                     <select  class="form-control" name="type_category" id="VoidSelectType"  >
                         <option disabled selected> Выбрать тип</option>
                         @foreach ($categories as $category)
-                            <option name="7"> {{ $category->category }}</option>
+                            <option> {{ $category->category }}</option>
                         @endForeach
                         <option name="type_category2"> Другой</option>
                     </select>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3" id="categ" >
-                    <input type="text" class="form-control" id="type_category2" placeholder="Введите тип" style="display: none;" >
+                    <input type="text" class="form-control" id="type_category2" name="type_category2" placeholder="Введите тип" style="display: none;" >
                 </div>
 
             </div>
@@ -165,11 +162,9 @@
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
                          <label >Вы можете добавить своё изображение</label>
                     </div>
-                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                        <button type="button" class="ghost-button"  data-toggle="modal" data-target="#exampleModal">
-                            Загрузить фото
-                        </button>
-                    </div>
+                                <input id="img" type="file" name="file[]">
+
+
                 </div><br>
                 <button class="btn btn-secondary btn-lg btn-block" type="submit">Отправить</button>
             </div>
@@ -180,69 +175,9 @@
 
 </div>
 @include ('layouts.footerNavigation')
-<div class="modal fade" id="ResponseModal" tabindex="-1" role="dialog" aria-labelledy="ResponseModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
 
 
 
-                <button class="close" type="button" data-dismiss="modal" aria-lable="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="container">
-
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Загрузка аватара</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form method="POST" enctype="multipart/form-data" action="{{url('/modal')}}" >
-
-
-                <div class="modal-body">
-
-                    @csrf
-                    <img class=" img-responsive avatar-lg" id="pw" src="">
-                    <input class="upload" name="image" type="file" id="uploadAvatar">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                    <button type="submit" class="btn btn-primary">Сохранить</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-<script>
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $('#pw').attr('src', e.target.result);
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-    $("#uploadAvatar").change(function() {
-        readURL(this);
-    });
-</script>
 
 <script src="noUiSlider.11.0.3/nouislider.min.js"></script>
 <script src="{{asset('js/create.js')}}" type="text/javascript"></script>
