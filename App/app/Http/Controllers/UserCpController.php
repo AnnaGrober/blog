@@ -31,7 +31,7 @@ class UserCpController extends Controller
     {
         return   $Data=  $this->data()
             ->select('categorypages.img as img','categorypages.ad as ad','categorypages.complexity as complexity',
-                'categorypages.category_pages as categoryPages','categorypages.price as price', 'categorypages.ad as ad',
+                'categorypages.category_pages as categoryPages','categorypages.price as price',
                 'categorypages.link as link',    'categorypages.category_pages as pages',   'one.language  as  language',
                 'two.language  as  translation','categories.category as category','users.name  as  user',
                 'categorypages.date_start as start',  'categorypages.date_finish as finish' , 'categorypages.id as id');

@@ -143,16 +143,17 @@ class categoryController extends Controller
             } else {
                 $type_category = Category:: where('category', request('type_category'))->value('id');
             }
+            $filename ='l62egxS0UcVpRlWWZlOO.png';
+            if (request('img') != NULL) {
+                $path = public_path() . '\upload';
+                $file = $request->file('file');
 
-
-            $path = public_path().'\upload';
-            $file = $request->file('file');
-
-            foreach ($file as $f) {
-                $filename = str_random(20) . '.' . $f->getClientOriginalExtension() ?: 'png' || 'jpg';
-                $img = ImageInt::make($f);
-                $img->resize(200, 200)->save($path . '/'.$filename);
-                //dd($filename, $img);
+                foreach ($file as $f) {
+                    $filename = str_random(20) . '.' . $f->getClientOriginalExtension() ?: 'png' || 'jpg';
+                    $img = ImageInt::make($f);
+                    $img->resize(200, 200)->save($path . '/' . $filename);
+                    //dd($filename, $img);
+                }
             }
             Categorypage::insert([
                 'language' => $Language,
