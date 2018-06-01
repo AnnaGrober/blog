@@ -30,7 +30,11 @@
 
 	          <div class="media-body pb-3 mb-0 big  lh-125 border-bottom border-gray">
 	            <strong class="d-block" style="color: #00b3ee;"> Пользователь:{{$Message->user}}</strong>
-                 <h4 style="color: mediumpurple;">{{$Message->message}}</h4>
+                 <h4 > <pre>{{$Message->message}} </pre>  </h4>
+                  @isset(($Message->img))
+                     <img src="../upload/{{$Message->img}}" >
+                  @endisset
+
               </div>
                 @isset (Auth::user()->id )
                   @if(($Message->user_id) === ( Auth::user()->id))

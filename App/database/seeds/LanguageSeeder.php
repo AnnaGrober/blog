@@ -12,20 +12,20 @@ class LanguageSeeder extends Seeder
     public function run()
     {
         DB::table('Languages')->insert(
-        	array(
-				[
-					'language' =>"Японский"
-				],
-				[
-					'language' =>"Турецкий"
-				],
-				[
-					'language' =>"Испанский"
-				],
-				[
-					'language' =>"Французский"
-				]
-			)
+            array(
+                [
+                    'language' =>"Русский"
+                ],
+                [
+                    'language' =>"Английский"
+                ],
+                [
+                    'language' =>"Украинский"
+                ],
+                [
+                    'language' =>"Хинди"
+                ]
+            )
         );
     }
 }

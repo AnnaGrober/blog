@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="container-fluid header">
-@include ('layouts.headerNavigetion')
+@include ('../navigation')
 <main role="main">
     <div>
         <div class="container">

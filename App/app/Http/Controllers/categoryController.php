@@ -115,6 +115,9 @@ class categoryController extends Controller
     }
 
 
+
+
+
         public function store(Request $request)
         {
             $categoryPage = new Categorypage;

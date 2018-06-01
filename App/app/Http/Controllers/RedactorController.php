@@ -30,7 +30,8 @@ class RedactorController extends Controller
             ->leftJoin('users', 'categoryPages.user', '=', 'users.id')
             ->select('categoryPages.id  as  id', 'categoryPages.img as img', 'categoryPages.ad as ad', 'categoryPages.complexity as complexity',
                 'one.language  as  language', 'two.language  as  translation', 'categories.category as category', 'categoryPages.date_start as date_start',
-                'categoryPages.date_finish as date_finish', 'users.name as  user');
+                'categoryPages.date_finish as date_finish', 'users.name as  user')
+           ->orderby('categoryPages.id', 'desc');
     }
     public function getAll()
     {

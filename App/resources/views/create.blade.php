@@ -123,6 +123,18 @@
                          <textarea class="form-control " id="ad" cols="255"  name="add" rows="4" > </textarea>
                     </div>
                 </div><br>
+
+                <div class="form-row" style="color:red;">
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                        <label for="extra" >Экстренный перевод</label>
+                    </div>
+                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                        <input  type="checkbox"  id="extra" name="extra">
+                    </div>
+                </div><br>
+
+
+
                 <div class="form-row ">
                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
                           <label for="link">Ссылка на источник</label>

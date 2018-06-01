@@ -11,6 +11,14 @@ $( "#All" ).click(function() {
     });
     document.getElementById('All').style.display='none';
     document.getElementById('None').style.display = 'inline';
+    document.getElementById('set').style.display='inline';
+    document.getElementById('set_none').style.display = 'none';
+    document.getElementById('run').style.display='inline';
+    document.getElementById('run_none').style.display = 'none';
+    document.getElementById('comp').style.display='inline';
+    document.getElementById('comp_none').style.display = 'none';
+    document.getElementById('comp_time').style.display='inline';
+    document.getElementById('comp_time_none').style.display = 'none';
 });
 
 $( "#None" ).click(function() {
@@ -31,6 +39,14 @@ $( "#set" ).click(function() {
     });
     document.getElementById('set').style.display='none';
     document.getElementById('set_none').style.display = 'inline';
+    document.getElementById('All').style.display='inline';
+    document.getElementById('None').style.display = 'none';
+    document.getElementById('run').style.display='inline';
+    document.getElementById('run_none').style.display = 'none';
+    document.getElementById('comp').style.display='inline';
+    document.getElementById('comp_none').style.display = 'none';
+    document.getElementById('comp_time').style.display='inline';
+    document.getElementById('comp_time_none').style.display = 'none';
 });
 
 $( "#set_none" ).click(function() {
@@ -49,8 +65,16 @@ $( "#run" ).click(function() {
             $('#change').html(response);
         },
     });
+    document.getElementById('set').style.display='inline';
+    document.getElementById('set_none').style.display = 'none';
+    document.getElementById('All').style.display='inline';
+    document.getElementById('None').style.display = 'none';
     document.getElementById('run').style.display='none';
     document.getElementById('run_none').style.display = 'inline';
+    document.getElementById('comp').style.display='inline';
+    document.getElementById('comp_none').style.display = 'none';
+    document.getElementById('comp_time').style.display='inline';
+    document.getElementById('comp_time_none').style.display = 'none';
 });
 
 $( "#run_none" ).click(function() {
@@ -70,8 +94,16 @@ $( "#comp" ).click(function() {
             $('#change').html(response);
         },
     });
+    document.getElementById('set').style.display='inline';
+    document.getElementById('set_none').style.display = 'none';
+    document.getElementById('All').style.display='inline';
+    document.getElementById('None').style.display = 'none';
+    document.getElementById('run').style.display='inline';
+    document.getElementById('run_none').style.display = 'none';
     document.getElementById('comp').style.display='none';
     document.getElementById('comp_none').style.display = 'inline';
+    document.getElementById('comp_time').style.display='inline';
+    document.getElementById('comp_time_none').style.display = 'none';
 });
 
 $( "#comp_none" ).click(function() {
@@ -91,6 +123,14 @@ $( "#comp_time" ).click(function() {
             $('#change').html(response);
         },
     });
+    document.getElementById('set').style.display='inline';
+    document.getElementById('set_none').style.display = 'none';
+    document.getElementById('All').style.display='inline';
+    document.getElementById('None').style.display = 'none';
+    document.getElementById('run').style.display='inline';
+    document.getElementById('run_none').style.display = 'none';
+    document.getElementById('comp').style.display='inline';
+    document.getElementById('comp_none').style.display = 'none';
     document.getElementById('comp_time').style.display='none';
     document.getElementById('comp_time_none').style.display = 'inline';
 });

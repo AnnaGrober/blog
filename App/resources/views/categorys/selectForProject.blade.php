@@ -1,5 +1,5 @@
 <a href="/category/{{ $data->id }}"   >
-        <div class="col-md-4" >
+        <div class="col-md-4 pl-5" >
             <div class="card mb-4 box-shadow">
                 <img class='card-img-top' src='../upload/{{ $data->img }}' height='300px'  alt='Card image cap'>
                 <div class="card-body">

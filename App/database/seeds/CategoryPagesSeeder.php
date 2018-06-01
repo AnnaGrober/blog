@@ -26,7 +26,8 @@ class CategoryPagesSeeder extends Seeder
                     'img'=>"krol.jpg",
                     'user'=>"1",
                     'link'=>"http://ilibrary.ru/text/436/p.2/index.html",
-
+                    'extra'=>"0",
+                    'file'=>"NULL"
 				],
                 [
                     'type_category' =>"4",
@@ -41,6 +42,8 @@ class CategoryPagesSeeder extends Seeder
                     'img'=>"dog.jpg",
                     'user'=>"2",
                     'link'=>"http://ilibrary.ru/text/436/p.2/index.html",
+                    'extra'=>"1",
+                    'file'=>"NULL"
 				]
 				
 			)
