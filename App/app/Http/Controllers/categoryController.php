@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Feedback;
+use App\File;
 use Illuminate\Http\Request;
 use DB;
 use App\Categorypage;
 use App\Language;
 use App\TestUsers;
 use Intervention\Image\Facades\Image as ImageInt;
+use  Carbon\Carbon;
 class categoryController extends Controller
 {
 
@@ -31,7 +33,8 @@ class categoryController extends Controller
                 'categorypages.category_pages as categoryPages','categorypages.price as price', 'categorypages.ad as ad',
                 'categorypages.link as link',    'categorypages.category_pages as pages',   'one.language  as  language',
                 'two.language  as  translation','categories.category as category','users.name  as  user',
-                'categorypages.date_start as start',  'categorypages.date_finish as finish' , 'categorypages.id as id');
+                'categorypages.date_start as start',  'categorypages.date_finish as finish' , 'categorypages.id as id',
+                'categorypages.extra as extra');
     }
 
     public function category(Request $request) {
@@ -110,12 +113,22 @@ class categoryController extends Controller
         $languages = Language::get();
         $Data=  $this->data_select()
             ->where('categorypages.id', $id)->get();
+        $files = File::where('files.app', $id)->get();
        // dd($Data);
-        return view('update', ['Data'=>$Data, 'categories'=>$categories, 'languages'=>$languages]);
+        return view('update', ['Data'=>$Data, 'categories'=>$categories, 'languages'=>$languages,
+            'files'=>$files]);
     }
 
 
-
+    public function upload(Request $request)
+    {
+        foreach ($request->file() as $file) {
+            foreach ($file as $f) {
+                $f->move(storage_path('images'), time().'_'.$f->getClientOriginalName());
+            }
+        }
+        return "Успех";
+    }
 
 
         public function store(Request $request)
@@ -146,6 +159,10 @@ class categoryController extends Controller
             } else {
                 $type_category = Category:: where('category', request('type_category'))->value('id');
             }
+            if (request('extra') == true){
+                $extra=true;
+                }
+                else $extra=false;
             $filename ='l62egxS0UcVpRlWWZlOO.png';
             if (request('img') != NULL) {
                 $path = public_path() . '\upload';
@@ -158,6 +175,8 @@ class categoryController extends Controller
                     //dd($filename, $img);
                 }
             }
+
+
             Categorypage::insert([
                 'language' => $Language,
                 'language_translation' => $language_translation,
@@ -170,13 +189,35 @@ class categoryController extends Controller
                 'date_finish' => request('dateFinish'),
                 'user' =>request('user'),
                 'img' =>$filename,
+                'extra' =>$extra,
                 'link' => request('link'),
+                'created_at' => Carbon::now()->toDateTimeString()
 
             ]);
-            return redirect('category');
+
+                    $id_now=Categorypage:: where('user',request('user'))
+                        ->orderby('created_at', 'desc')
+                        ->value('id');
+
+
+            foreach ($request->file() as $file) {
+                foreach ($file as $f) {
+
+                    $f->move(storage_path('images'), time() . '_' . $f->getClientOriginalName());
+                    $name=/*storage_path('images').'/'. time().'_'.*/$f->getClientOriginalName();
+
+                   // dd($name);
+                    File::insertGetId([
+                        'app'=>$id_now,
+                        'file'=> $name
+                    ]);
+                }
+            }
+
+            return redirect( request('user') .'/project');
         }
 
-            public function up($id)
+            public function up($id, Request $request)
             {
                 $categoryPage = new Categorypage;
                 $category = new Category;
@@ -185,12 +226,14 @@ class categoryController extends Controller
                 if (request('language2') != NULL) {
                     Language::insert(['language' => request('language2')]);
                     $Language = Language:: where('language', request('language2'))->value('id');
+
                 } else {
                     $Language = Language:: where('language', request('language'))->value('id');
                 }
                 if (request('language_translation2') != NULL) {
                     Language::insert(['language' => request('language_translation2')]);
                     $language_translation = Language:: where('language', request('language_translation2'))->value('id');
+
                 } else {
                     $language_translation = Language:: where('language', request('language_translation'))->value('id');
                 }
@@ -202,23 +245,61 @@ class categoryController extends Controller
                 } else {
                     $type_category = Category:: where('category', request('type_category'))->value('id');
                 }
+                if (request('extra') == true){
+                    $extra=true;
+                }
+                else $extra=false;
+                $filename ='l62egxS0UcVpRlWWZlOO.png';
+                if (request('img') != NULL) {
+                    $path = public_path() . '\upload';
+                    $file = $request->file('file');
+
+                    foreach ($file as $f) {
+                        $filename = str_random(20) . '.' . $f->getClientOriginalExtension() ?: 'png' || 'jpg';
+                        $img = ImageInt::make($f);
+                        $img->resize(200, 200)->save($path . '/' . $filename);
+                        //dd($filename, $img);
+                    }
+                }
 
               Categorypage::where('id', $id)
                     ->update([
-                    'language' => $Language,
-                    'language_translation' => $language_translation,
-                    'type_category' => $type_category,
-                    'price' => request('price'),
-                    'complexity' => request('complexity'),
-                    'ad' => request('add'),
-                    'category_pages' => request('category_pages'),
-                    'date_start' => request('dateStart'),
-                    'date_finish' => request('dateFinish'),
+                        'language' => $Language,
+                        'language_translation' => $language_translation,
+                        'type_category' => $type_category,
+                        'price' => request('price'),
+                        'complexity' => request('complexity'),
+                        'ad' => request('add'),
+                        'category_pages' => request('category_pages'),
+                        'date_start' => request('dateStart'),
+                        'date_finish' => request('dateFinish'),
                         'user' =>request('user'),
-                    /*'lmg' =>request('img'),*/
-                    'link' => request('link'),
+                        'img' =>$filename,
+                        'extra' =>$extra,
+                        'link' => request('link'),
+                        'updated_at' => Carbon::now()->toDateTimeString()
                 ]);
-                return redirect('category');
+
+                $id_now=Categorypage:: where('user',request('user'))
+                    ->orderby('updated_at', 'desc')
+                    ->value('id');
+
+
+                foreach ($request->file() as $file) {
+                    foreach ($file as $f) {
+
+                        $f->move(storage_path('images'), time() . '_' . $f->getClientOriginalName());
+                        $name=/*storage_path('images').'/'. time().'_'.*/$f->getClientOriginalName();
+
+                        // dd($name);
+                        File::updateGetId([
+                            'app'=>$id_now,
+                            'file'=> $name
+                        ]);
+                    }
+                }
+
+                return redirect( request('user') .'/project');
             }
     public function del($id)
     {

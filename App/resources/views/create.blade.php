@@ -78,9 +78,6 @@
             </div>
 
 
-
-
-
                 <br>
                 <div class="form-row ">
 
@@ -134,6 +131,16 @@
                 </div><br>
 
 
+                <div class="form-row ">
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                        <label for="link">Добавить файлы</label>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <input type="file" multiple name="files[]" id="create_files">
+                    </div>
+
+                </div><br>
+
 
                 <div class="form-row ">
                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
@@ -142,6 +149,7 @@
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
                         <input class="form-control" id="link" name="link">
                     </div>
+
                 </div><br>
 
 

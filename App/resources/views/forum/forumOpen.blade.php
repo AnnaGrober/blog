@@ -31,9 +31,12 @@
 	          <div class="media-body pb-3 mb-0 big  lh-125 border-bottom border-gray">
 	            <strong class="d-block" style="color: #00b3ee;"> Пользователь:{{$Message->user}}</strong>
                  <h4 > <pre>{{$Message->message}} </pre>  </h4>
-                  @isset(($Message->img))
-                     <img src="../upload/{{$Message->img}}" >
-                  @endisset
+
+                      @foreach ($img as $imges)
+                          @if(($Message->id) == ($imges->message) )
+                     <img src="../upload/{{$imges->img}}" >
+                      @endif
+                          @endforeach
 
               </div>
                 @isset (Auth::user()->id )
@@ -58,6 +61,7 @@
           @include ('forum.create_forum_message')
 	</div>
    @include ('../layouts.footerNavigation')
+
   <script src="../bootstrap/dist/js/jquery.js"></script>
    <script src="{{asset('../js/forum.js')}}" type="text/javascript"></script>
   <script src="../bootstrap/dist/js/bootstrap.min.js"></script>

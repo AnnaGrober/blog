@@ -29,7 +29,6 @@ class CreateCategoryPagesTable extends Migration
             $table->string('link',255)->nullable();
             $table->integer('status')->nullable();
             $table->boolean('extra')->nullable();
-            $table->string('file',50)->nullable();
             $table->timestamps();
         });
     }

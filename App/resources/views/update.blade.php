@@ -27,32 +27,34 @@
                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
                         <lable for="VoidSelectLanquage"> Язык оригинала</lable>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3">
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3" id="div_by_lang">
                         <select class="form-control" id="VoidSelectLanquage" name="language"  max-width="276">
                             <option selected> {{$data->language}}</option>
                             @foreach ($languages as $language)
                                 <option> {{ $language->language }}</option>
                             @endForeach
+                            <option name="lanquage2"> Другой</option>
                         </select>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3">
-                        <input type="text" class="form-control" id="lanquage" name="language2" placeholder="Введите язык" >
+                        <input type="text" class="form-control" id="lanquage2" name="language2" placeholder="Введите язык" style="display: none;">
                     </div>
                 </div><br>
                 <div class="form-row">
                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
                         <lable for="VoidSelectLanquageTranslation"> Язык перевода</lable>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3">
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3"  id="div_by_lang_tr">
                         <select  class="form-control" id="VoidSelectLanquageTranslation" name="language_translation"  max-width="276">
                             <option selected>{{$data->translation}} </option>
                             @foreach ($languages as $language)
                                 <option> {{ $language->language }}</option>
                             @endForeach
+                            <option name="language_translation2"> Другой</option>
                         </select>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3">
-                        <input type="text" class="form-control" id="lanquage_translation" name="language_translation2"  placeholder="Введите язык" >
+                        <input type="text" class="form-control" id="language_translation2" name="language_translation2"  placeholder="Введите язык" style="display: none;" >
                     </div>
                 </div><br>
                 <div class="form-row ">
@@ -60,16 +62,17 @@
                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-1 col-xs-1">
                         <lable for="VoidSelectType"> Тип </lable>
                     </div>
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-6" id="div_by_type">
                         <select  class="form-control" id="VoidSelectType" name="type_category"  >
                             <option selected>{{$data->category}} </option>
                             @foreach ($categories as $category)
                                 <option > {{ $category->category }}</option>
                             @endForeach
+                            <option name="type_category2"> Другой</option>
                         </select>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-xs-3">
-                        <input type="text" class="form-control" id="lanquage" name="type_category2"   placeholder="Введите категорию">
+                        <input type="text" class="form-control" id="type_category2" name="type_category2" placeholder="Введите тип" style="display: none;" >
                     </div>
                 </div><br>
                 <div class="form-row ">
@@ -113,6 +116,32 @@
                         <textarea class="form-control"  id="ad" cols="255"  name="add" rows="4">{{$data->ad}}</textarea>
                     </div>
                 </div><br>
+
+
+                    <div class="form-row" style="color:red;">
+                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            <label for="extra" >Экстренный перевод</label>
+                        </div>
+                        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                            <input  type="checkbox"  id="extra" name="extra"
+                                    @if (($data->extra)==true)  checked @endif
+                            >
+                        </div>
+                    </div><br>
+
+
+                    <div class="form-row ">
+                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                            <label for="link">Добавить файлы</label>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
+
+                            <input type="file" multiple name="files[]"
+                                   value=" @foreach($files as $file) {{$file->file}} @endforeach" id="create_files" value="">
+
+                        </div>
+
+                    </div><br>
                 <div class="form-row ">
                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
                         <label for="link">Ссылка на источник</label>
@@ -121,6 +150,11 @@
                         <input class="form-control" value="{{$data->link}}" id="link" name="link">
                     </div>
                 </div><br>
+
+                <input class="form-control" id="user" value="{{ Auth::user()->id }}" name="user" type="hidden">
+
+
+
                 <div class="form-row ">
                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
                         <label for="categoryPages">Введите объявление (полностью)</label>
@@ -147,11 +181,9 @@
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
                         <label >Вы можете добавить своё изображение</label>
                     </div>
-                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                        <label class="btn btn-secondary">
-                            Добавить изображение <input type="file"  name="img" hidden>
-                        </label>
-                    </div>
+                    <input id="img" type="file" name="file[]" value="{{$data->img}}">
+
+
                 </div><br>
                 <button class="btn btn-secondary btn-lg btn-block" type="submit">Отправить</button>
             </div>
@@ -189,38 +221,6 @@
 
 <script src="../noUiSlider.11.0.3/nouislider.min.js"></script>
 <script>
-    $('#datepicker').datepicker({
-        dateFormat:'yy-mm-dd',
-        uiLibrary: 'bootstrap4'
-    });
-
-
-    $('#datepicker2').datepicker({
-        dateFormat:'yy-mm-dd',
-        uiLibrary: 'bootstrap4'
-    });
-    var select = document.getElementById('input-select');
-    var selectcomplexity = document.getElementById('input-complexity');
-
-    // Append the option elements price
-    for ( var i = 0; i <= 10000; i++ ){
-
-        var option = document.createElement("option");
-        option.text = i;
-        option.value = i;
-
-        select.appendChild(option);
-    }
-
-    // Append the option elements complexity
-    for ( var j = 0; j <= 5; j++ ){
-
-        var option2 = document.createElement("option");
-        option2.text = j;
-        option2.value = j;
-
-        selectcomplexity.appendChild(option2);
-    }
 
     var html5Slider = document.getElementById('html5');
     var complexitySlider = document.getElementById('complexity');
@@ -240,42 +240,12 @@
             'max': 5
         }
     });
-    var inputNumber = document.getElementById('input-number');
-
-    html5Slider.noUiSlider.on('update', function( values, handle ) {
-
-        var value = values[handle];
-
-        if ( handle ) {
-            inputNumber.value = value;
-        } else {
-            select.value = Math.round(value);
-        }
-    });
-
-
-    complexitySlider.noUiSlider.on('update', function( values, handle ) {
-        var value = values[handle];
-        if ( handle ) {
-            inputNumber.value = value;
-        } else {
-            selectcomplexity.value = Math.round(value);
-        }
-    });
-
-    select.addEventListener('change', function(){
-        html5Slider.noUiSlider.set([this.value, null]);
-    });
-
-
-    selectcomplexity.addEventListener('change', function(){
-        complexitySlider.noUiSlider.set([this.value, null]);
-    });
 
 </script>
 @endForeach
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="../bootstrap/dist/js/jquery.js"></script>
+<script src="{{asset('../js/update.js')}}" type="text/javascript"></script>
+<script src="../https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="../sbootstrap/dist/js/jquery.js"></script>
 <script src="../bootstrap/dist/js/bootstrap.min.js"></script>
 
 </body>

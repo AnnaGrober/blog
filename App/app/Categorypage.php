@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use  Carbon\Carbon;
 class Categorypage extends Model
 {
+
+    public $timestamps = true;
     protected $fillable = [
         'type_category',
         'language',
@@ -19,6 +21,7 @@ class Categorypage extends Model
         'img',
         'link'
     ];
+
 
     public function category()
     {
@@ -37,6 +40,9 @@ class Categorypage extends Model
     {
         return $this->hasMany(User::class,  'id', 'user');
     }
-
+    public function file()
+    {
+        return $this->hasMany(File::class,  'id', 'app');
+    }
 
 }

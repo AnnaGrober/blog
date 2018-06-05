@@ -39,4 +39,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Categorypage::class);
     }
+    public function forums()
+    {
+        return $this->belongsTo(Forum::class);
+    }
 }
