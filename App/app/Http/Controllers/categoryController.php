@@ -12,6 +12,7 @@ use App\Language;
 use App\TestUsers;
 use Intervention\Image\Facades\Image as ImageInt;
 use  Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 class categoryController extends Controller
 {
 
@@ -166,9 +167,9 @@ class categoryController extends Controller
             $filename ='l62egxS0UcVpRlWWZlOO.png';
             if (request('img') != NULL) {
                 $path = public_path() . '\upload';
-                $file = $request->file('file');
+                $image = $request->file('img');
 
-                foreach ($file as $f) {
+                foreach ($image as $f) {
                     $filename = str_random(20) . '.' . $f->getClientOriginalExtension() ?: 'png' || 'jpg';
                     $img = ImageInt::make($f);
                     $img->resize(200, 200)->save($path . '/' . $filename);
@@ -203,17 +204,17 @@ class categoryController extends Controller
             foreach ($request->file() as $file) {
                 foreach ($file as $f) {
 
-                    $f->move(storage_path('images'), time() . '_' . $f->getClientOriginalName());
-                    $name=/*storage_path('images').'/'. time().'_'.*/$f->getClientOriginalName();
+                    //$f->move(storage_path('images'), time() . '/' . $f->getClientOriginalName());
+                    $f->move (public_path('storage') , time() . '/' . $f->getClientOriginalName());
+                    $name=$f->getClientOriginalName();
 
-                   // dd($name);
                     File::insertGetId([
                         'app'=>$id_now,
                         'file'=> $name
                     ]);
                 }
             }
-
+            //return response()->download(storage_path('images'), $name);
             return redirect( request('user') .'/project');
         }
 
@@ -252,9 +253,9 @@ class categoryController extends Controller
                 $filename ='l62egxS0UcVpRlWWZlOO.png';
                 if (request('img') != NULL) {
                     $path = public_path() . '\upload';
-                    $file = $request->file('file');
+                    $image = $request->file('img');
 
-                    foreach ($file as $f) {
+                    foreach ($image as $f) {
                         $filename = str_random(20) . '.' . $f->getClientOriginalExtension() ?: 'png' || 'jpg';
                         $img = ImageInt::make($f);
                         $img->resize(200, 200)->save($path . '/' . $filename);
@@ -288,15 +289,16 @@ class categoryController extends Controller
                 foreach ($request->file() as $file) {
                     foreach ($file as $f) {
 
-                        $f->move(storage_path('images'), time() . '_' . $f->getClientOriginalName());
-                        $name=/*storage_path('images').'/'. time().'_'.*/$f->getClientOriginalName();
+                        $f->move(storage_path('images') . '_' . $f->getClientOriginalExtension()());
+                        $name=storage_path('images') . '_' .$f->getClientOriginalName();
 
-                        // dd($name);
+                        dd($name);
                         File::updateGetId([
                             'app'=>$id_now,
                             'file'=> $name
                         ]);
                     }
+
                 }
 
                 return redirect( request('user') .'/project');

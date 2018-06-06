@@ -182,7 +182,7 @@
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
                          <label >Вы можете добавить своё изображение</label>
                     </div>
-                                <input id="img" type="file" name="file[]">
+                                <input id="img" type="file" name="img[]">
 
 
                 </div><br>

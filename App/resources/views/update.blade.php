@@ -136,9 +136,8 @@
                         </div>
                         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
 
-                            <input type="file" multiple name="files[]"
-                                   value=" @foreach($files as $file) {{$file->file}} @endforeach" id="create_files" value="">
-
+                            <input type="file" multiple name="files[]" id="create_files" value="">
+                           @foreach($files as $File) <a href={{Storage::URL($File->file)}}> {{$File->file}}</a> @endforeach
                         </div>
 
                     </div><br>
@@ -178,12 +177,19 @@
 
                 </div><br>
                 <div class="form-row ">
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                        <label >Вы можете добавить своё изображение</label>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                        Ваше изображение:  <a href="../upload/{{$data->img}}">yourFile.img</a>
+
                     </div>
-                    <input id="img" type="file" name="file[]" value="{{$data->img}}">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                        <label >Вы можете его изменить</label>
 
+                    </div>
 
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                        <input id="img" type="file" name="img[]">
+
+                    </div>
                 </div><br>
                 <button class="btn btn-secondary btn-lg btn-block" type="submit">Отправить</button>
             </div>
