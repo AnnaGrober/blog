@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateForumTable extends Migration
+class CreateForumMessagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateForumTable extends Migration
      */
     public function up()
     {
-        Schema::create('forums', function (Blueprint $table) {
+        Schema::create('forum_messages', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('subject');
             $table->string('message')->nullable();
@@ -29,6 +29,6 @@ class CreateForumTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('forums');
+        Schema::dropIfExists('forum_messages');
     }
 }

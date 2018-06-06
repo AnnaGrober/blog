@@ -7,7 +7,7 @@ use App\Feedback;
 use App\File;
 use Illuminate\Http\Request;
 use DB;
-use App\Categorypage;
+use App\Advent;
 use App\Language;
 use App\TestUsers;
 use Intervention\Image\Facades\Image as ImageInt;
@@ -22,20 +22,20 @@ class categoryController extends Controller
      */
     public function data()
     {
-        return  $Data = Categorypage:: leftJoin('categories', 'categoryPages.type_category', '=', 'categories.id')
-            ->leftJoin('languages as one', 'categoryPages.language', '=', 'one.id')
-            ->leftJoin('languages as two', 'categoryPages.language_translation', '=', 'two.id')
-            ->leftJoin('users', 'categoryPages.user', '=', 'users.id');
+        return  $Data = Advent:: leftJoin('categories', 'Advents.type_category', '=', 'categories.id')
+            ->leftJoin('languages as one', 'Advents.language', '=', 'one.id')
+            ->leftJoin('languages as two', 'Advents.language_translation', '=', 'two.id')
+            ->leftJoin('users', 'Advents.user', '=', 'users.id');
     }
     public function data_select()
     {
         return   $Data=  $this->data()
-            ->select('categorypages.img as img','categorypages.ad as ad','categorypages.complexity as complexity',
-                'categorypages.category_pages as categoryPages','categorypages.price as price', 'categorypages.ad as ad',
-                'categorypages.link as link',    'categorypages.category_pages as pages',   'one.language  as  language',
+            ->select('Advents.img as img','Advents.ad as ad','Advents.complexity as complexity',
+                'Advents.great_announcement as Advents','Advents.price as price', 'Advents.ad as ad',
+                'Advents.link as link',    'Advents.great_announcement as pages',   'one.language  as  language',
                 'two.language  as  translation','categories.category as category','users.name  as  user',
-                'categorypages.date_start as start',  'categorypages.date_finish as finish' , 'categorypages.id as id',
-                'categorypages.extra as extra');
+                'Advents.date_start as start',  'Advents.date_finish as finish' , 'Advents.id as id',
+                'Advents.extra as extra');
     }
 
     public function category(Request $request) {
@@ -52,9 +52,9 @@ class categoryController extends Controller
             $data2 =  $request->data2;
 
             $Data=  $this->data()
-               ->where('categoryPages.price', '>=',$priceMin)
-                ->where('categoryPages.price', '<=',$priceMax)
-                ->where('categoryPages.complexity', '=',$complex)
+               ->where('Advents.price', '>=',$priceMin)
+                ->where('Advents.price', '<=',$priceMax)
+                ->where('Advents.complexity', '=',$complex)
                ->when($lang, function ($language) use ($lang){
                     return $language ->where('one.id', $lang);
                 })
@@ -65,14 +65,14 @@ class categoryController extends Controller
                     return $category ->where('categories.id', $cat);
                 })
                ->when($data1, function ($datepicker1) use ($data1) {
-                   return $datepicker1->where('categoryPages.date_start', '>=', $data1);
+                   return $datepicker1->where('Advents.date_start', '>=', $data1);
                })
                 ->when($data2, function ($datepicker2) use ($data2){
-                    return $datepicker2 ->where('categoryPages.date_finish', '<=',$data2);
+                    return $datepicker2 ->where('Advents.date_finish', '<=',$data2);
                 })
-                ->select('categoryPages.id  as  id', 'categoryPages.img as img', 'categoryPages.ad as ad', 'categoryPages.complexity as complexity',
-                    'one.language  as  language', 'two.language  as  translation', 'categories.category as category', 'categoryPages.date_start as date_start',
-                    'categoryPages.date_finish as date_finish',  'users.name as  user')->get();
+                ->select('Advents.id  as  id', 'Advents.img as img', 'Advents.ad as ad', 'Advents.complexity as complexity',
+                    'one.language  as  language', 'two.language  as  translation', 'categories.category as category', 'Advents.date_start as date_start',
+                    'Advents.date_finish as date_finish',  'users.name as  user')->get();
 
              response()->json($Data);
             return view('categorys.products', ['languages' => $languages, 'categories' => $categories, 'Data' => $Data]);
@@ -91,7 +91,7 @@ class categoryController extends Controller
         $categories = Category::get();
         $languages = Language::get();
         $Data=  $this->data_select()
-            ->where('categorypages.user', $id)
+            ->where('Advents.user', $id)
             ->get();
         return view('user_cp', ['languages' => $languages, 'categories' => $categories, 'Data' => $Data],compact('user'));
     }
@@ -99,7 +99,7 @@ class categoryController extends Controller
 
     public function getDetails($id) {
         $data=  $this->data_select()
-            ->where('categorypages.id', $id)->get();
+            ->where('Advents.id', $id)->get();
         return view('categorys.details', ['data'=>$data]);
     }
     public function create()
@@ -113,7 +113,7 @@ class categoryController extends Controller
         $categories = Category::get();
         $languages = Language::get();
         $Data=  $this->data_select()
-            ->where('categorypages.id', $id)->get();
+            ->where('Advents.id', $id)->get();
         $files = File::where('files.app', $id)->get();
        // dd($Data);
         return view('update', ['Data'=>$Data, 'categories'=>$categories, 'languages'=>$languages,
@@ -134,7 +134,7 @@ class categoryController extends Controller
 
         public function store(Request $request)
         {
-            $categoryPage = new Categorypage;
+            $Advent = new Advent;
             $category = new Category;
             $language = new Language;
 
@@ -178,14 +178,14 @@ class categoryController extends Controller
             }
 
 
-            Categorypage::insert([
+            Advent::insert([
                 'language' => $Language,
                 'language_translation' => $language_translation,
                 'type_category' => $type_category,
                 'price' => request('price'),
                 'complexity' => request('complexity'),
                 'ad' => request('add'),
-                'category_pages' => request('category_pages'),
+                'great_announcement' => request('great_announcement'),
                 'date_start' => request('dateStart'),
                 'date_finish' => request('dateFinish'),
                 'user' =>request('user'),
@@ -196,7 +196,7 @@ class categoryController extends Controller
 
             ]);
 
-                    $id_now=Categorypage:: where('user',request('user'))
+                    $id_now=Advent:: where('user',request('user'))
                         ->orderby('created_at', 'desc')
                         ->value('id');
 
@@ -220,7 +220,7 @@ class categoryController extends Controller
 
             public function up($id, Request $request)
             {
-                $categoryPage = new Categorypage;
+                $Advent = new Advent;
                 $category = new Category;
                 $language = new Language;
 
@@ -263,7 +263,7 @@ class categoryController extends Controller
                     }
                 }
 
-              Categorypage::where('id', $id)
+              Advent::where('id', $id)
                     ->update([
                         'language' => $Language,
                         'language_translation' => $language_translation,
@@ -271,7 +271,7 @@ class categoryController extends Controller
                         'price' => request('price'),
                         'complexity' => request('complexity'),
                         'ad' => request('add'),
-                        'category_pages' => request('category_pages'),
+                        'great_announcement' => request('great_announcement'),
                         'date_start' => request('dateStart'),
                         'date_finish' => request('dateFinish'),
                         'user' =>request('user'),
@@ -281,7 +281,7 @@ class categoryController extends Controller
                         'updated_at' => Carbon::now()->toDateTimeString()
                 ]);
 
-                $id_now=Categorypage:: where('user',request('user'))
+                $id_now=Advent:: where('user',request('user'))
                     ->orderby('updated_at', 'desc')
                     ->value('id');
 
@@ -305,13 +305,13 @@ class categoryController extends Controller
             }
     public function del($id)
     {
-            Categorypage::where('id', $id)->delete();
+            Advent::where('id', $id)->delete();
             return redirect('redactor');
     }
 
     public function feedback()
     {
-        $categoryPage = new Categorypage;
+        $Advent = new Advent;
         $feedback =new  Feedback;
         Feedback::insert([
             'user' =>request('user'),

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class CategoryPagesSeeder extends Seeder
+class AdventsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,7 +11,7 @@ class CategoryPagesSeeder extends Seeder
      */
     public function run()
    {
-        DB::table('categorypages')->insert(
+        DB::table('Advents')->insert(
         	array(
 				[
 					'type_category' =>"1",
@@ -22,7 +22,7 @@ class CategoryPagesSeeder extends Seeder
                     'date_start'=>"2018-04-02",
                     'date_finish'=>"2018-04-02",
 					'ad'=>"Переведите пожалуйста",
-					'category_pages'=>"перевод перевод перевод",
+					'great_announcement'=>"перевод перевод перевод",
                     'img'=>"krol.jpg",
                     'user'=>"1",
                     'link'=>"http://ilibrary.ru/text/436/p.2/index.html",
@@ -37,7 +37,7 @@ class CategoryPagesSeeder extends Seeder
                     'date_start'=>"2018-04-02",
                     'date_finish'=>"2018-04-02",
                     'ad'=>"Переведите пожалуйста перевод",
-                    'category_pages'=>"перевод перевод перевод переведите",
+                    'great_announcement'=>"перевод перевод перевод переведите",
                     'img'=>"dog.jpg",
                     'user'=>"2",
                     'link'=>"http://ilibrary.ru/text/436/p.2/index.html",

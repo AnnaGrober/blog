@@ -35,12 +35,12 @@ class User extends Authenticatable
     public function isBlock(){
         return $this->block;
     }
-    public function categorypages()
+    public function advents()
     {
-        return $this->belongsTo(Categorypage::class);
+        return $this->belongsTo(Advent::class);
     }
     public function forums()
     {
-        return $this->belongsTo(Forum::class);
+        return $this->belongsTo(forum_message::class);
     }
 }

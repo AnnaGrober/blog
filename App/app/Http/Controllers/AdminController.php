@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Categorypage;
+use App\Advent;
 use App\User;
 use Carbon\Carbon;
 class AdminController extends Controller
@@ -11,15 +11,15 @@ class AdminController extends Controller
 //    }
     public function panel(Request $request){
         $user=User::get();
-        $categ=Categorypage::get();
+        $categ=Advent::get();
         $user_count=$user->count();
         $user_new= User::whereYear('created_at', '=', (Carbon::now())->year)
             ->whereMonth('created_at', '=',(Carbon::now())->month)
             ->count();
         $categ_count=$categ->count();
-        $runtime = Categorypage::where('categoryPages.status', '=', 1)->count();
-        $completed= Categorypage::where('categoryPages.date_finish', '>',Carbon::now())->count();
-        $Notcompleted= Categorypage::where('categoryPages.date_finish', '<=',Carbon::now())->count();
+        $runtime = Advent::where('Advents.status', '=', 1)->count();
+        $completed= Advent::where('Advents.date_finish', '>',Carbon::now())->count();
+        $Notcompleted= Advent::where('Advents.date_finish', '<=',Carbon::now())->count();
         $finduser=$request->username;
         $data = User::select('users.id as id', 'users.name  as  login', 'users.photo as photo')
             ->where('name', 'like', '%' . $finduser . '%')

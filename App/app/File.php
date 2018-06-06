@@ -12,6 +12,6 @@ class File extends Model
     ];
     public function forums()
     {
-        return $this->belongsTo(Categorypage::class);
+        return $this->belongsTo(Advent::class);
     }
 }

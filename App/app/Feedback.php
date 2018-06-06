@@ -13,7 +13,7 @@ class Feedback extends Model
     ];
     public function category()
     {
-        return $this->hasMany(Categorypage::class,  'id', 'application');
+        return $this->hasMany(Advent::class,  'id', 'application');
     }
     public function language_translation()
     {

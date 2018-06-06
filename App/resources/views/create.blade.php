@@ -158,10 +158,10 @@
 
                 <div class="form-row ">
                     <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                        <label for="categoryPages">Введите объявление (полностью)</label>
+                        <label for="Advents">Введите объявление (полностью)</label>
                     </div>
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                          <textarea class="form-control" id="categoryPages" name="category_pages" cols="2000" rows="10" required> </textarea>
+                          <textarea class="form-control" id="Advents" name="great_announcement" cols="2000" rows="10" required> </textarea>
                     </div>
                 </div><br>
                 <div class="form-row ">

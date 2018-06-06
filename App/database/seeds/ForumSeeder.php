@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ForumSeeder extends Seeder
+class forumMessagesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,7 +11,7 @@ class ForumSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('forums')->insert(
+        DB::table('forum_messages')->insert(
             array(
                 [
                     'subject' =>"2",

@@ -10,9 +10,9 @@ class Category extends Model
    protected $fillable = [
         'category'
     ];
-    public function categorypages()
+    public function advents()
     {
-        return $this->belongsTo(Categorypage::class);
+        return $this->belongsTo(Advent::class);
     }
 
 }

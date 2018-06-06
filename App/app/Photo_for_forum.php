@@ -13,6 +13,6 @@ class Photo_for_forum extends Model
 
     public function forums()
     {
-        return $this->belongsTo(Forum::class);
+        return $this->belongsTo(forum_message::class);
     }
 }

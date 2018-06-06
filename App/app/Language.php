@@ -10,9 +10,9 @@ class Language extends Model
     protected $fillable = [
         'language'
     ];
-    public function categorypages()
+    public function advents()
     {
-        return $this->belongsTo(Categorypage::class);
+        return $this->belongsTo(Advent::class);
     }
 
 }

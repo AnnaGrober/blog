@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-md-6 col-lg-6">
                 <h1 class="display-4 font-italic">{{ $category->ad }}</h1>
-                <p class="lead my-3">{{ $category->categoryPages }}</p>
+                <p class="lead my-3">{{ $category->Advents }}</p>
                 <p class="lead my-3">{{ $category->category }}</p>
                 <p class="lead my-3">Язык Оригинала:{{ $category->language }}</p>
                 <p class="lead my-3">Язык Перевода:{{ $category->translation}}</p>

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategoryPagesTable extends Migration
+class CreateAdventsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCategoryPagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('CategoryPages', function (Blueprint $table) {
+        Schema::create('Advents', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->integer('type_category');
             $table->integer('language');
@@ -23,7 +23,7 @@ class CreateCategoryPagesTable extends Migration
             $table->date('date_start');
             $table->date('date_finish');
             $table->text('ad')->nullable();
-            $table->text('category_pages')->nullable();
+            $table->text('great_announcement')->nullable();
             $table->string('img',50)->nullable();
             $table->integer('user')->nullable();
             $table->string('link',255)->nullable();
@@ -40,6 +40,6 @@ class CreateCategoryPagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('CategoryPages');
+        Schema::dropIfExists('Advents');
     }
 }

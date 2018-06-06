@@ -11,6 +11,6 @@ class subject extends Model
     ];
     public function forum()
     {
-        return $this->belongsTo(forum ::class);
+        return $this->belongsTo(forum_message ::class);
     }
 }

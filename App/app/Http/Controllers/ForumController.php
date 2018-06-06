@@ -17,7 +17,7 @@ class ForumController extends Controller
     {
         $subject = subject::
             orderby('id', 'desc')->paginate(10);
-        $forums= forum:: leftJoin('subjects', 'forums.subject', '=', 'subjects.id')
+        $forums= forum_message:: leftJoin('subjects', 'forum_messages.subject', '=', 'subjects.id')
             ->get();
         return view('forum',  ['subject' => $subject, 'forums'=> $forums]);
     }
@@ -31,13 +31,13 @@ class ForumController extends Controller
     public function forum_open($id){
         $subject = subject::where ('id', $id)->value('subject_name');
         $subject_id = subject::where ('id', $id)->value('id');
-        $forums= forum:: leftJoin('subjects', 'forums.subject', '=', 'subjects.id')
-            ->leftJoin('users', 'users.id', '=', 'forums.user')
+        $forums= forum_message:: leftJoin('subjects', 'forum_messages.subject', '=', 'subjects.id')
+            ->leftJoin('users', 'users.id', '=', 'forum_messages.user')
             ->where ('subjects.id', $id)
-            ->select ('users.name  as  user', 'users.id as user_id', 'forums.message as message', 'forums.id as id')
-            ->orderby('forums.id')
+            ->select ('users.name  as  user', 'users.id as user_id', 'forum_messages.message as message', 'forum_messages.id as id')
+            ->orderby('forum_messages.id')
             ->paginate(10);
-        $img = Photo_for_forum::all();
+        $img = Photo_for_forum_message::all();
        // dd($img);
         return view('forum.forumOpen',  ['subject' => $subject, 'forums'=> $forums,'subject_id' => $subject_id
         , 'img'=>$img] );
@@ -48,7 +48,7 @@ class ForumController extends Controller
         ]);
        $subj_id= subject:: where('subject_name', request('subj'))->value('id');
 
-        forum::insert([
+        forum_message::insert([
             'subject' => $subj_id,
             'message' => request('mes') ,
             'user' =>request('user')
@@ -58,7 +58,7 @@ class ForumController extends Controller
 
     public function store_mes(Request $request){
 
-        forum::insert([
+        forum_message::insert([
             'subject' => request('subj_id'),
             'message' =>request('message_for_forum'),
             'user' =>request('user'),
@@ -74,8 +74,8 @@ class ForumController extends Controller
                // dd($filename, request('file'));
 
 
-               $mes = forum:: where('message', request('message_for_forum'))->value('id');
-               Photo_for_forum::insert([
+               $mes = forum_message:: where('message', request('message_for_forum'))->value('id');
+               Photo_for_forum_message::insert([
                    'img' => $filename,
                    'message' => $mes
                ]);
@@ -90,12 +90,12 @@ class ForumController extends Controller
        $subj= request('subj');
        $mes=request('mes');
         $subj_id =request ('subj_id');
-        $mes_id = Forum:: where ('subject', $subj_id)-> value('id');
+        $mes_id = forum_message:: where ('subject', $subj_id)-> value('id');
 //dd($subj,$mes, $subj_id, $mes_id);
             Subject::where('id', $subj_id)
                 ->update([
                     'subject_name' => $subj]);
-            Forum::where('id', $mes_id)
+            forum_message::where('id', $mes_id)
                 ->update([
                     'message' => $mes]);
         return redirect('/forum');
@@ -107,7 +107,7 @@ public function update_save_mes($id) {
     $mes=request('upd_message_for_forum');
 
     //dd($mes, $mes_id);
-    Forum::where('id', $mes_id)
+    forum_message::where('id', $mes_id)
         ->update([
             'message' => $mes]);
     return back();
@@ -116,13 +116,13 @@ public function update_save_mes($id) {
 public function del_subj($id){
        subject::where ('id', $id)
            -> delete();
-       forum::where('subject', $id)
+       forum_message::where('subject', $id)
            ->delete();
     return back();
 }
 
 public function del_mes($id){
-    forum::where('id', $id)
+    forum_message::where('id', $id)
         ->delete();
     return back();
 }

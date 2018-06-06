@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Category;
 use App\Feedback;
 
-use App\Categorypage;
+use App\Advent;
 use App\Language;
 use App\TestUsers;
 class UserCpController extends Controller
@@ -21,20 +21,20 @@ class UserCpController extends Controller
     //
     public function data()
     {
-        return  $Data = Categorypage:: leftJoin('categories', 'categoryPages.type_category', '=', 'categories.id')
-            ->leftJoin('languages as one', 'categoryPages.language', '=', 'one.id')
-            ->leftJoin('languages as two', 'categoryPages.language_translation', '=', 'two.id')
-            ->leftJoin('users', 'categoryPages.user', '=', 'users.id')
-        ->leftJoin('feedbacks', 'categoryPages.id', '=', 'feedbacks.application');
+        return  $Data = Advent:: leftJoin('categories', 'Advents.type_category', '=', 'categories.id')
+            ->leftJoin('languages as one', 'Advents.language', '=', 'one.id')
+            ->leftJoin('languages as two', 'Advents.language_translation', '=', 'two.id')
+            ->leftJoin('users', 'Advents.user', '=', 'users.id')
+        ->leftJoin('feedbacks', 'Advents.id', '=', 'feedbacks.application');
     }
     public function data_select()
     {
         return   $Data=  $this->data()
-            ->select('categorypages.img as img','categorypages.ad as ad','categorypages.complexity as complexity',
-                'categorypages.category_pages as categoryPages','categorypages.price as price',
-                'categorypages.link as link',    'categorypages.category_pages as pages',   'one.language  as  language',
+            ->select('Advents.img as img','Advents.ad as ad','Advents.complexity as complexity',
+                'Advents.great_announcement as Advents','Advents.price as price',
+                'Advents.link as link',    'Advents.great_announcement as pages',   'one.language  as  language',
                 'two.language  as  translation','categories.category as category','users.name  as  user',
-                'categorypages.date_start as start',  'categorypages.date_finish as finish' , 'categorypages.id as id');
+                'Advents.date_start as start',  'Advents.date_finish as finish' , 'Advents.id as id');
     }
     public function get_info()
     {
@@ -43,7 +43,7 @@ class UserCpController extends Controller
         $categories = Category::get();
         $languages = Language::get();
         $Data=  $this->data_select()
-            ->where('categorypages.user', $id)
+            ->where('Advents.user', $id)
             ->get();
         //dd($Data);
        return view('user_cp',compact('user', 'Data', 'categories', 'languages'));
@@ -56,7 +56,7 @@ class UserCpController extends Controller
         $languages = Language::get();
         $feedbacks= Feedback::get();
         $Data=  $this->data_select()
-            ->where('categorypages.user', $id)
+            ->where('Advents.user', $id)
             ->get();
         $Data2=  $this->data_select()
             ->where('feedbacks.user', $id)
