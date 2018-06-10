@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFilesTable extends Migration
+class PhotoForum extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateFilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('files', function (Blueprint $table) {
+        Schema::create('Photo_for_forums', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('app')->unsigned()->index();;
-            $table->string('file');
+            $table->string('img');
+            $table->integer('message')->unsigned()->index();
             $table->timestamps();
 
-            $table->foreign('app')
-                ->references('id')->on('Advents')
+            $table->foreign('message')
+                ->references('id')->on('Forum_messages')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });
@@ -33,6 +33,6 @@ class CreateFilesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('files');
+        Schema::dropIfExists('Photo_for_forums');
     }
 }

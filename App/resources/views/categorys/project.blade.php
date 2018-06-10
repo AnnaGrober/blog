@@ -14,6 +14,7 @@
 <main role="main">
     <div>
         <div class="container">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 ml-5">
             <h3>Вы опубликовали проекты:</h3>
             <div class="row">
                 <div class="container">
@@ -37,7 +38,7 @@
                 </div>
             </div>
         </div>
-
+        </div>
     </div>
 </main>
 </div>

@@ -32,7 +32,7 @@ class UserCpController extends Controller
         return   $Data=  $this->data()
             ->select('Advents.img as img','Advents.ad as ad','Advents.complexity as complexity',
                 'Advents.great_announcement as Advents','Advents.price as price',
-                'Advents.link as link',    'Advents.great_announcement as pages',   'one.language  as  language',
+                'Advents.link as link',    'Advents.great_announcement as pages',   'one.language  as  language','Advents.status as status',
                 'two.language  as  translation','categories.category as category','users.name  as  user',
                 'Advents.date_start as start',  'Advents.date_finish as finish' , 'Advents.id as id');
     }
@@ -54,14 +54,17 @@ class UserCpController extends Controller
         $user = User::find($id);
         $categories = Category::get();
         $languages = Language::get();
-        $feedbacks= Feedback::get();
+        //$feedbacks= Feedback::get();
         $Data=  $this->data_select()
             ->where('Advents.user', $id)
             ->get();
+        $Data3 = Feedback::leftJoin('Users', 'Feedbacks.user', '=', 'Users.id')
+                ->LeftJoin('Advents', 'Feedbacks.application', '=', 'Advents.id')
+        ->select('Users.name as name', 'Advents.id as id')->get();
         $Data2=  $this->data_select()
             ->where('feedbacks.user', $id)
             ->get();
-        return view('categorys.project',compact('user', 'Data', 'categories', 'languages', 'Data2'));
+        return view('categorys.project',compact('user', 'Data', 'categories', 'languages', 'Data2', 'Data3'));
     }
 
 

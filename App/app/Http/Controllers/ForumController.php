@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\forum_message;
 use App\Photo_for_forum;
 use Illuminate\Http\Request;
 use App\forum;
@@ -34,11 +35,10 @@ class ForumController extends Controller
         $forums= forum_message:: leftJoin('subjects', 'forum_messages.subject', '=', 'subjects.id')
             ->leftJoin('users', 'users.id', '=', 'forum_messages.user')
             ->where ('subjects.id', $id)
-            ->select ('users.name  as  user', 'users.id as user_id', 'forum_messages.message as message', 'forum_messages.id as id')
+            ->select ('users.name  as  user', 'users.photo  as  photo', 'users.id as user_id', 'forum_messages.message as message', 'forum_messages.id as id')
             ->orderby('forum_messages.id')
             ->paginate(10);
-        $img = Photo_for_forum_message::all();
-       // dd($img);
+        $img = Photo_for_forum::all();
         return view('forum.forumOpen',  ['subject' => $subject, 'forums'=> $forums,'subject_id' => $subject_id
         , 'img'=>$img] );
     }
@@ -66,16 +66,13 @@ class ForumController extends Controller
        if (request('file') != NULL) {
            $path = public_path() . '\upload';
            $file = $request->file('file');
-
            foreach ($file as $f) {
                $filename = str_random(20) . '.' . $f->getClientOriginalExtension() ?: 'png' || 'jpg';
                $img = ImageInt::make($f);
                $img->resize(100, 100)->save($path . '/' . $filename);
-               // dd($filename, request('file'));
-
 
                $mes = forum_message:: where('message', request('message_for_forum'))->value('id');
-               Photo_for_forum_message::insert([
+               Photo_for_forum::insert([
                    'img' => $filename,
                    'message' => $mes
                ]);

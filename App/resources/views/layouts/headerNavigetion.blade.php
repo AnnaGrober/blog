@@ -1,6 +1,6 @@
 
 
-<div class="  col-xl-12  main " id="main" >
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12  main " id="main" >
     <div id="mySidenav" class="sidenav">
         <a href="#">Книги</a>
         <a href="#">Статьи</a>
@@ -30,8 +30,8 @@
                 </li>
                 <li class="nav-item ">
                     <form class="form-inline ">
-                        <input class="form-control mr-sm-2" id="search" type="text" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-info" type="submit">Search</button>
+                        <input class="form-control mr-sm-1" id="search" type="text" placeholder="Search" aria-label="Search">
+                        <button class="btn-sm btn-outline-info" type="submit">Поиск</button>
                     </form>
                 </li>
                 <li class="nav-item">

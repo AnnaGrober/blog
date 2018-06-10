@@ -13,7 +13,7 @@ class CreateSubjectTable extends Migration
      */
     public function up()
     {
-        Schema::create('subjects', function (Blueprint $table) {
+        Schema::create('Subjects', function (Blueprint $table) {
             $table->increments('id');
             $table->string('subject_name');
             $table->timestamps();

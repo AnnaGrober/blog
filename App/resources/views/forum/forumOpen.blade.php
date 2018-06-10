@@ -27,9 +27,11 @@
                 @foreach ($forums as $Message)
                 <form  method="POST" action="../updating_massage/{{$Message->id}}">
 	        <div class="row media text-muted pt-3">
-
-	          <div class="media-body pb-3 mb-0 big  lh-125 border-bottom border-gray">
-	            <strong class="d-block" style="color: #00b3ee;"> Пользователь:{{$Message->user}}</strong>
+                <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-xs-1 " >
+                    <img class="rounded-circle" src="../img/{{$Message->photo}}" style="width: 100px; height: 100px;"  alt="Generic placeholder image" >
+                </div>
+	          <div class=" col-xl-10 col-lg-10 col-md-10 col-sm-10 col-xs-10  media-body pb-3 mb-0 big  lh-125 border-bottom border-gray">
+	            <strong class="d-block" style="color: #00b3ee;"> {{$Message->user}}</strong>
                  <h4 > <pre>{{$Message->message}} </pre>  </h4>
 
                       @foreach ($img as $imges)

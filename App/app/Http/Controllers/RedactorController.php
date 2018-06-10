@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Advent;
+use App\Subject;
+use App\forum_message;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Language;
@@ -11,14 +13,17 @@ class RedactorController extends Controller
 {
     public function getRed()
     {
-        $categories = Category::get();
-        $languages = Language::get();
         $col = Advent::count();
         $set = Advent::where('Advents.status', '=', 1)->count();
         $runtime = Advent::where('Advents.status', '=', 2)->count();
         $completed = Advent::where('Advents.status', '=', 3)->count();
-        $completed_time= Advent::where('Advents.date_finish', '>',Carbon::now())->count();
-        return view('redactor', ['col' => $col,'set' => $set,  'runtime' =>  $runtime, 'completed' =>  $completed,'completed_time' => $completed_time]);
+        $completed_time= Advent::where('Advents.date_finish', '<',Carbon::now())->count();
+        $language = Language::count();
+        $category = Category::count();
+        $subject = Subject::count();
+        $message = forum_message::count();
+        return view('redactor', ['col' => $col,'set' => $set,  'runtime' =>  $runtime, 'completed' =>  $completed,'completed_time' => $completed_time,
+        'language' => $language, 'category' => $category, 'subject' =>$subject, 'message' =>$message]);
     }
 
 
@@ -68,7 +73,7 @@ class RedactorController extends Controller
     {
         $categories = Category::get();
         $languages = Language::get();
-        $Data= $this->data()->where('Advents.date_finish', '>',Carbon::now())
+        $Data= $this->data()->where('Advents.date_finish', '<',Carbon::now())
             ->get();
         return view('categorys.SelectForUpdate', [ 'languages' => $languages, 'categories' => $categories,'Data' => $Data]);
     }

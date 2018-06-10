@@ -31,10 +31,10 @@ class categoryController extends Controller
     {
         return   $Data=  $this->data()
             ->select('Advents.img as img','Advents.ad as ad','Advents.complexity as complexity',
-                'Advents.great_announcement as Advents','Advents.price as price', 'Advents.ad as ad',
-                'Advents.link as link',    'Advents.great_announcement as pages',   'one.language  as  language',
+                'Advents.great_announcement as Advents','Advents.price as price','Advents.status as status',
+                'Advents.link as link',       'one.language  as  language',
                 'two.language  as  translation','categories.category as category','users.name  as  user',
-                'Advents.date_start as start',  'Advents.date_finish as finish' , 'Advents.id as id',
+                'Advents.date_start as start',  'Advents.date_finish as finish' ,
                 'Advents.extra as extra');
     }
 
@@ -100,7 +100,8 @@ class categoryController extends Controller
     public function getDetails($id) {
         $data=  $this->data_select()
             ->where('Advents.id', $id)->get();
-        return view('categorys.details', ['data'=>$data]);
+        $files = File::where('files.app', $id)->get();
+        return view('categorys.details', ['data'=>$data, 'files'=>$files]);
     }
     public function create()
     {

@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <title>Категории</title>
+	<script src="{{asset('js/jquery1.js')}}"></script>
+	<script src="{{asset('js/jquery2.js')}}"></script>
 
-	<script src="{{asset('bootstrap/dist/js/jquery.js')}}"></script>
     <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="noUiSlider.11.0.3/nouislider.min.css" rel="stylesheet">
 
 	<link href="jQRangeSlider-master/demo/lib/jquery-ui/css/smoothness/jquery-ui-1.8.10.custom.css" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <link href="styles/styles2.css" rel="stylesheet">
 
 
@@ -158,17 +158,20 @@
 							<div class="card mb-4 box-shadow">
 								<img class='card-img-top' src='upload/{{ $data->img }}' height='300px'  alt='Card image cap'>
 								<div class="card-body">
-									<p class="card-text">{{ $data->ad }}</p>
-									<p class="card-text">Сложность:{{ $data->complexity }}</p>
-									<p class="card-text">Категрия:{{$data->category}}</p>
-									<p class="card-text">Язык Оригинала:{{ $data->language }}</p>
-									<p class="card-text">Язык Перевода:{{ $data->translation}}</p>
+									<p class="card-text text-center">{{ $data->ad }}</p>
+									<p class="card-text text-center">@for ($i = 0; $i <($data->complexity); $i++)
+											<img src='imgs/star.png' height='30px' >
+										@endfor</p>
+									<p class="card-text text-center">{{$data->category}}</p>
+									<p class="card-text text-center">{{ $data->language }}➜ {{ $data->translation}} </p>
 									<div class="d-flex justify-content-between align-items-center">
 										<div class="btn-group">
 
-											<a href="/category/{{ $data->id }}"  class="btn  btn-outline-secondary " >Подробности</a>
-											<input type="button"  id="feed" class="btn  btn-outline-primary ml-3" value="Откликнуться">
+											<a href="/category/{{ $data->id }}"  class="btn  btn-outline-secondary ml-3" >Подробности</a>
 											<input class="form-control" id="id_cat" value="{{$data->id}}"  type="hidden">
+											<input type="button"  id="feed" onclick="feedback({{ $data->id }})" class="btn  btn-outline-primary ml-3" value="Откликнуться">
+
+
 										</div>
 									</div>
 								</div>
@@ -192,8 +195,7 @@
 
 <script src="noUiSlider.11.0.3/nouislider.min.js"></script>
 <script src="{{asset('js/filter.js')}}" type="text/javascript"></script>
-<script src="{{asset('js/ajax.js')}}" type="text/javascript"></script>
-<script src="{{asset('bootstrap/dist/js/jquery.js')}}"></script>
+
 <script src="{{asset('bootstrap/dist/js/bootstrap.min.js')}}"></script>
 
 </body>

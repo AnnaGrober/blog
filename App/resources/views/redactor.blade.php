@@ -52,6 +52,34 @@
                 <input type="button" id="comp_time_none" value="Скрыть" style="display: none;" class="btn btn-secondary">
             </div>
         </div>
+        <div class="col-md-2 col-lg-2 col-sm-6 col-xs-12" >
+            <div class="sz">Языки<br>
+                <h1 class="font_h1"> <b>{{$language}}</b></h1>
+                <input type="button" id="comp_language" value="Просмотр" class="btn btn-secondary ">
+                <input type="button" id="comp_language_none" value="Скрыть" style="display: none;" class="btn btn-secondary">
+            </div>
+        </div>
+        <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12" >
+            <div class="sz">Категории<br>
+                <h1 class="font_h1"> <b>{{$category}}</b></h1>
+                <input type="button" id="comp_category" value="Просмотр" class="btn btn-secondary ">
+                <input type="button" id="comp_category_none" value="Скрыть" style="display: none;" class="btn btn-secondary">
+            </div>
+        </div>
+        <div class="col-md-2 col-lg-2 col-sm-6 col-xs-12" >
+            <div class="sz">Темы форума<br>
+                <h1 class="font_h1"> <b>{{$subject}}</b></h1>
+                <input type="button" id="comp_subject" value="Просмотр" class="btn btn-secondary ">
+                <input type="button" id="comp_subject_none" value="Скрыть" style="display: none;" class="btn btn-secondary">
+            </div>
+        </div>
+        <div class="col-md-3 col-lg-3 col-sm-6 col-xs-12" >
+            <div class="sz">Сообщения форума<br>
+                <h1 class="font_h1"> <b>{{$message}}</b></h1>
+                <input type="button" id="comp_message" value="Просмотр" class="btn btn-secondary ">
+                <input type="button" id="comp_message_none" value="Скрыть" style="display: none;" class="btn btn-secondary">
+            </div>
+        </div>
     </div>
     <div class="row pt-5 pl-5" id="change">
 
