@@ -4,10 +4,16 @@
 
 Route::get('/', "IndexController@getIndex");
 
+Route::get('livesearch','DemoController@liveSearch');
+
+Route::get('headerNavigetion','DemoController@category');
+
 Route::get('/reg', function (){
     return  view('/reg');
 });
 Route::get('/category', "categoryController@category");
+Route::get('/category/type/{id}', "categoryController@category");
+
 Route::get('/category/{id}',"categoryController@getDetails");
 Route::post('/create/add',"categoryController@store" );
 Route::get('/forum',"ForumController@getSubject" );
@@ -46,6 +52,7 @@ Route::group(['middleware' => 'auth'], function () {
 //    Route::get('/{user}/', 'UserCpController@get_info');
     Route::get('/{user}', 'UserCpController@get_info');
     Route::get('/{user}/project', 'UserCpController@get_project');
+    Route::get('/project_user/{id}', 'UserCpController@get_project_users');
     Route::post('/modal', 'UserCpController@avaUpload');
     Route::post('/user_cp','UserCpController@store_about')->name('about.post');
     Route::post('/create/add',"categoryController@store" );

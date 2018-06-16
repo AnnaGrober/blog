@@ -38,7 +38,7 @@ class categoryController extends Controller
                 'Advents.extra as extra');
     }
 
-    public function category(Request $request) {
+    public function category($id=null, Request $request) {
         $categories = Category::get();
         $languages = Language::get();
         if($request->ajax() ){
@@ -52,6 +52,7 @@ class categoryController extends Controller
             $data2 =  $request->data2;
 
             $Data=  $this->data()
+
                ->where('Advents.price', '>=',$priceMin)
                 ->where('Advents.price', '<=',$priceMax)
                 ->where('Advents.complexity', '=',$complex)
@@ -61,12 +62,16 @@ class categoryController extends Controller
                 ->when($lang_tran, function ($language) use ($lang_tran){
                     return $language ->where('two.id', $lang_tran);
                 })
+
                ->when($cat, function ($category) use ($cat){
                     return $category ->where('categories.id', $cat);
                 })
                ->when($data1, function ($datepicker1) use ($data1) {
                    return $datepicker1->where('Advents.date_start', '>=', $data1);
                })
+                ->when($id, function ($category) use ($id){
+                return $category ->where('categories.id', $id);
+            })
                 ->when($data2, function ($datepicker2) use ($data2){
                     return $datepicker2 ->where('Advents.date_finish', '<=',$data2);
                 })
@@ -79,10 +84,17 @@ class categoryController extends Controller
         }
         else {
             $Data=  $this->data_select()
+                ->when($id, function ($category) use ($id){
+                    return $category ->where('categories.id', $id);
+                })
                 ->get();
-            return view('category', ['languages' => $languages, 'categories' => $categories, 'Data' => $Data]);
+            $type= Category::where('id', $id)->first();
+         if($id==null)   return view('category', ['languages' => $languages, 'categories' => $categories, 'Data' => $Data]);
+             else  return view('categorys/category_type', ['languages' => $languages, 'categories' => $categories, 'Data' => $Data, 'type'=>
+             $type]);
         }
     }
+
 
 
     public function sel_user() {

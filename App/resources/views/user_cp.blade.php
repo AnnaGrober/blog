@@ -44,11 +44,7 @@
                                 <button id="bo" type="button">Open</button>
                                 <button id="bos" value="{{ $user->about }}" name="bos" type="button" style="display: none;">Save</button>
                             </form>
-
                         </div>
-                    </div>
-                    <div class="row">
-
                     </div>
                 </div>
 
@@ -58,10 +54,6 @@
 
             </div>
         </div>
-
-
-
-
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -95,4 +87,4 @@
 
 
 @endsection
-@extends('layouts.footer')
+@extends('layouts/footer')

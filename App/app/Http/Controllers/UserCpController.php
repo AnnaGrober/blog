@@ -67,7 +67,22 @@ class UserCpController extends Controller
         return view('categorys.project',compact('user', 'Data', 'categories', 'languages', 'Data2', 'Data3'));
     }
 
+    public function get_project_users($id)
+    {
 
+        //$user = User::find($id);
+        $user =User::where('id', $id)->first();
+        $categories = Category::get();
+        $languages = Language::get();
+        //$feedbacks= Feedback::get();
+
+
+        $Data2=  $this->data_select()
+            ->where('feedbacks.user', $id)
+            ->where('Advents.status',3)
+            ->get();
+        return view('categorys.project_user',compact('user',  'categories', 'languages', 'Data2'));
+    }
 
 
 //public function get_info(User $user){

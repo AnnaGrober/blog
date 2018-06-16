@@ -192,7 +192,6 @@
 
 
 
-
 <script src="noUiSlider.11.0.3/nouislider.min.js"></script>
 <script src="{{asset('js/filter.js')}}" type="text/javascript"></script>
 

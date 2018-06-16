@@ -2,9 +2,11 @@
 
 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12  main " id="main" >
     <div id="mySidenav" class="sidenav">
-        <a href="#">Книги</a>
-        <a href="#">Статьи</a>
-        <a href="#">Видео</a>
+        <p><a href="/category">Все</a> </p>
+    @foreach(App\Category::get()   as $cat)
+
+            <p><a href="/category/type/{{ $cat->id }}">{{ $cat->category }}</a> </p>
+        @endforeach
     </div>
     <!-- Use any element to open the sidenav -->
 
@@ -30,8 +32,8 @@
                 </li>
                 <li class="nav-item ">
                     <form class="form-inline ">
-                        <input class="form-control mr-sm-1" id="search" type="text" placeholder="Search" aria-label="Search">
-                        <button class="btn-sm btn-outline-info" type="submit">Поиск</button>
+                        <input class="form-control mr-sm-1" name="str" id="search" type="text" placeholder="Search" autocomplete="off" aria-label="Search">
+                    
                     </form>
                 </li>
                 <li class="nav-item">
@@ -75,6 +77,11 @@
     </nav>
 </div>
 
+<div class="container">
+    <div class="row">
+        <div id="txtHint" class="title-color" style="padding-top:50px; text-align:center;" ></div>
+    </div>
+</div>
 
 <script>
     /* Set the width of the side navigation to 250px */
@@ -88,6 +95,29 @@
     }
     /* Set the width of the side navigation to 0 */
 
+    $(document).ready(function(){
+        $("#search").keyup(function(){
+
+        var str = $("#search").val();
+        // if(str == "") {
+        $("#txtHint").html("<b>Blogs information will be listed here...</b>");
+        //}else {
+
+            $.ajax({
+                type: 'get',
+                url: 'livesearch',
+                dataType:'html',
+                data: "str="+str,
+                success: function (response) {
+                    console.log(response);
+                    //alert(str);
+                    $("#txtHint").html(response);
+                }
+        });
+        // }
+        });
+    })
+   // });
 
 
 </script>
